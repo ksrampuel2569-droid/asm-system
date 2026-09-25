@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ภารกิจ อสม. ประจำสัปดาห์</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#7c3aed">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{ --purple:#7c3aed; --purple-light:#ede9fe; --blue:#3b82f6; --gold:#f59e0b; --red:#ef4444; --green:#22c55e; }
+  * { font-family:'Noto Sans Thai', sans-serif; box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{ background:linear-gradient(160deg,#6d28d9,#8b5cf6 60%,#a78bfa); min-height:100%;
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
+  .card{ background:#fff; border-radius:28px; box-shadow:0 10px 30px rgba(76,29,149,.25); }
+  .btn{ font-size:1.35rem; font-weight:700; padding:20px 18px; border-radius:20px; width:100%; text-align:center; transition:transform .12s ease; line-height:1.3; }
+  .btn:active{ transform:scale(.96); }
+  .btn:disabled{ opacity:.5; }
+  .btn-primary{ background:var(--purple); color:#fff; }
+  .btn-green{ background:var(--green); color:#fff; }
+  .btn-red{ background:var(--red); color:#fff; }
+  .btn-outline{ background:#fff; color:var(--purple); border:3px solid var(--purple); }
+  .char-bubble{ background:var(--purple-light); border-radius:22px; padding:18px 20px; font-size:1.3rem; font-weight:600; color:#4c1d95; }
+  .avatar{ width:76px; height:76px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size:2.4rem; box-shadow:0 4px 10px rgba(0,0,0,.15); animation:bob 2.4s ease-in-out infinite; }
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
+  .star-pop{ animation:pop .5s ease; }
+  @keyframes pop{ 0%{transform:scale(0);} 70%{transform:scale(1.25);} 100%{transform:scale(1);} }
+  .progress-dot{ width:10px; height:10px; border-radius:50%; background:#e5e7eb; }
+  .progress-dot.active{ background:var(--purple); }
+  input,select{ font-size:1.25rem; padding:16px; border-radius:16px; border:2px solid #ddd; width:100%; }
+  .chip{ border:3px solid #e5e7eb; border-radius:20px; padding:18px; text-align:center; font-size:1.15rem; font-weight:700; }
+  .chip.selected{ border-color:var(--purple); background:var(--purple-light); }
+  table{ border-collapse:collapse; width:100%; font-size:.9rem; }
+  th,td{ border:1px solid #e5e7eb; padding:8px 10px; text-align:center; white-space:nowrap; }
+  th{ background:#f5f3ff; position:sticky; top:0; }
+  .spinner{ width:48px; height:48px; border:6px solid #fff; border-top-color:transparent; border-radius:50%; animation:spin 1s linear infinite; margin:40px auto; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+</style>
+</head>
+<body>
+<div id="app" class="max-w-md mx-auto min-h-screen p-4"></div>
+
+<script>
+/* ================= API LAYER ================= */
+const API = '/api';
+function authHeaders(){ const t = sessionStorage.getItem('asm_admin_token'); return t ? {'Authorization':'Bearer '+t} : {}; }
+async function apiGet(path, admin=false){
+  const r = await fetch(API+path, { headers: admin?authHeaders():{} });
+  if(!r.ok){ const e = await r.json().catch(()=>({error:'เกิดข้อผิดพลาด'})); throw new Error(e.error||'เกิดข้อผิดพลาด'); }
+  return r.json();
+}
+async function apiPost(path, body, admin=false){
+  const r = await fetch(API+path, { method:'POST', headers:{'Content-Type':'application/json', ...(admin?authHeaders():{})}, body:JSON.stringify(body) });
+  const data = await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(data.error||'เกิดข้อผิดพลาด');
+  return data;
+}
+
+const ANIMALS = [
+  {v:"dog",label:"สุนัข",icon:"🐕"},{v:"cat",label:"แมว",icon:"🐈"},
+  {v:"cow",label:"โค",icon:"🐄"},{v:"squirrel",label:"กระรอก",icon:"🐿️"},
+  {v:"other",label:"สัตว์อื่น ๆ",icon:"🐾"},
+];
+const LOCATIONS = ["มือ","แขน","ขา","เท้า","ลำตัว","ใบหน้า","ศีรษะ","อื่น ๆ"];
+const STAR_COLOR = { blue:'#3b82f6', gold:'#f59e0b', red:'#ef4444', none:'#9ca3af' };
+const STAR_ICON = { blue:'🔵⭐', gold:'🟡⭐', red:'🔴⭐', none:'⚪' };
+
+let state = { screen:'loading', village:null, volunteer:null, mission:null, survey:null };
+
+function el(tag, cls, html){ const e=document.createElement(tag); if(cls) e.className=cls; if(html!==undefined) e.innerHTML=html; return e; }
+function render(){ const a=document.getElementById('app'); a.innerHTML=''; a.appendChild(screens[state.screen]()); window.scrollTo(0,0); }
+function loadingScreen(msg){ const w=el('div','pt-24 text-center'); w.innerHTML=`<div class="spinner"></div><p class="text-white text-xl font-bold">${msg||'กำลังโหลด...'}</p>`; return w; }
+function errorScreen(msg, retryScreen){
+  const w = el('div','pt-24 text-center');
+  w.innerHTML = `<div class="card p-7"><p class="text-xl font-bold text-red-500 mb-4">⚠️ ${msg}</p></div>`;
+  const btn = el('button','btn btn-primary mt-6','ลองใหม่อีกครั้ง');
+  btn.onclick = ()=>{ state.screen = retryScreen || 'welcome'; boot(); };
+  w.appendChild(btn);
+  return w;
+}
+function character(msg){ const w=el('div','flex items-start gap-3 mb-6'); w.innerHTML=`<div class="avatar">🐶</div><div class="char-bubble flex-1">${msg}</div>`; return w; }
+function progress(step,total){ const w=el('div','flex justify-center gap-2 mb-4'); for(let i=1;i<=total;i++) w.appendChild(el('div',`progress-dot ${i<=step?'active':''}`)); return w; }
+function backBtn(to){ const b=el('button','text-white/90 font-bold mb-3 text-lg','← ย้อนกลับ'); b.onclick=()=>{ state.screen=to; render(); }; return b; }
+function daysSince(dateStr){ const b=new Date(dateStr); const t=new Date(); b.setHours(0,0,0,0); t.setHours(0,0,0,0); return Math.round((t-b)/86400000); }
+
+const screens = {};
+screens.loading = () => loadingScreen();
+
+/* ================= BOOT: โหลดภารกิจปัจจุบัน ================= */
+async function boot(){
+  state.screen='loading'; render();
+  try{
+    const params = new URLSearchParams(location.search);
+    const token = params.get('m');
+    state.mission = token ? await apiGet('/missions/token/'+token) : await apiGet('/missions/current');
+    state.screen='welcome'; render();
+  }catch(err){
+    document.getElementById('app').innerHTML='';
+    document.getElementById('app').appendChild(errorScreen(err.message, 'welcome'));
+  }
+}
+
+screens.welcome = () => {
+  const wrap = el('div','pt-10');
+  wrap.appendChild(el('div','text-center mb-6','<div class="avatar mx-auto" style="width:110px;height:110px;font-size:3.6rem;">🐶</div>'));
+  const card = el('div','card p-7 text-center');
+  card.innerHTML = `
+    <h1 class="text-3xl font-extrabold text-purple-800 mb-3">ภารกิจเฝ้าระวัง<br>ผู้ถูกสัตว์กัด/ข่วน</h1>
+    <p class="text-xl text-gray-600 mb-1">ประจำสัปดาห์ที่ ${state.mission.week_number} / ${state.mission.year}</p>
+    <p class="text-lg text-gray-500 mb-6">พร้อมทำภารกิจประจำสัปดาห์หรือยัง?</p>`;
+  const btn = el('button','btn btn-primary','🚀 เริ่มภารกิจ');
+  btn.onclick = async ()=>{
+    state.screen='loading'; render();
+    try{ state.villages = await apiGet('/villages'); state.screen='village'; render(); }
+    catch(err){ document.getElementById('app').innerHTML=''; document.getElementById('app').appendChild(errorScreen(err.message,'welcome')); }
+  };
+  card.appendChild(btn);
+  const adminLink = el('button','block mx-auto mt-5 text-white/80 underline text-lg','สำหรับเจ้าหน้าที่ →');
+  adminLink.onclick=()=>{ state.screen='adminLogin'; render(); };
+  wrap.appendChild(card); wrap.appendChild(adminLink);
+  return wrap;
+};
+
+screens.village = () => {
+  const wrap = el('div','pt-6');
+  wrap.appendChild(backBtn('welcome'));
+  const card = el('div','card p-6');
+  card.appendChild(character('โปรดเลือกหมู่บ้านของคุณค่ะ'));
+  const grid = el('div','grid gap-4');
+  state.villages.forEach(v=>{
+    const b = el('button','btn btn-outline','🏠 '+v.village_name);
+    b.onclick = async ()=>{
+      state.village = v; state.screen='loading'; render();
+      try{ state.volunteers = await apiGet(`/villages/${v.id}/volunteers`); state.screen='volunteer'; render(); }
+      catch(err){ document.getElementById('app').innerHTML=''; document.getElementById('app').appendChild(errorScreen(err.message,'village')); }
+    };
+    grid.appendChild(b);
+  });
+  card.appendChild(grid);
+  wrap.appendChild(card);
+  return wrap;
+};
+
+screens.volunteer = () => {
+  const wrap = el('div','pt-6');
+  wrap.appendChild(backBtn('village'));
+  const card = el('div','card p-6');
+  card.appendChild(character(`เลือกชื่อของคุณจาก ${state.village.village_name}`));
+  const grid = el('div','grid gap-3');
+  state.volunteers.forEach(vol=>{
+    const b = el('button','btn btn-outline text-left','👤 '+vol.full_name);
+    b.onclick=()=>{ state.volunteer=vol; state.screen='confirmVol'; render(); };
+    grid.appendChild(b);
+  });
+  card.appendChild(grid);
+  wrap.appendChild(card);
+  return wrap;
+};
+
+screens.confirmVol = () => {
+  const wrap = el('div','pt-10');
+  const card = el('div','card p-7 text-center');
+  card.innerHTML = `<div class="avatar mx-auto mb-4">🐶</div>
+    <p class="text-xl text-gray-600 mb-2">สวัสดีค่ะ</p>
+    <p class="text-3xl font-extrabold text-purple-800 mb-1">${state.volunteer.full_name}</p>
+    <p class="text-lg text-gray-500 mb-6">${state.village.village_name}</p>`;
+  const btn = el('button','btn btn-primary','เริ่มรายงาน ➜');
+  btn.onclick=()=>{ state.screen='mainQ'; render(); };
+  card.appendChild(btn);
+  const back = el('button','block mx-auto mt-4 text-purple-600 font-bold text-lg','เลือกชื่อใหม่');
+  back.onclick=()=>{ state.screen='volunteer'; render(); };
+  card.appendChild(back);
+  wrap.appendChild(card);
+  return wrap;
+};
+
+screens.mainQ = () => {
+  const wrap = el('div','pt-6');
+  wrap.appendChild(backBtn('confirmVol'));
+  const card = el('div','card p-6');
+  card.appendChild(character('ในเขตบ้านที่คุณรับผิดชอบ<br>มีผู้ถูกสุนัข/สัตว์กัด หรือไม่คะ?'));
+  const yes = el('button','btn btn-green mb-4','🐕 พบผู้ถูกกัด');
+  const no = el('button','btn btn-red','✅ ไม่พบผู้ถูกกัด');
+  yes.onclick=()=>{ state.survey={ exposures:[], counseling:{} }; state.screen='animal'; render(); };
+  no.onclick=()=> submitFinal('NO_BITE', [], {});
+  card.appendChild(yes); card.appendChild(no);
+  wrap.appendChild(card);
+  return wrap;
+};
+
+screens.animal = () => {
+  const wrap = el('div','pt-6');
+  wrap.appendChild(backBtn('mainQ'));
+  const card = el('div','card p-6');
+  card.appendChild(progress(1,4));
+  card.appendChild(character('พบเหตุการณ์แล้ว! สัตว์ที่กัด/ข่วน คือ?'));
+  const grid = el('div','grid grid-cols-2 gap-3 mb-5');
+  ANIMALS.forEach(a=>{
+    const c = el('div',`chip ${state._animal===a.v?'selected':''}`, `<div style="font-size:2.2rem">${a.icon}</div>${a.label}`);
+    c.onclick=()=>{ state._animal=a.v; render(); };
+    grid.appendChild(c);
+  });
+  card.appendChild(grid);
+  if(state._animal==='other'){
+    const inp = el('input','mb-5'); inp.placeholder='โปรดระบุชนิดสัตว์'; inp.value=state._animalOther||'';
+    inp.oninput=e=>state._animalOther=e.target.value;
+    card.appendChild(inp);
+  }
+  const next = el('button','btn btn-primary','ถัดไป ➜');
+  next.onclick=()=>{ if(!state._animal){alert('กรุณาเลือกชนิดสัตว์');return;} state.screen='count'; render(); };
+  card.appendChild(next);
+  wrap.appendChild(card);
+  return wrap;
+};
+
+screens.count = () => {
+  const wrap = el('div','pt-6');
+  wrap.appendChild(backBtn('animal'));
+  const card = el('div','card p-6');
+  card.appendChild(progress(2,4));
+  card.appendChild(character('มีผู้ถูกกัดหรือสัมผัสกี่คน?'));
+  const grid = el('div','grid grid-cols-2 gap-3');
+  [1,2,3,4].forEach(n=>{
+    const b = el('button',`chip ${state._count===n?'selected':''}`, n+' คน');
+    b.onclick=()=>{
+      state._count=n; state._personIdx=0;
+      state.survey.exposures = Array.from({length:n},(_,i)=>({person_no:i+1, animal_type:state._animal, animal_other:state._animalOther||''}));
+      state.screen='person'; render();
+    };
+    grid.appendChild(b);
+  });
+  card.appendChild(grid);
+  wrap.appendChild(card);
+  return wrap;
+};
+
+screens.person = () => {
+  const idx = state._personIdx||0, total = state._count, p = state.survey.exposures[idx];
+  const wrap = el('div','pt-6');
+  wrap.appendChild(backBtn(idx===0?'count':'person'));
+  const card = el('div','card p-6');
+  card.appendChild(progress(3,4));
+  card.appendChild(character(`ข้อมูลผู้ถูกกัด คนที่ ${idx+1} จาก ${total}`));
+  const field = (label, node) => { const w=el('div','mb-4'); w.appendChild(el('label','block text-lg font-bold text-gray-700 mb-1',label)); w.appendChild(node); return w; };
+
+  const nameI = el('input'); nameI.value=p.full_name||''; nameI.placeholder='ชื่อ-นามสกุล'; nameI.oninput=e=>p.full_name=e.target.value;
+  card.appendChild(field('ชื่อ-นามสกุล', nameI));
+  const sexSel = el('select'); sexSel.innerHTML=`<option value="">-- เลือก --</option><option value="ชาย">ชาย</option><option value="หญิง">หญิง</option>`;
+  sexSel.value=p.sex||''; sexSel.onchange=e=>p.sex=e.target.value;
+  card.appendChild(field('เพศ', sexSel));
+  const ageI = el('input'); ageI.type='number'; ageI.value=p.age||''; ageI.placeholder='อายุ (ปี)'; ageI.oninput=e=>p.age=e.target.value;
+  card.appendChild(field('อายุ', ageI));
+  const houseI = el('input'); houseI.value=p.house_number||''; houseI.placeholder='บ้านเลขที่'; houseI.oninput=e=>p.house_number=e.target.value;
+  card.appendChild(field('บ้านเลขที่', houseI));
+  const dateI = el('input'); dateI.type='date'; dateI.max=new Date().toISOString().slice(0,10); dateI.value=p.bite_date||''; dateI.onchange=e=>p.bite_date=e.target.value;
+  card.appendChild(field('วันที่ถูกกัด', dateI));
+  const locSel = el('select'); locSel.innerHTML=`<option value="">-- เลือกบริเวณ --</option>`+LOCATIONS.map(l=>`<option value="${l}">${l}</option>`).join('');
+  locSel.value=p.bite_location||''; locSel.onchange=e=>p.bite_location=e.target.value;
+  card.appendChild(field('บริเวณที่ถูกกัด', locSel));
+
+  const vacWrap = el('div','flex gap-3 mb-5');
+  [['vaccinated','✔ ได้รับ'],['not_vaccinated','✘ ไม่ได้รับ'],['unknown','ไม่ทราบ']].forEach(([v,label])=>{
+    const b = el('button',`chip flex-1 ${p.vaccination_status===v?'selected':''}`, label);
+    b.style.padding='12px'; b.style.fontSize='1rem';
+    b.onclick=()=>{ p.vaccination_status=v; render(); };
+    vacWrap.appendChild(b);
+  });
+  card.appendChild(el('label','block text-lg font-bold text-gray-700 mb-1','สถานะวัคซีน'));
+  card.appendChild(vacWrap);
+
+  const next = el('button','btn btn-primary', idx+1<total ? 'ถัดไป (คนที่ '+(idx+2)+') ➜' : 'ไปหน้าคำแนะนำ ➜');
+  next.onclick=()=>{
+    if(!p.full_name || !p.sex || !p.age || !p.bite_date || !p.bite_location){ alert('กรุณากรอกข้อมูลให้ครบทุกช่อง'); return; }
+    if(idx+1<total){ state._personIdx=idx+1; render(); } else { state.screen='counseling'; render(); }
+  };
+  card.appendChild(next);
+  wrap.appendChild(card);
+  return wrap;
+};
+
+screens.counseling = () => {
+  const wrap = el('div','pt-6');
+  wrap.appendChild(backBtn('person'));
+  const card = el('div','card p-6');
+  card.appendChild(progress(4,4));
+  card.appendChild(character('คุณได้ให้คำแนะนำแก่ผู้ถูกกัดหรือไม่?'));
+  const items = [
+    ['advised_doctor_24_48h','แนะนำให้ไปพบแพทย์ภายใน 24–48 ชม.'],
+    ['advised_wound_washing','แนะนำให้ล้างแผลด้วยสบู่และน้ำ'],
+    ['advised_animal_observation','แนะนำให้สังเกตอาการของสัตว์'],
+    ['provided_rabies_education','ให้ความรู้เรื่องโรคพิษสุนัขบ้า'],
+  ];
+  items.forEach(([key,label])=>{
+    const row = el('div','flex items-center justify-between border-2 rounded-2xl p-4 mb-3');
+    row.innerHTML = `<span class="text-lg font-semibold flex-1 pr-3">${label}</span>`;
+    const yn = el('div','flex gap-2');
+    ['ใช่','ไม่ใช่'].forEach(opt=>{
+      const val = opt==='ใช่';
+      const b = el('button',`chip ${state.survey.counseling[key]===val?'selected':''}`, opt);
+      b.style.padding='10px 16px'; b.style.fontSize='1rem';
+      b.onclick=()=>{ state.survey.counseling[key]=val; render(); };
+      yn.appendChild(b);
+    });
+    row.appendChild(yn);
+    card.appendChild(row);
+  });
+  const next = el('button','btn btn-primary mt-2','ตรวจสอบข้อมูล ➜');
+  next.onclick=()=>{ if(items.some(([k])=>state.survey.counseling[k]===undefined)){ alert('กรุณาตอบให้ครบทุกข้อ'); return; } state.screen='review'; render(); };
+  card.appendChild(next);
+  wrap.appendChild(card);
+  return wrap;
+};
+
+screens.review = () => {
+  const wrap = el('div','pt-6');
+  wrap.appendChild(backBtn('counseling'));
+  const card = el('div','card p-6');
+  card.appendChild(character('ตรวจสอบข้อมูลก่อนส่งรายงาน'));
+  let html = `<div class="text-lg space-y-2 mb-5">
+    <p><b>อสม.:</b> ${state.volunteer.full_name}</p>
+    <p><b>หมู่บ้าน:</b> ${state.village.village_name}</p>
+    <p><b>ผลสำรวจ:</b> พบผู้ถูกกัด (${state._count} คน)</p>`;
+  state.survey.exposures.forEach(p=>{
+    const animalLabel = ANIMALS.find(a=>a.v===p.animal_type)?.label||p.animal_type;
+    html += `<div class="border-t pt-2"><b>คนที่ ${p.person_no}:</b> ${p.full_name} (${p.sex}, ${p.age} ปี)<br>สัตว์: ${animalLabel} | บริเวณ: ${p.bite_location} | วันที่ถูกกัด: ${p.bite_date}</div>`;
+  });
+  html += `</div>`;
+  card.appendChild(el('div','',html));
+  const submit = el('button','btn btn-primary','✅ ส่งรายงาน');
+  submit.onclick=()=>{ submit.disabled=true; submit.textContent='กำลังส่ง...'; submitFinal('BITE_FOUND', state.survey.exposures, state.survey.counseling, submit); };
+  card.appendChild(submit);
+  wrap.appendChild(card);
+  return wrap;
+};
+
+async function submitFinal(result, exposures, counseling, btnEl){
+  try{
+    const payload = {
+      mission_id: state.mission.id, volunteer_id: state.volunteer.id, village_id: state.village.id,
+      survey_result: result, exposures, counseling,
+    };
+    const res = await apiPost('/surveys', payload);
+    state._lastStar = res.star;
+    state.screen='success'; render();
+  }catch(err){
+    alert(err.message);
+    if(btnEl){ btnEl.disabled=false; btnEl.textContent='✅ ส่งรายงาน'; }
+  }
+}
+
+screens.success = () => {
+  const star = state._lastStar || {color:'blue', label:''};
+  const wrap = el('div','pt-16 text-center');
+  wrap.innerHTML = `
+    <div class="star-pop text-8xl mb-4">⭐</div>
+    <div class="card p-7">
+      <p class="text-2xl font-extrabold text-purple-800 mb-2">ภารกิจสัปดาห์นี้เสร็จสิ้นแล้ว!</p>
+      <p class="text-xl mb-1" style="color:${STAR_COLOR[star.color]}">คุณได้รับดาว${star.color==='blue'?'สีฟ้า':star.color==='gold'?'สีทอง':'สีแดง'}</p>
+      <p class="text-gray-500 mb-6">ขอบคุณสำหรับความตั้งใจค่ะ 🙏</p>
+    </div>`;
+  const btn = el('button','btn btn-primary mt-6','เสร็จสิ้น');
+  btn.onclick=()=>{ state={screen:'welcome', mission:state.mission}; render(); };
+  wrap.appendChild(btn);
+  return wrap;
+};
+
+/* ================= ADMIN ================= */
+screens.adminLogin = () => {
+  const wrap = el('div','pt-16');
+  wrap.appendChild(backBtn('welcome'));
+  const card = el('div','card p-7 text-center');
+  card.innerHTML = `<p class="text-2xl font-extrabold text-purple-800 mb-4">เข้าสู่ระบบเจ้าหน้าที่</p>`;
+  const userI = el('input'); userI.placeholder='ชื่อผู้ใช้'; userI.autocomplete='username'; userI.className='mb-3';
+  const passI = el('input'); passI.type='password'; passI.placeholder='รหัสผ่าน'; passI.autocomplete='current-password';
+  card.appendChild(userI); card.appendChild(passI);
+  const errMsg = el('p','text-red-500 font-bold mt-3 hidden','');
+  card.appendChild(errMsg);
+  const btn = el('button','btn btn-primary mt-4','เข้าสู่ระบบ');
+  const doLogin = async ()=>{
+    errMsg.classList.add('hidden');
+    btn.disabled=true; btn.textContent='กำลังเข้าสู่ระบบ...';
+    try{
+      const res = await apiPost('/auth/login', { username:userI.value.trim(), password:passI.value });
+      sessionStorage.setItem('asm_admin_token', res.token);
+      sessionStorage.setItem('asm_admin_name', res.admin.full_name || res.admin.username);
+      state.screen='adminDash'; render();
+    }catch(err){
+      errMsg.textContent = err.message; errMsg.classList.remove('hidden');
+      btn.disabled=false; btn.textContent='เข้าสู่ระบบ';
+    }
+  };
+  btn.onclick=doLogin;
+  passI.addEventListener('keydown', e=>{ if(e.key==='Enter') doLogin(); });
+  card.appendChild(btn);
+  wrap.appendChild(card);
+  return wrap;
+};
+
+screens.adminDash = () => {
+  const wrap = el('div','pt-6 pb-10');
+  wrap.appendChild(loadingScreen('กำลังโหลดข้อมูล Dashboard...'));
+  (async ()=>{
+    try{
+      const data = await apiGet('/admin/dashboard', true);
+      renderAdminDash(data);
+    }catch(err){
+      document.getElementById('app').innerHTML='';
+      document.getElementById('app').appendChild(errorScreen(err.message, 'adminLogin'));
+      if(err.message.includes('เซสชัน')) sessionStorage.removeItem('asm_admin_token');
+    }
+  })();
+  return wrap;
+};
+
+function renderAdminDash(data){
+  const { mission, stats, grid, bites } = data;
+  const wrap = el('div','pt-6 pb-10');
+  const top = el('div','flex justify-between items-center mb-4');
+  top.innerHTML = `<h1 class="text-white text-2xl font-extrabold">📊 Dashboard เจ้าหน้าที่</h1>`;
+  const logout = el('button','text-white underline','ออกจากระบบ');
+  logout.onclick=()=>{ sessionStorage.removeItem('asm_admin_token'); state.screen='welcome'; render(); };
+  top.appendChild(logout);
+  wrap.appendChild(top);
+
+  if(!mission){
+    wrap.appendChild(el('div','card p-6 text-center','<p class="text-lg text-gray-500">ยังไม่มีภารกิจในระบบ กรุณาสร้างภารกิจใหม่ผ่าน API /api/admin/missions</p>'));
+    document.getElementById('app').innerHTML=''; document.getElementById('app').appendChild(wrap); return;
+  }
+
+  wrap.appendChild(el('p','text-white/90 text-lg mb-3 text-center', `สัปดาห์ที่ ${mission.week_number} / ${mission.year}`));
+
+  const statsGrid = el('div','grid grid-cols-2 gap-3 mb-5');
+  const statCard = (label,val,color)=>el('div','card p-4 text-center',`<div class="text-3xl font-extrabold" style="color:${color}">${val}</div><div class="text-sm text-gray-600 mt-1">${label}</div>`);
+  statsGrid.appendChild(statCard('อสม.ทั้งหมด', stats.total_volunteers, '#7c3aed'));
+  statsGrid.appendChild(statCard('รายงานแล้ว', stats.submitted, '#22c55e'));
+  statsGrid.appendChild(statCard('ยังไม่รายงาน', stats.not_submitted, '#ef4444'));
+  statsGrid.appendChild(statCard('พบผู้ถูกกัด', stats.bite_people+' คน', '#f59e0b'));
+  wrap.appendChild(statsGrid);
+
+  const exportBtn = el('button','btn btn-primary mb-3','📥 Export Excel (.xlsx)');
+  exportBtn.onclick = async ()=>{
+    exportBtn.disabled=true; exportBtn.textContent='กำลังสร้างไฟล์...';
+    try{
+      const r = await fetch(API+'/admin/export/excel?mission_id='+mission.id, { headers: authHeaders() });
+      if(!r.ok) throw new Error('ไม่สามารถสร้างไฟล์ Excel ได้');
+      const blob = await r.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url; a.download=`รายงาน_อสม_สัปดาห์${mission.week_number}.xlsx`; a.click();
+      URL.revokeObjectURL(url);
+    }catch(err){ alert(err.message); }
+    exportBtn.disabled=false; exportBtn.textContent='📥 Export Excel (.xlsx)';
+  };
+  wrap.appendChild(exportBtn);
+
+  const backupBtn = el('button','btn btn-outline mb-5 bg-white','💾 สำรองข้อมูลทันที');
+  backupBtn.onclick = async ()=>{
+    backupBtn.disabled=true; backupBtn.textContent='กำลังสำรองข้อมูล...';
+    try{ const r = await apiPost('/admin/backup', {}, true); alert('สำรองข้อมูลสำเร็จ: '+r.filename); }
+    catch(err){ alert(err.message); }
+    backupBtn.disabled=false; backupBtn.textContent='💾 สำรองข้อมูลทันที';
+  };
+  wrap.appendChild(backupBtn);
+
+  const gridCard = el('div','card p-4 mb-5 overflow-x-auto');
+  gridCard.appendChild(el('h2','text-lg font-extrabold text-purple-800 mb-3','สถานะรายบุคคล'));
+  let tbl = '<table><tr><th>อสม.</th><th>หมู่บ้าน</th><th>สถานะ</th></tr>';
+  grid.forEach(g=>{ tbl += `<tr><td class="text-left">${g.full_name}</td><td>${g.village_name.replace('บ้าน','')}</td><td>${STAR_ICON[g.star.color]}</td></tr>`; });
+  tbl += '</table>';
+  gridCard.appendChild(el('div','max-h-96 overflow-y-auto',tbl));
+  wrap.appendChild(gridCard);
+
+  if(bites.length){
+    const biteCard = el('div','card p-4');
+    biteCard.appendChild(el('h2','text-lg font-extrabold text-purple-800 mb-3','รายชื่อผู้ถูกกัด'));
+    const animalLabel = {dog:'สุนัข',cat:'แมว',cow:'โค',squirrel:'กระรอก',other:'สัตว์อื่นๆ'};
+    let bt = '<table><tr><th>ชื่อ</th><th>หมู่บ้าน</th><th>สัตว์</th><th>วันที่ถูกกัด</th><th>ผ่านมาแล้ว</th></tr>';
+    bites.forEach(p=>{ bt += `<tr><td class="text-left">${p.full_name}</td><td>${p.village_name.replace('บ้าน','')}</td><td>${animalLabel[p.animal_type]||p.animal_other}</td><td>${p.bite_date}</td><td>${p.days_since_bite} วัน</td></tr>`; });
+    bt += '</table>';
+    biteCard.appendChild(el('div','max-h-72 overflow-y-auto',bt));
+    wrap.appendChild(biteCard);
+  }
+
+  document.getElementById('app').innerHTML='';
+  document.getElementById('app').appendChild(wrap);
+}
+
+boot();
+</script>
+</body>
+</html>
