@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ทะเบียนเฝ้าระวังโรค E0/E1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F1ECDC;--bg-panel:#FFFDF6;--bg-panel-2:#FBF7EC;--ink:#1E2A26;--ink-soft:#5B6660;
+    --primary:#0B4F4A;--primary-light:#14726B;--primary-dark:#072F2C;--gold:#B4841B;
+    --line:#D9CFB2;--line-soft:#E7E0CB;--green:#3F7D4A;--green-bg:#E6EFE1;
+    --amber:#C97F1D;--amber-bg:#FBEBD4;--red:#A6332C;--red-bg:#F5E1DE;
+    --font-display:'Chakra Petch',sans-serif;--font-body:'Sarabun',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);}
+  ::selection{background:var(--gold);color:#fff;}
+  #app{display:flex;min-height:100vh;}
+  .spine{width:56px;background:var(--primary-dark);flex:0 0 56px;display:flex;flex-direction:column;align-items:center;padding:18px 0;}
+  .spine-title{writing-mode:vertical-rl;text-orientation:mixed;color:#EFE6C9;font-family:var(--font-display);letter-spacing:3px;font-size:13px;font-weight:600;margin-top:6px;}
+  .spine-seal{width:32px;height:32px;border:2px solid #EFE6C9;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#EFE6C9;font-family:var(--font-display);font-size:10px;font-weight:700;margin-bottom:14px;}
+  .sidebar{width:210px;flex:0 0 210px;background:var(--primary);padding:20px 0 20px 14px;}
+  .tab-btn{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--primary);border:none;color:#DCEAE6;font-family:var(--font-body);font-size:15px;font-weight:500;padding:12px 14px;cursor:pointer;border-radius:10px 0 0 10px;margin-bottom:4px;transition:background .15s;}
+  .tab-btn .num{font-family:var(--font-display);font-size:12px;opacity:.6;width:18px;}
+  .tab-btn:hover{background:var(--primary-light);}
+  .tab-btn.active{background:var(--bg-panel);color:var(--primary-dark);font-weight:600;}
+  .tab-btn.active .num{opacity:1;color:var(--gold);}
+  main{flex:1;padding:28px 34px 60px;max-width:1180px;}
+  .page-head{margin-bottom:22px;}
+  .eyebrow{font-family:var(--font-display);font-size:12px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin:0 0 4px;}
+  h1{font-family:var(--font-display);font-size:26px;margin:0;color:var(--primary-dark);font-weight:600;}
+  .sub{color:var(--ink-soft);font-size:14px;margin-top:6px;}
+  .panel{background:var(--bg-panel);border:1px solid var(--line);border-radius:4px;padding:20px;margin-bottom:18px;}
+  .panel-title{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--primary-dark);margin:0 0 12px;letter-spacing:.3px;}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;}
+  .card{background:var(--bg-panel);border:1px solid var(--line);border-radius:4px;padding:16px;}
+  .card .k{font-family:var(--font-display);font-size:30px;color:var(--primary-dark);font-weight:600;}
+  .card .l{font-size:13px;color:var(--ink-soft);margin-top:2px;}
+  .stamp{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:104px;height:104px;border-radius:50%;border:3px double currentColor;font-family:var(--font-display);font-weight:700;transform:rotate(-7deg);flex:0 0 104px;}
+  .stamp .t1{font-size:11px;letter-spacing:1px;}
+  .stamp .t2{font-size:15px;margin-top:2px;}
+  .stamp.ok{color:var(--green);}
+  .stamp.warn{color:var(--amber);}
+  .stamp.alert{color:var(--red);}
+  .status-pill{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:20px;font-family:var(--font-body);}
+  .pill-ok{background:var(--green-bg);color:var(--green);}
+  .pill-warn{background:var(--amber-bg);color:var(--amber);}
+  .pill-red{background:var(--red-bg);color:var(--red);}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  thead th{text-align:left;font-family:var(--font-display);font-weight:600;font-size:11.5px;letter-spacing:.4px;color:var(--primary-dark);text-transform:uppercase;border-bottom:2px solid var(--primary);padding:8px;background:var(--bg-panel-2);}
+  tbody td{padding:8px;border-bottom:1px solid var(--line-soft);vertical-align:top;}
+  tbody tr:hover{background:var(--bg-panel-2);}
+  .num-cell{font-family:var(--font-display);color:var(--ink-soft);}
+  .table-wrap{overflow-x:auto;max-height:520px;overflow-y:auto;border:1px solid var(--line);border-radius:4px;}
+  .btn{font-family:var(--font-body);font-weight:600;font-size:13.5px;border-radius:4px;border:1px solid var(--primary);background:var(--primary);color:#fff;padding:9px 16px;cursor:pointer;transition:opacity .15s;}
+  .btn:hover{opacity:.88;}
+  .btn:disabled{opacity:.5;cursor:not-allowed;}
+  .btn.ghost{background:transparent;color:var(--primary);}
+  .btn.small{padding:5px 10px;font-size:12.5px;}
+  .btn.danger{background:var(--red);border-color:var(--red);}
+  .btn.gold{background:var(--gold);border-color:var(--gold);}
+  .toolbar{display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap;}
+  input[type=text],input[type=number],select,input[type=date],input[type=time]{font-family:var(--font-body);font-size:13.5px;padding:8px 10px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);}
+  label{font-size:12.5px;font-weight:600;color:var(--ink-soft);display:block;margin-bottom:4px;}
+  textarea{font-family:var(--font-body);font-size:13.5px;padding:8px 10px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);width:100%;resize:vertical;}
+  .checklabel{font-weight:400;display:flex;align-items:center;gap:5px;font-size:13px;color:var(--ink);}
+  .field{margin-bottom:12px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .overlay{position:fixed;inset:0;background:rgba(7,47,44,.55);display:none;align-items:flex-start;justify-content:center;padding:36px 16px;overflow-y:auto;z-index:50;}
+  .overlay.open{display:flex;}
+  .modal{background:var(--bg-panel);border-radius:6px;max-width:760px;width:100%;padding:26px 28px;border:1px solid var(--line);}
+  .modal h2{font-family:var(--font-display);color:var(--primary-dark);margin:0 0 4px;font-size:19px;}
+  .modal .close{float:right;background:none;border:none;font-size:20px;cursor:pointer;color:var(--ink-soft);}
+  fieldset{border:1px solid var(--line-soft);border-radius:4px;margin:0 0 14px;padding:12px 14px;}
+  legend{font-family:var(--font-display);font-size:11.5px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;padding:0 6px;}
+  .empty{padding:34px;text-align:center;color:var(--ink-soft);font-size:14px;}
+  .note{font-size:12.5px;color:var(--ink-soft);background:var(--bg-panel-2);border-left:3px solid var(--gold);padding:8px 12px;border-radius:2px;margin-bottom:14px;}
+  .flex-between{display:flex;justify-content:space-between;align-items:center;}
+  .disease-hero{display:flex;gap:18px;align-items:center;margin-bottom:18px;}
+  .tag{font-family:var(--font-display);font-size:11px;background:var(--primary-dark);color:#EFE6C9;padding:2px 8px;border-radius:3px;}
+  .save-status{position:fixed;top:14px;right:14px;padding:8px 14px;border-radius:4px;font-size:13px;font-weight:600;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.15);opacity:0;transition:opacity .3s;pointer-events:none;}
+  .save-status.show{opacity:1;}
+  .save-status.ok{background:var(--green);color:#fff;}
+  .save-status.err{background:var(--red);color:#fff;}
+  .save-status.loading{background:var(--gold);color:#fff;}
+
+  /* ===== ฟอร์ม สสจ. แบบ 10 คอลัมน์ ===== */
+  .form-skh-table{width:100%;border-collapse:collapse;font-family:'Sarabun',sans-serif;font-size:7.5pt;line-height:1.3;background:#fff;color:#000;table-layout:fixed;}
+  .form-skh-table th,.form-skh-table td{border:1px solid #000;padding:3px 4px;vertical-align:top;word-wrap:break-word;overflow-wrap:break-word;}
+  .form-skh-table thead th{text-align:center;font-weight:700;font-size:7.5pt;padding:4px 2px;background:#F2F2F2;}
+  .form-skh-table .header-main{text-align:center;font-weight:700;font-size:11pt;padding:6px 8px;background:#fff;line-height:1.35;}
+  .form-skh-table .col-no{width:2.5%;text-align:center;}
+  .form-skh-table .col-1{width:12%;}
+  .form-skh-table .col-2{width:10%;}
+  .form-skh-table .col-3{width:9%;}
+  .form-skh-table .col-4{width:8%;}
+  .form-skh-table .col-5{width:13%;}
+  .form-skh-table .col-6{width:13%;}
+  .form-skh-table .col-7{width:9%;}
+  .form-skh-table .col-8{width:13%;}
+  .form-skh-table .col-9{width:10%;}
+  .form-skh-table .chk{display:block;margin-bottom:1px;}
+  .form-skh-table .chk::before{content:'(  ) ';}
+  .form-skh-table .chk.on::before{content:'(✓) ';font-weight:700;}
+  .form-skh-table .indent{padding-left:14px;}
+  .form-skh-table .small{font-size:6.5pt;color:#333;}
+  .form-skh-table .bold{font-weight:700;}
+  .form-skh-table .bottom-notes{padding:6px 8px;font-size:7.5pt;line-height:1.7;background:#FAFAFA;}
+  .dotted{display:inline-block;border-bottom:1px dotted #666;min-width:60px;height:11px;vertical-align:bottom;}
+  @media screen{
+    .form-skh-table{font-size:10px;}
+    .form-skh-table th,.form-skh-table td{padding:4px 5px;}
+    .print-preview-wrap{background:#fff;padding:14px;border:1px solid var(--line);border-radius:4px;overflow-x:auto;margin-bottom:16px;}
+  }
+  @media print{
+    @page{size:A4 landscape;margin:8mm 6mm;}
+    html,body{background:#fff !important;}
+    .spine,.sidebar,.toolbar,.overlay,#pf-controls,.note,button,.save-status{display:none !important;}
+    main{padding:0 !important;max-width:none !important;}
+    .print-preview-wrap{padding:0;border:none;box-shadow:none;overflow:visible;}
+    .form-skh-table{font-size:7pt;}
+    .form-skh-table thead{display:table-header-group;}
+    .form-skh-table tr{page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="spine">
+    <div class="spine-seal">E0</div>
+    <div class="spine-title">ทะเบียนเฝ้าระวังโรคระบาด</div>
+  </div>
+  <div class="sidebar" id="sidebar"></div>
+  <main id="main"><div class="empty">⏳ กำลังโหลดข้อมูล…</div></main>
+</div>
+
+<div class="overlay" id="overlay"><div class="modal" id="modalBody"></div></div>
+<div class="save-status" id="saveStatus"></div>
+
+<script>
+/* ============================================================
+   ★★★ WEB APP URL ★★★
+   ============================================================ */
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxg94GxHMzaH0aYGuCThNXDjeT0uR4t3E-yJJ1m4D06ZTgI8yDu89Ac5q5VV_oUrwrE-w/exec';
+
+/* ================= DATA ================= */
+const THAI_MONTHS = ["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+const PREFIXES = ["นาย","นาง","นางสาว","ด.ช.","ด.ญ.","อื่นๆ"];
+
+const VILLAGES = [
+  {moo:'6',  name:'บ้านอำปึล',        tambon:'บักได', amphoe:'พนมดงรัก', changwat:'สุรินทร์'},
+  {moo:'7',  name:'บ้านโพธิ์ทอง',      tambon:'บักได', amphoe:'พนมดงรัก', changwat:'สุรินทร์'},
+  {moo:'8',  name:'บ้านโคกสูง',       tambon:'บักได', amphoe:'พนมดงรัก', changwat:'สุรินทร์'},
+  {moo:'16', name:'บ้านไทยสันติสุข',   tambon:'บักได', amphoe:'พนมดงรัก', changwat:'สุรินทร์'},
+  {moo:'20', name:'บ้านอำปึล',        tambon:'บักได', amphoe:'พนมดงรัก', changwat:'สุรินทร์'},
+];
+function villageByMoo(moo){ return VILLAGES.find(v=>String(v.moo)===String(moo)); }
+function villageLabel(moo){ const v = villageByMoo(moo); return v? `ม.${v.moo} ${v.name}` : (moo? `ม.${moo}` : ''); }
+
+const REPORT_CHECK_GROUPS = {
+  confirm:     {label:'การยืนยันการเกิดโรค/เหตุการณ์', options:['ยืนยันการเกิดโรค','ยืนยันการเกิดเหตุการณ์','เป็นเหตุการณ์ผิดปกติ']},
+  checkResult: {label:'ผลการตรวจสอบข่าว', options:['เข้าเกณฑ์ตรวจสอบข่าว','ไม่เข้าเกณฑ์ตรวจสอบข่าว','เป็นโรคที่ไม่สามารถระบุชนิดได้']},
+  escalation:  {label:'เข้าเกณฑ์แจ้งเตือน/สอบสวนระดับ', options:['เข้าเกณฑ์ DCIR','เข้าเกณฑ์สอบสวนส่วนกลาง','เข้าเกณฑ์ CIR เขต','เข้าเกณฑ์สอบสวนเขต','เข้าเกณฑ์ CIR จังหวัด','เข้าเกณฑ์สอบสวนจังหวัด','เข้าเกณฑ์ CIR อำเภอ','เข้าเกณฑ์สอบสวนอำเภอ']},
+  notify:      {label:'การแจ้งทีม/หน่วยงาน', options:['แจ้งทีม SRRT รพ.','แจ้งทีม SRRT ตำบล','แจ้งทีม SRRT อำเภอ','แจ้ง สสจ.','แจ้ง อบต./เทศบาล','รายงาน ผอ.รพ.','ประสานหน่วยทหาร/เสนารักษ์ในพื้นที่','แจ้งปศุสัตว์อำเภอ']},
+  checkMethod: {label:'วิธีตรวจสอบข่าว', options:['ลงพื้นที่สอบสวนโรค','ตรวจสอบด้วยตนเอง','โทรศัพท์สอบถาม','ทบทวนเวชระเบียน']},
+  newsType:    {label:'ประเภทข่าว', options:['โรค/กลุ่มอาการที่พบบ่อย','โรคใหม่/กลุ่มอาการที่ไม่เคยพบในพื้นที่','เหตุการณ์ที่เป็นปัจจัยเสี่ยงต่อสุขภาพ/การเกิดโรคในคน']}
+};
+
+const DEFAULT_THRESHOLDS = [
+ {id:'dengue', name:'ไข้เลือดออก (Dengue)', minCases:1, windowDays:null, deadlineHours:48, note:'พบผู้ป่วย/สงสัย 1 รายขึ้นไป'},
+ {id:'chikv', name:'ไข้ปวดข้อยุงลาย (Chikungunya)', minCases:1, windowDays:null, deadlineHours:48, note:'ใช้เกณฑ์เดียวกับไข้เลือดออก'},
+ {id:'scrub', name:'สครับไทฟัส (Scrub Typhus)', minCases:2, windowDays:null, deadlineHours:168, note:'ผู้ป่วยเป็นกลุ่มก้อนตั้งแต่ 2 รายขึ้นไป'},
+ {id:'murine', name:'มิวรีนไทฟัส (Murine Typhus)', minCases:2, windowDays:null, deadlineHours:168, note:'กลุ่มก้อนตั้งแต่ 2 รายขึ้นไป'},
+ {id:'leishmania', name:'ลิชมาเนีย (Leishmaniasis)', minCases:1, windowDays:null, deadlineHours:24, note:'สงสัยทุกรายต้องสอบสวนทันที'},
+ {id:'covid', name:'โควิด-19 (COVID-19)', minCases:5, windowDays:7, deadlineHours:168, note:'5 รายขึ้นไป ภายใน 1 สัปดาห์'},
+ {id:'flu', name:'ไข้หวัดใหญ่ (Seasonal Influenza)', minCases:5, windowDays:7, deadlineHours:168, note:'5 รายขึ้นไป ภายใน 1 สัปดาห์'},
+ {id:'pneumonia', name:'ปอดอักเสบ (Pneumonia)', minCases:5, windowDays:null, deadlineHours:168, note:'5 รายขึ้นไป'},
+ {id:'rsv', name:'RSV', minCases:5, windowDays:7, deadlineHours:168, note:'5 รายขึ้นไป ภายใน 1 สัปดาห์'},
+ {id:'diarrhea', name:'อุจจาระร่วง / อาหารเป็นพิษ', minCases:5, windowDays:null, deadlineHours:48, note:'มากกว่า 5 ราย'},
+ {id:'rabies', name:'พิษสุนัขบ้า (คน/สัตว์)', minCases:1, windowDays:null, deadlineHours:24, note:'ทุกรายสอบสวนทันที'},
+ {id:'lepto', name:'เลปโตสไปโรซิส', minCases:2, windowDays:null, deadlineHours:168, note:'2 รายขึ้นไป'},
+ {id:'chickenpox', name:'สุกใส (Chickenpox)', minCases:2, windowDays:null, deadlineHours:168, note:'2 รายขึ้นไป'},
+ {id:'hfmd', name:'มือ เท้า ปาก (HFMD)', minCases:2, windowDays:7, deadlineHours:168, note:'2 รายขึ้นไป ภายใน 1 สัปดาห์'},
+ {id:'conjunctivitis', name:'ตาแดงจากไวรัส', minCases:2, windowDays:null, deadlineHours:168, note:'2 รายขึ้นไป ในสถานที่คนรวมกันมาก'},
+ {id:'drowning', name:'จมน้ำ (Drowning)', minCases:1, windowDays:null, deadlineHours:24, note:'ทุกรายสอบสวนทันที'},
+ {id:'rti', name:'อุบัติเหตุทางถนน (RTI)', minCases:1, windowDays:null, deadlineHours:24, note:'เสียชีวิต 1 ราย หรือ admit 2 รายขึ้นไป'},
+];
+
+const emptyRecord = ()=>{
+  const now = new Date();
+  return {
+    id:'r'+Date.now()+Math.random().toString(16).slice(2),
+    prefix:'นาย', firstname:'', lastname:'', hn:'', age:'',
+    houseNo:'', moo:'', tambon:'บักได', amphoe:'พนมดงรัก', changwat:'สุรินทร์',
+    illDay:'', illMonth:THAI_MONTHS[now.getMonth()], illYear:'',
+    treatDay:'', treatMonth:THAI_MONTHS[now.getMonth()], treatYear:'',
+    diagnosisId:'', diagnosisText:'',
+    reportDay:String(now.getDate()),
+    reportMonth:THAI_MONTHS[now.getMonth()],
+    reportYear:String(now.getFullYear()+543),
+    reportTime:`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`,
+    investigateDay:'', investigateMonth:THAI_MONTHS[now.getMonth()], investigateYear:'', investigateTime:'',
+    sendDay:'', sendMonth:THAI_MONTHS[now.getMonth()], sendYear:'', sendTime:'',
+    receiver:'', receivePlace:'', attachmentRef:'', extraNote:'',
+    rep_enabled:false, rep_reporterName:'', rep_reporterContact:'', rep_eventLocation:'',
+    rep_confirm:[], rep_checkResult:[], rep_escalation:[], rep_notify:[], rep_checkMethod:[], rep_newsType:[],
+    rep_activities:'', rep_team:'', rep_findings:'', rep_contacts:''
+  };
+};
+
+/* ================= STATE ================= */
+let state = {
+  records: [], thresholds: DEFAULT_THRESHOLDS.slice(),
+  tab:'dashboard', editingId:null, e1Disease: DEFAULT_THRESHOLDS[0].id, search:'',
+  printMonth: THAI_MONTHS[new Date().getMonth()], printYear: new Date().getFullYear()+543,
+  printSelected: new Set(), printInitKeys: new Set(),
+  lastBackupAt: null, importMode:'merge',
+  dashMonth: THAI_MONTHS[new Date().getMonth()], dashYear: new Date().getFullYear()+543,
+  e0FilterMonth: '', e0FilterYear: '', e1FilterMonth: '', e1FilterYear: '',
+  exportMonth: '', exportYear: '',
+  weeklyChartYear: new Date().getFullYear()+543,
+  weeklyChartCompareYears: new Set(), weeklyChartSelectedDiseases: null,
+  weeklyChartFromDate: '', weeklyChartToDate: '', weeklyChartShowAllDiseases: true,
+  isSaving: false, lastSaveAt: null,
+};
+
+/* ================= Google Sheets API ================= */
+function toArray(v){
+  if(Array.isArray(v)) return v;
+  if(v === '' || v == null) return [];
+  return String(v).split(/[|,]/).map(s=>s.trim()).filter(Boolean);
+}
+function showSaveStatus(msg, type){
+  const el = document.getElementById('saveStatus');
+  if(!el) return;
+  el.textContent = msg;
+  el.className = 'save-status show ' + (type || 'ok');
+  if(type !== 'loading') setTimeout(()=>{ el.classList.remove('show'); }, 2500);
+}
+
+async function loadState(){
+  const mainEl = document.getElementById('main');
+  if(mainEl) mainEl.innerHTML = '<div class="empty">⏳ กำลังโหลดข้อมูลจาก Google Sheets…</div>';
+  try {
+    const res = await fetch(WEB_APP_URL + '?t=' + Date.now());
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if(data.status !== 'success') throw new Error(data.message || 'Server error');
+
+    state.records = (data.records || []).map(r => ({
+      ...emptyRecord(), ...r,
+      rep_enabled: (r.rep_enabled === true || String(r.rep_enabled).toUpperCase() === 'TRUE'),
+      rep_confirm:     toArray(r.rep_confirm),
+      rep_checkResult: toArray(r.rep_checkResult),
+      rep_escalation:  toArray(r.rep_escalation),
+      rep_notify:      toArray(r.rep_notify),
+      rep_checkMethod: toArray(r.rep_checkMethod),
+      rep_newsType:    toArray(r.rep_newsType),
+    }));
+
+    state.thresholds = (data.thresholds && data.thresholds.length)
+      ? data.thresholds.map(t => ({
+          ...t,
+          minCases: parseInt(t.minCases,10) || 1,
+          windowDays: (t.windowDays === '' || t.windowDays == null) ? null : parseInt(t.windowDays,10),
+          deadlineHours: parseInt(t.deadlineHours,10) || 168,
+          custom: (t.custom === true || String(t.custom).toUpperCase() === 'TRUE'),
+        }))
+      : DEFAULT_THRESHOLDS.slice();
+
+    let addedNew = false;
+    DEFAULT_THRESHOLDS.forEach(def=>{
+      if(!state.thresholds.some(t=>t.id===def.id)){ state.thresholds.push({...def}); addedNew = true; }
+    });
+    if(addedNew) await saveThresholds();
+
+    try{ state.lastBackupAt = localStorage.getItem('lastBackupAt') || null; }catch(e){ state.lastBackupAt = null; }
+  } catch(err) {
+    console.error('❌ โหลดข้อมูลไม่สำเร็จ:', err);
+    state.records = []; state.thresholds = DEFAULT_THRESHOLDS.slice();
+    if(mainEl) mainEl.innerHTML = `
+      <div class="page-head"><p class="eyebrow">เกิดข้อผิดพลาด</p><h1>ไม่สามารถเชื่อมต่อกับ Google Sheets ได้</h1><p class="sub">${err.message}</p></div>
+      <div class="panel"><button class="btn gold" onclick="location.reload()">🔄 ลองอีกครั้ง</button></div>`;
+    return;
+  }
+  render();
+}
+
+async function saveRecords(){
+  state.isSaving = true; showSaveStatus('⏳ กำลังบันทึก…', 'loading');
+  try {
+    const res = await fetch(WEB_APP_URL, {
+      method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify({ action:'saveRecords', records: state.records })
+    });
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if(data.status !== 'success') throw new Error(data.message || 'Server error');
+    showSaveStatus('✅ บันทึกสำเร็จ', 'ok');
+  } catch(err) {
+    showSaveStatus('❌ บันทึกไม่สำเร็จ', 'err');
+    alert('บันทึกไม่สำเร็จ: ' + err.message);
+  } finally { state.isSaving = false; }
+}
+
+async function saveThresholds(){
+  try {
+    const res = await fetch(WEB_APP_URL, {
+      method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify({ action:'saveThresholds', thresholds: state.thresholds })
+    });
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+  } catch(err) { console.error('save thresholds failed', err); }
+}
+
+/* ================= HELPERS ================= */
+function toDate(day, monthAbbr, yearBE, timeStr){
+  if(!day || !monthAbbr || !yearBE) return null;
+  const mi = THAI_MONTHS.indexOf(monthAbbr);
+  if(mi<0) return null;
+  let y = parseInt(yearBE,10); if(isNaN(y)) return null;
+  if(y<200) y += 2500;
+  const yCE = y - 543;
+  let hh = 0, mm = 0;
+  if(timeStr !== null && timeStr !== undefined && timeStr !== ''){
+    const t = String(timeStr).trim();
+    if(t.includes(':')){
+      const parts = t.split(':');
+      hh = parseInt(parts[0] || 0, 10) || 0;
+      mm = parseInt(parts[1] || 0, 10) || 0;
+    } else {
+      hh = parseInt(t, 10) || 0;
+      mm = 0;
+    }
+  }
+  if(hh < 0 || hh > 23) hh = 0;
+  if(mm < 0 || mm > 59) mm = 0;
+  return new Date(yCE, mi, parseInt(day,10), hh, mm);
+}
+function fmtThaiDate(day,month,yearBE){ if(!day||!month||!yearBE) return '—'; return `${day} ${month} ${yearBE}`; }
+function toDateInputValue(day, monthAbbr, yearBE, timeStr){
+  const d = toDate(day, monthAbbr, yearBE, timeStr);
+  if(!d) return '';
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function toTimeInputValue(timeStr){
+  if(timeStr === null || timeStr === undefined || timeStr === '') return '';
+  const t = String(timeStr).trim();
+  const m = t.match(/^(\d{1,2})[:.](\d{2})/);
+  if(m){
+    const hh = String(Math.min(23, parseInt(m[1],10))).padStart(2,'0');
+    const mm = String(Math.min(59, parseInt(m[2],10))).padStart(2,'0');
+    return `${hh}:${mm}`;
+  }
+  const num = parseInt(t, 10);
+  if(!isNaN(num) && num >= 0 && num <= 23) return `${String(num).padStart(2,'0')}:00`;
+  return '';
+}
+function splitDateInputValue(val){
+  if(!val) return {day:'',month:THAI_MONTHS[0],yearBE:''};
+  const [yyyy,mm,dd] = val.split('-');
+  return { day: String(parseInt(dd,10)), month: THAI_MONTHS[parseInt(mm,10)-1], yearBE: String(parseInt(yyyy,10)+543) };
+}
+function todayDateInputValue(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function nowTimeInputValue(){
+  const d = new Date();
+  return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
+function thresholdFor(diagId){ return state.thresholds.find(t=>t.id===diagId); }
+function findOrCreateThreshold(rawName){
+  const name = (rawName||'').trim();
+  if(!name) return null;
+  const existing = state.thresholds.find(t=>t.name.trim().toLowerCase()===name.toLowerCase());
+  if(existing) return existing.id;
+  const id = 'custom_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  state.thresholds.push({ id, name, minCases:2, windowDays:7, deadlineHours:168, note:'เกณฑ์เริ่มต้นสำหรับโรคที่เพิ่มเอง', custom:true });
+  return id;
+}
+function diagnosisLabel(rec){
+  const t = thresholdFor(rec.diagnosisId);
+  return rec.diagnosisId==='other' ? (rec.diagnosisText||'อื่นๆ') : (t? t.name : (rec.diagnosisText||'—'));
+}
+function investigationStatus(rec){
+  const t = thresholdFor(rec.diagnosisId);
+  const reportDT = toDate(rec.reportDay, rec.reportMonth, rec.reportYear, rec.reportTime);
+  if(!t || !reportDT) return {label:'—', cls:'pill-ok'};
+  const deadline = new Date(reportDT.getTime() + t.deadlineHours*3600*1000);
+  const investDT = toDate(rec.investigateDay, rec.investigateMonth, rec.investigateYear, rec.investigateTime);
+  if(investDT) return investDT <= deadline ? {label:'สอบสวนทันเวลา', cls:'pill-ok'} : {label:'สอบสวนล่าช้า', cls:'pill-red'};
+  const now = new Date();
+  if(now > deadline) return {label:'เกินกำหนด ยังไม่สอบสวน', cls:'pill-red'};
+  const hoursLeft = (deadline-now)/3600000;
+  return hoursLeft < t.deadlineHours*0.34 ? {label:'ใกล้ครบกำหนด', cls:'pill-warn'} : {label:'อยู่ในกำหนด', cls:'pill-ok'};
+}
+function overdueList(){ return state.records.map(r=>({r, s:investigationStatus(r)})).filter(x=>x.s.cls==='pill-red'); }
+function getEpiWeek(d){
+  const y = d.getFullYear();
+  const jan1 = new Date(y,0,1);
+  const jan1Dow = jan1.getDay();
+  const secondWeekStart = jan1Dow===0 ? new Date(y,0,8) : new Date(y,0,1+(7-jan1Dow));
+  if(d < secondWeekStart) return {week:1, yearCE:y};
+  const diffDays = Math.floor((d - secondWeekStart)/86400000);
+  return {week: 2+Math.floor(diffDays/7), yearCE:y};
+}
+function normalizeYearBE(yRaw){
+  let y = parseInt(yRaw,10); if(isNaN(y)) return null;
+  if(y<200) y += 2500;
+  return y;
+}
+function recordEpiDate(r){
+  return toDate(r.illDay,r.illMonth,r.illYear) || toDate(r.reportDay,r.reportMonth,r.reportYear);
+}
+function yearOptions(selected, includeAll){
+  let opts = includeAll ? `<option value="" ${!selected?'selected':''}>ทุกปี</option>` : '';
+  for(let y=2566; y<=2579; y++) opts += `<option ${String(y)===String(selected)?'selected':''}>${y}</option>`;
+  return opts;
+}
+function monthFilterOptions(selected){
+  return `<option value="" ${!selected?'selected':''}>ทุกเดือน</option>` + THAI_MONTHS.map(m=>`<option ${m===selected?'selected':''}>${m}</option>`).join('');
+}
+
+/* ================= RENDER SHELL ================= */
+const TABS = [
+  {id:'dashboard', label:'ภาพรวม / แจ้งเตือน'},
+  {id:'e0', label:'ทะเบียน E0'},
+  {id:'e1', label:'E1 รายโรค'},
+  {id:'weekly', label:'กราฟรายสัปดาห์'},
+  {id:'criteria', label:'เกณฑ์การระบาด'},
+  {id:'printform', label:'พิมพ์แบบฟอร์ม (สสจ.)'},
+  {id:'backup', label:'สำรอง/กู้คืนข้อมูล'},
+  {id:'export', label:'ส่งออกข้อมูล'},
+];
+function renderSidebar(){
+  const sb = document.getElementById('sidebar');
+  sb.innerHTML = TABS.map((t,i)=>`
+    <button class="tab-btn ${state.tab===t.id?'active':''}" data-tab="${t.id}">
+      <span class="num">0${i+1}</span>${t.label}
+    </button>`).join('');
+  sb.querySelectorAll('.tab-btn').forEach(b=>b.onclick=()=>{ state.tab=b.dataset.tab; render(); });
+}
+function render(){
+  renderSidebar();
+  const m = document.getElementById('main');
+  if(state.tab==='dashboard') m.innerHTML = viewDashboard();
+  else if(state.tab==='e0') m.innerHTML = viewE0();
+  else if(state.tab==='e1') m.innerHTML = viewE1();
+  else if(state.tab==='weekly') m.innerHTML = viewWeekly();
+  else if(state.tab==='criteria') m.innerHTML = viewCriteria();
+  else if(state.tab==='printform') m.innerHTML = viewPrintForm();
+  else if(state.tab==='backup') m.innerHTML = viewBackup();
+  else if(state.tab==='export') m.innerHTML = viewExport();
+  bindDynamicEvents();
+}
+
+/* ================= DASHBOARD ================= */
+function viewDashboard(){
+  const total = state.records.length;
+  const overdue = overdueList();
+  const inPeriod = state.records.filter(r=> r.reportMonth===state.dashMonth && normalizeYearBE(r.reportYear)===state.dashYear);
+  const perDisease = state.thresholds.map(t=>{
+    const count = inPeriod.filter(r=>r.diagnosisId===t.id).length;
+    let st='ok'; if(count>=t.minCases) st='alert'; else if(t.minCases>1 && count===t.minCases-1) st='warn';
+    return {t, count, st};
+  }).sort((a,b)=> b.count-a.count);
+  const maxCount = Math.max(1, ...perDisease.map(x=>x.count));
+  const alertsNow = perDisease.filter(x=>x.st==='alert');
+  const barRows = perDisease.map(x=>{
+    const color = x.st==='alert'?'var(--red)':x.st==='warn'?'var(--amber)':'var(--primary-light)';
+    const pct = Math.max(x.count>0?4:0, (x.count/maxCount)*100);
+    return `<div style="display:flex;align-items:center;gap:10px;margin-bottom:9px;">
+      <div style="width:190px;font-size:13px;flex:0 0 190px;">${x.t.name}</div>
+      <div style="flex:1;background:var(--bg-panel-2);border-radius:3px;height:18px;position:relative;">
+        <div style="width:${pct}%;background:${color};height:100%;border-radius:3px;"></div>
+      </div>
+      <div style="width:52px;flex:0 0 52px;text-align:right;font-family:var(--font-display);font-weight:600;color:${color};">${x.count} ราย</div>
+    </div>`;
+  }).join('');
+
+  return `
+  <div class="page-head">
+    <p class="eyebrow">ระบบทะเบียนเฝ้าระวังโรค</p>
+    <h1>ภาพรวมและการแจ้งเตือน</h1>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="k">${total}</div><div class="l">ผู้ป่วยสะสมทั้งหมด</div></div>
+    <div class="card"><div class="k">${inPeriod.length}</div><div class="l">รับรายงานในช่วงที่เลือก</div></div>
+    <div class="card"><div class="k" style="color:${alertsNow.length?'var(--red)':'var(--ink)'}">${alertsNow.length}</div><div class="l">โรคเข้าเกณฑ์แจ้งเตือน</div></div>
+    <div class="card"><div class="k" style="color:${overdue.length?'var(--red)':'var(--ink)'}">${overdue.length}</div><div class="l">สอบสวนล่าช้า/เกินกำหนด</div></div>
+  </div>
+  <div class="panel">
+    <div class="flex-between" style="margin-bottom:12px;flex-wrap:wrap;gap:10px;">
+      <div class="panel-title" style="margin:0;">จำนวนผู้ป่วยแยกรายโรค — เดือน${state.dashMonth} ${state.dashYear}</div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <select id="dashMonthSelect">${THAI_MONTHS.map(m=>`<option ${m===state.dashMonth?'selected':''}>${m}</option>`).join('')}</select>
+        <select id="dashYearInput">${yearOptions(state.dashYear, false)}</select>
+      </div>
+    </div>
+    ${inPeriod.length? barRows : `<div class="empty">ไม่มีผู้ป่วยในเดือน/ปีนี้</div>`}
+  </div>
+  <div class="panel">
+    <div class="panel-title">รายการที่ต้องติดตาม</div>
+    ${overdue.length? `<div class="table-wrap"><table><thead><tr><th>ชื่อ-สกุล</th><th>วินิจฉัย</th><th>วันรับแจ้ง</th><th>สถานะ</th></tr></thead><tbody>
+      ${overdue.map(x=>`<tr><td>${x.r.prefix}${x.r.firstname} ${x.r.lastname}</td><td>${diagnosisLabel(x.r)}</td><td>${fmtThaiDate(x.r.reportDay,x.r.reportMonth,x.r.reportYear)}</td><td><span class="status-pill ${x.s.cls}">${x.s.label}</span></td></tr>`).join('')}
+    </tbody></table></div>` : `<div class="empty">ไม่มีรายการค้างสอบสวน</div>`}
+  </div>
+  `;
+}
+
+/* ================= E0 ================= */
+function viewE0(){
+  const q = state.search.trim().toLowerCase();
+  let list = state.records;
+  if(state.e0FilterMonth) list = list.filter(r => r.reportMonth === state.e0FilterMonth);
+  if(state.e0FilterYear) list = list.filter(r => String(normalizeYearBE(r.reportYear)) === String(state.e0FilterYear));
+  if(q) list = list.filter(r => (`${r.firstname} ${r.lastname} ${r.tambon} ${r.amphoe} ${diagnosisLabel(r)}`).toLowerCase().includes(q));
+  list = list.slice().sort((a,b)=> (String(b.reportYear||'')+String(b.reportMonth||'')+String(b.reportDay||'')).localeCompare(String(a.reportYear||'')+String(a.reportMonth||'')+String(a.reportDay||'')));
+
+  return `
+  <div class="page-head flex-between">
+    <div>
+      <p class="eyebrow">ทะเบียนรวมผู้ป่วยที่ได้รับแจ้ง</p>
+      <h1>ทะเบียน E0</h1>
+    </div>
+    <button class="btn gold" id="btnAdd">+ เพิ่มผู้ป่วยใหม่</button>
+  </div>
+  <div class="toolbar">
+    <label style="margin:0;">ช่วงเวลา (วันรับแจ้ง)</label>
+    <select id="e0FilterMonth">${monthFilterOptions(state.e0FilterMonth)}</select>
+    <select id="e0FilterYear">${yearOptions(state.e0FilterYear, true)}</select>
+    ${(state.e0FilterMonth || state.e0FilterYear) ? `<button class="btn small ghost" id="e0FilterClear">ล้าง</button>` : ''}
+    <input type="text" id="searchBox" placeholder="ค้นหา ชื่อ / ตำบล / อำเภอ / โรค" value="${state.search}" style="min-width:220px;">
+    <span class="tag">${list.length} รายการ</span>
+  </div>
+  <div class="table-wrap">
+  <table><thead><tr>
+    <th>ลำดับ</th><th>ชื่อ-สกุล</th><th>อายุ</th><th>ที่อยู่</th><th>วินิจฉัย</th>
+    <th>วันป่วย</th><th>วันรับแจ้ง</th><th>วันสอบสวน</th><th>สถานะ</th><th>ไฟล์แนบ</th><th></th>
+  </tr></thead><tbody>
+  ${list.length? list.map((r,i)=>{
+    const s = investigationStatus(r);
+    return `<tr>
+      <td class="num-cell">${state.records.length-state.records.indexOf(r)}</td>
+      <td>${r.prefix}${r.firstname} ${r.lastname}${r.hn?`<div style="font-size:11px;color:var(--ink-soft)">HN ${r.hn}</div>`:''}</td>
+      <td class="num-cell">${r.age||'—'}</td>
+      <td>${[r.houseNo&&('เลขที่ '+r.houseNo), r.moo&&villageLabel(r.moo), r.amphoe&&('อ.'+r.amphoe)].filter(Boolean).join(' ')||'—'}</td>
+      <td>${diagnosisLabel(r)}</td>
+      <td>${fmtThaiDate(r.illDay,r.illMonth,r.illYear)}</td>
+      <td>${fmtThaiDate(r.reportDay,r.reportMonth,r.reportYear)}${r.reportTime?` <span style="color:var(--ink-soft)">${toTimeInputValue(r.reportTime)}น.</span>`:''}</td>
+      <td>${fmtThaiDate(r.investigateDay,r.investigateMonth,r.investigateYear)}</td>
+      <td><span class="status-pill ${s.cls}">${s.label}</span></td>
+      <td style="max-width:120px;font-size:12px;color:var(--ink-soft);">${r.attachmentRef||'—'}</td>
+      <td><button class="btn small ghost" data-edit="${r.id}">แก้ไข</button> <button class="btn small danger" data-del="${r.id}">ลบ</button></td>
+    </tr>`;
+  }).join('') : `<tr><td colspan="11"><div class="empty">ไม่พบรายการ</div></td></tr>`}
+  </tbody></table>
+  </div>
+  `;
+}
+
+/* ================= E1 ================= */
+function viewE1(){
+  const t = thresholdFor(state.e1Disease);
+  let baseMatches = state.records.filter(r=>r.diagnosisId===state.e1Disease);
+  if(state.e1FilterMonth) baseMatches = baseMatches.filter(r => r.reportMonth === state.e1FilterMonth);
+  if(state.e1FilterYear){
+    baseMatches = baseMatches.filter(r => {
+      const y = normalizeYearBE(r.reportYear);
+      return y !== null && String(y) === String(state.e1FilterYear);
+    });
+  }
+  const filteredCount = baseMatches.length;
+  let st = 'ok';
+  if(filteredCount >= t.minCases) st = 'alert';
+  else if(t.minCases>1 && filteredCount === t.minCases-1) st = 'warn';
+  const cls = st==='alert'?'alert':st==='warn'?'warn':'ok';
+  const txt = st==='alert'?'เข้าเกณฑ์แจ้งเตือน':st==='warn'?'ใกล้เข้าเกณฑ์':'ปกติ';
+  const matches = baseMatches.slice().sort((a,b)=>
+    (String(b.reportYear||'')+String(b.reportMonth||'')+String(b.reportDay||''))
+      .localeCompare(String(a.reportYear||'')+String(a.reportMonth||'')+String(a.reportDay||''))
+  );
+  const byMoo = {};
+  matches.forEach(r=>{ const k=r.moo||'ไม่ระบุ'; byMoo[k]=(byMoo[k]||0)+1; });
+  const mooOrder = [...VILLAGES.map(v=>v.moo), ...Object.keys(byMoo).filter(k=>!villageByMoo(k))];
+
+  return `
+  <div class="page-head">
+    <p class="eyebrow">แยกหน้าเฉพาะโรค</p>
+    <h1>E1 · เลือกโรคระบาด</h1>
+  </div>
+  <div class="toolbar">
+    <select id="diseaseSelect" style="min-width:280px;">
+      ${state.thresholds.map(d=>`<option value="${d.id}" ${d.id===state.e1Disease?'selected':''}>${d.name}</option>`).join('')}
+    </select>
+    <label style="margin:0;">ช่วงเวลา (วันรับแจ้ง)</label>
+    <select id="e1FilterMonth">${monthFilterOptions(state.e1FilterMonth)}</select>
+    <select id="e1FilterYear">${yearOptions(state.e1FilterYear, true)}</select>
+    ${(state.e1FilterMonth || state.e1FilterYear) ? `<button class="btn small ghost" id="e1FilterClear">ล้าง</button>` : ''}
+    <span class="tag">${matches.length} รายการ</span>
+  </div>
+  <div class="panel disease-hero">
+    <div class="stamp ${cls}"><div class="t1">${txt}</div><div class="t2">${filteredCount}/${t.minCases}</div></div>
+    <div>
+      <div class="panel-title" style="margin-bottom:6px;">${t.name}</div>
+      <div style="font-size:13.5px;color:var(--ink-soft);margin-bottom:6px;">${t.note}</div>
+      <div style="font-size:12.5px;">สอบสวนภายใน <b>${t.deadlineHours} ชม.</b></div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-title">จำนวนผู้ป่วยแยกตามหมู่บ้าน</div>
+    ${matches.length? `<div style="display:flex;gap:10px;flex-wrap:wrap;">
+      ${mooOrder.map(k=>{
+        const v = byMoo[k]||0;
+        const label = villageByMoo(k) ? villageLabel(k) : (k==='ไม่ระบุ'?'ไม่ระบุหมู่บ้าน':`ม.${k}`);
+        return `<span class="tag" style="background:${v>0?'var(--primary)':'var(--ink-soft)'};">${label} · ${v}</span>`;
+      }).join('')}
+    </div>` : `<div class="empty">ไม่มีผู้ป่วยในช่วงเวลาที่เลือก</div>`}
+  </div>
+  <div class="table-wrap">
+  <table><thead><tr>
+    <th>ชื่อ-สกุล</th><th>อายุ</th><th>ตำบล/อำเภอ</th><th>วันป่วย</th><th>วันรับแจ้ง</th><th>วันสอบสวน</th><th>สถานะ</th>
+  </tr></thead><tbody>
+  ${matches.length? matches.map(r=>{
+    const s = investigationStatus(r);
+    return `<tr>
+      <td>${r.prefix}${r.firstname} ${r.lastname}</td>
+      <td class="num-cell">${r.age||'—'}</td>
+      <td>${r.tambon||'—'} / ${r.amphoe||'—'}</td>
+      <td>${fmtThaiDate(r.illDay,r.illMonth,r.illYear)}</td>
+      <td>${fmtThaiDate(r.reportDay,r.reportMonth,r.reportYear)}</td>
+      <td>${fmtThaiDate(r.investigateDay,r.investigateMonth,r.investigateYear)}</td>
+      <td><span class="status-pill ${s.cls}">${s.label}</span></td>
+    </tr>`;
+  }).join('') : `<tr><td colspan="7"><div class="empty">ไม่มีข้อมูล</div></td></tr>`}
+  </tbody></table>
+  </div>
+  `;
+}
+
+/* ================= WEEKLY CHART ================= */
+const CHART_COLORS = ['#0B4F4A','#A6332C','#C97F1D','#3F7D4A','#14726B','#7B4B94','#B4841B','#2E5C8A','#8A2E5C','#4A7D3F','#8A5A2E','#5C2E8A','#2E8A7B','#8A2E2E','#2E4A8A','#7D3F4A','#3F7D7D','#7D7D3F'];
+const COMPARE_STYLE = { dash:'4,3', opacity:0.55 };
+
+function weeklyCountsInRange(diseaseId, yearBE, fromDate, toDate){
+  const counts = new Array(53).fill(0);
+  state.records.filter(r=>r.diagnosisId===diseaseId).forEach(r=>{
+    const d = recordEpiDate(r);
+    if(!d) return;
+    if(d.getFullYear()+543 !== yearBE) return;
+    if(fromDate && d < fromDate) return;
+    if(toDate && d > toDate) return;
+    const {week} = getEpiWeek(d);
+    if(week>=1 && week<=53) counts[week-1]++;
+  });
+  return counts;
+}
+function lineChartSVG(series, w, h){
+  const padL=36, padR=12, padT=14, padB=28;
+  const plotW = w-padL-padR, plotH = h-padT-padB;
+  let maxVal = 1;
+  series.forEach(s=>{ s.counts.forEach(c=>{ if(c>maxVal) maxVal=c; }); });
+  const step = Math.pow(10, Math.floor(Math.log10(maxVal)));
+  maxVal = Math.ceil(maxVal/step)*step;
+  if(maxVal < 5) maxVal = 5;
+  const n = 53;
+  const xFor = i => padL + (i/(n-1))*plotW;
+  const yFor = v => padT + plotH - (v/maxVal)*plotH;
+  let grid = '';
+  for(let i=0;i<=5;i++){
+    const v = (maxVal/5)*i;
+    const y = yFor(v);
+    grid += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${w-padR}" y2="${y.toFixed(1)}" stroke="var(--line-soft)" stroke-width="0.6"></line>`;
+    grid += `<text x="${padL-4}" y="${(y+3).toFixed(1)}" font-size="8" fill="var(--ink-soft)" text-anchor="end" font-family="Chakra Petch">${Math.round(v)}</text>`;
+  }
+  let xLabels = '';
+  for(let i=0;i<n;i+=4){
+    const x = xFor(i);
+    xLabels += `<text x="${x.toFixed(1)}" y="${h-10}" font-size="8" fill="var(--ink-soft)" text-anchor="middle" font-family="Chakra Petch">${i+1}</text>`;
+  }
+  xLabels += `<text x="${(padL+plotW/2).toFixed(1)}" y="${h-1}" font-size="9" fill="var(--ink-soft)" text-anchor="middle" font-family="Chakra Petch">สัปดาห์ระบาด</text>`;
+  const lines = series.map(s=>{
+    let d = ''; let started = false;
+    s.counts.forEach((c,i)=>{
+      if(c===0 && !started) return;
+      const x = xFor(i), y = yFor(c);
+      d += (started?' L':'M') + x.toFixed(1) + ' ' + y.toFixed(1);
+      started = true;
+    });
+    if(!d) return '';
+    const dashAttr = s.dash ? `stroke-dasharray="${s.dash}"` : '';
+    const op = s.opacity != null ? s.opacity : 1;
+    const dots = s.counts.map((c,i)=>{
+      if(c===0) return '';
+      const x = xFor(i), y = yFor(c);
+      return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="1.6" fill="${s.color}" opacity="${op}"><title>${s.name} — สัปดาห์ ${i+1}: ${c} ราย</title></circle>`;
+    }).join('');
+    return `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${s.dash?1.2:1.8}" ${dashAttr} opacity="${op}" stroke-linejoin="round" stroke-linecap="round"></path>${dots}`;
+  }).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%" height="${h}" style="display:block;">
+    ${grid}
+    <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT+plotH}" stroke="var(--line)" stroke-width="1"></line>
+    <line x1="${padL}" y1="${padT+plotH}" x2="${w-padR}" y2="${padT+plotH}" stroke="var(--line)" stroke-width="1"></line>
+    ${lines}
+    ${xLabels}
+  </svg>`;
+}
+function viewWeekly(){
+  const y = state.weeklyChartYear;
+  if(state.weeklyChartSelectedDiseases === null || state.weeklyChartShowAllDiseases){
+    state.weeklyChartSelectedDiseases = new Set(state.thresholds.map(t=>t.id));
+  }
+  const selectedDiseases = state.thresholds.filter(t=> state.weeklyChartSelectedDiseases.has(t.id));
+  const fromDate = state.weeklyChartFromDate ? new Date(state.weeklyChartFromDate) : null;
+  const toDate   = state.weeklyChartToDate   ? new Date(state.weeklyChartToDate)   : null;
+  const series = [];
+  const compareYears = Array.from(state.weeklyChartCompareYears).sort((a,b)=>b-a);
+  const allYears = [{ year:y, isMain:true }].concat(compareYears.map(yy=>({year:yy, isMain:false})));
+  allYears.forEach(({year, isMain})=>{
+    selectedDiseases.forEach((t)=>{
+      const counts = weeklyCountsInRange(t.id, year, fromDate, toDate);
+      const sum = counts.reduce((a,b)=>a+b,0);
+      if(sum===0) return;
+      const baseColor = CHART_COLORS[state.thresholds.indexOf(t) % CHART_COLORS.length];
+      series.push({ name: `${t.name} (${year})`, color: baseColor, counts, dash: isMain ? null : COMPARE_STYLE.dash, opacity: isMain ? 1 : COMPARE_STYLE.opacity });
+    });
+  });
+  const availableYears = new Set();
+  for(let yy=2566; yy<=2579; yy++) availableYears.add(yy);
+  state.records.forEach(r=>{
+    const d = recordEpiDate(r);
+    if(d) availableYears.add(d.getFullYear()+543);
+  });
+  const compareYearOpts = Array.from(availableYears).filter(yy=>yy!==y).sort((a,b)=>b-a);
+
+  return `
+  <div class="page-head">
+    <p class="eyebrow">Epidemic curve</p>
+    <h1>กราฟรายสัปดาห์เปรียบเทียบรายปี</h1>
+  </div>
+  <div class="panel">
+    <div class="panel-title">ช่วงเวลาที่แสดง</div>
+    <div class="grid4">
+      <div class="field"><label>จาก</label><input type="date" id="wFromDate" value="${state.weeklyChartFromDate}"></div>
+      <div class="field"><label>ถึง</label><input type="date" id="wToDate" value="${state.weeklyChartToDate}"></div>
+      <div class="field" style="display:flex;align-items:flex-end;"><button class="btn small ghost" id="wClearRange" style="width:100%;">ล้าง</button></div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-title">ปีที่เปรียบเทียบ</div>
+    <div class="grid2">
+      <div class="field"><label>ปีหลัก</label><select id="wMainYear">${yearOptions(y, false)}</select></div>
+      <div class="field"><label>เทียบกับปี</label>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;padding-top:6px;">
+          ${compareYearOpts.map(yy=>`<label class="checklabel"><input type="checkbox" data-compareyear="${yy}" ${state.weeklyChartCompareYears.has(yy)?'checked':''}> ${yy}</label>`).join('')}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-title flex-between" style="display:flex;justify-content:space-between;">
+      <span>โรคที่แสดง</span>
+      <span><button class="btn small ghost" id="wSelectAllDiseases">ทั้งหมด</button> <button class="btn small ghost" id="wClearAllDiseases">ไม่เลือก</button></span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+      ${state.thresholds.map(t=>`
+        <label class="checklabel">
+          <input type="checkbox" data-disease="${t.id}" ${state.weeklyChartSelectedDiseases.has(t.id)?'checked':''}>
+          <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${CHART_COLORS[state.thresholds.indexOf(t)%CHART_COLORS.length]};margin-right:4px;"></span>
+          ${t.name}
+        </label>`).join('')}
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-title">กราฟเส้นรวมทุกโรค</div>
+    ${series.length? lineChartSVG(series, 1100, 380) : `<div class="empty">ไม่มีข้อมูล</div>`}
+  </div>
+  `;
+}
+
+/* ============================================================
+   PRINT FORM (สสจ.) — 10 คอลัมน์ + ประเภทข่าว + หมายเหตุ + ผู้รายงาน ต่อท้ายทุกเคส
+   ============================================================ */
+function printBlock(r, idx){
+  const g = (v) => (v === null || v === undefined) ? '' : v;
+  const chk = (arr, opt) => `<span class="chk ${(arr||[]).includes(opt)?'on':''}">${opt}</span>`;
+
+  const dIll   = r.illDay   ? `${r.illDay}/${r.illMonth}/${r.illYear}`   : '';
+  const dTreat = r.treatDay ? `${r.treatDay}/${r.treatMonth}/${r.treatYear}` : '';
+  const dRep   = r.reportDay ? `${r.reportDay}/${r.reportMonth}/${r.reportYear}` : '';
+  const tRep   = toTimeInputValue(r.reportTime);
+  const dInv   = r.investigateDay ? `${r.investigateDay}/${r.investigateMonth}/${r.investigateYear}` : '';
+  const tInv   = toTimeInputValue(r.investigateTime);
+
+  const patientAddr = [
+    r.houseNo && ('เลขที่ '+r.houseNo), r.moo && villageLabel(r.moo),
+    r.tambon && ('ต.'+r.tambon), r.amphoe && ('อ.'+r.amphoe), r.changwat && ('จ.'+r.changwat)
+  ].filter(Boolean).join(' ');
+  const eventAddr = r.rep_eventLocation || patientAddr;
+  const patientFullName = `${g(r.prefix)}${g(r.firstname)} ${g(r.lastname)}`.trim();
+
+  const col2 = `
+    <div><b>วันเวลารับแจ้ง</b></div>
+    <div>ว/ด/ป: ${dRep || '<span class="dotted"></span>'}</div>
+    <div>เวลา: ${tRep || '<span class="dotted"></span>'}</div>
+    <div style="margin-top:3px;">${chk([], 'พบเหตุการณ์ผิดปกติ')}</div>
+    <div class="small indent">${(r.rep_activities||'').split('\n').slice(0,3).map(x=>'• '+x).join('<br>')}</div>
+    <div style="margin-top:3px;">จำนวน <span class="dotted" style="min-width:30px;"></span> เหตุการณ์</div>
+    <div>${chk([], 'พบผู้ป่วย')}</div>
+    <div class="small indent">
+      ชื่อ-สกุล: <b>${patientFullName || '&nbsp;'}</b><br>
+      อายุ ${g(r.age)||'—'} ปี ${r.hn?('ID: '+r.hn):''}<br>
+      วันเริ่มป่วย: ${dIll || '<span class="dotted"></span>'}<br>
+      วันรักษา: ${dTreat || '<span class="dotted"></span>'}<br>
+      จำนวน <span class="dotted" style="min-width:20px;"></span> ราย
+    </div>
+    <div style="margin-top:2px;">${chk([], 'อื่นๆ')}</div>
+  `;
+  const col3 = `
+    <div>${eventAddr || '<span class="dotted"></span>'}</div>
+    <div style="margin-top:3px;">โทร: ${r.rep_reporterContact||'<span class="dotted"></span>'}</div>
+  `;
+  const col4 = `
+    <div><b>${r.rep_reporterName||'&nbsp;'}</b></div>
+    <div>${r.rep_reporterContact||''}</div>
+    <div style="margin-top:2px;">ที่อยู่: ${eventAddr || '<span class="dotted"></span>'}</div>
+  `;
+  const col5 = `
+    <div><b>${r.receiver||'&nbsp;'}</b></div>
+    <div style="margin-top:2px;">วัน/เวลา:</div>
+    <div>${dRep || '<span class="dotted"></span>'}</div>
+    <div>${tRep || '<span class="dotted"></span>'} น.</div>
+    <div style="margin-top:2px;">สถานที่: ${r.receivePlace||'—'}</div>
+  `;
+  const col6 = `
+    ${chk(r.rep_confirm, 'ยืนยันการเกิดโรค')}
+    ${chk(r.rep_confirm, 'ยืนยันการเกิดเหตุการณ์')}
+    ${chk(r.rep_notify, 'แจ้งทีม SRRT รพ.')}
+    <div class="indent small">${(r.rep_team||'').split('\n')[0]||''}</div>
+    ${chk(r.rep_notify, 'แจ้งทีม SRRT ตำบล')}
+    ${chk(r.rep_notify, 'แจ้งทีม SRRT อำเภอ')}
+    ${chk(r.rep_notify, 'แจ้งทีม SRRT จังหวัด')}
+    ${chk(r.rep_notify, 'แจ้ง อบต./เทศบาล')}
+    ${chk(r.rep_notify, 'แจ้งปศุสัตว์อำเภอ')}
+    ${chk(r.rep_notify, 'รายงาน ผอ.รพ.')}
+    ${chk(r.rep_checkMethod, 'ลงพื้นที่สอบสวนโรค')}
+    <div class="indent small">ป้องกัน ควบคุมโรค</div>
+    ${chk([], 'รง.เข้า D506')}
+    ${chk([], 'อื่นๆ ระบุ')}
+    <div class="indent small">${(r.rep_activities||'').split('\n').slice(3,5).join('<br>')}</div>
+  `;
+  const col7 = `
+    ${chk(r.rep_confirm, 'เป็นโรคติดต่อจริง')}
+    <div class="indent small">คือ ${diagnosisLabel(r)}</div>
+    <div class="indent small">วันที่วินิจฉัย: ${dIll||'<span class="dotted"></span>'}</div>
+    ${chk([], 'เป็นโรคที่ยังไม่สามารถระบุชนิดได้')}
+    ${chk([], 'เป็นการเจ็บป่วยผิดปกติ')}
+    ${chk(r.rep_confirm, 'เป็นเหตุการณ์ผิดปกติ')}
+    <div class="bold" style="margin-top:3px;">ผลการตรวจสอบ</div>
+    ${chk(r.rep_checkResult, 'พบผู้ป่วย')}
+    ${chk([], 'พบผู้เสียชีวิต')}
+    ${chk([], 'พบผู้มีอาการสงสัย')}
+    ${chk(r.rep_newsType, 'โรค/กลุ่มอาการที่พบบ่อย')}
+    ${chk(r.rep_newsType, 'โรคใหม่/กลุ่มอาการที่ไม่เคยพบในพื้นที่')}
+    ${chk(r.rep_newsType, 'เหตุการณ์ที่เป็นปัจจัยเสี่ยงต่อสุขภาพ')}
+    <div class="bold" style="margin-top:3px;">วิธีตรวจสอบข่าว</div>
+    ${chk(r.rep_checkMethod, 'ตรวจสอบด้วยตนเอง')}
+    ${chk(r.rep_checkMethod, 'โทรศัพท์สอบถาม')}
+    ${chk(r.rep_checkMethod, 'ทบทวนเวชระเบียน')}
+    ${chk(r.rep_checkMethod, 'ลงพื้นที่สอบสวนโรค')}
+  `;
+  const col8 = `
+    ${chk(r.rep_checkResult, 'ไม่เข้าเกณฑ์ตรวจสอบข่าว')}
+    ${chk(r.rep_checkResult, 'เข้าเกณฑ์ตรวจสอบข่าว')}
+    ${chk(r.rep_escalation, 'เข้าเกณฑ์ DCIR')}
+    ${chk(r.rep_escalation, 'เข้าเกณฑ์สอบสวนส่วนกลาง')}
+    ${chk(r.rep_escalation, 'เข้าเกณฑ์ CIR เขต')}
+    ${chk(r.rep_escalation, 'เข้าเกณฑ์สอบสวนเขต')}
+    ${chk(r.rep_escalation, 'เข้าเกณฑ์ CIR จังหวัด')}
+    ${chk(r.rep_escalation, 'เข้าเกณฑ์สอบสวนจังหวัด')}
+    ${chk(r.rep_escalation, 'เข้าเกณฑ์ CIR อำเภอ')}
+    ${chk(r.rep_escalation, 'เข้าเกณฑ์สอบสวนอำเภอ')}
+  `;
+  const col9 = `
+    <div class="bold">กิจกรรมที่ดำเนินการ</div>
+    ${chk(r.rep_checkMethod, 'ลงพื้นที่สอบสวนโรค')}
+    <div class="indent small">วัน/เวลา: ${dInv||'<span class="dotted"></span>'} ${tInv||''}</div>
+    ${chk([], 'ลงพื้นที่เฝ้าระวัง ป้องกัน ควบคุมโรค')}
+    <div class="indent small">วัน/เวลา: <span class="dotted"></span></div>
+    ${chk([], 'ระงับเหตุการณ์')}
+    <div class="indent small">วัน/เวลา: <span class="dotted"></span></div>
+    <div class="indent small">โดย ${(r.rep_team||'').split('\n').slice(0,3).join('<br>')||'&nbsp;'}</div>
+    <div class="bold" style="margin-top:3px;">ผลการสอบสวน</div>
+    <div class="small">${(r.rep_findings||'').replace(/\n/g,'<br>')||'&nbsp;'}</div>
+    ${r.rep_contacts?`<div class="bold" style="margin-top:2px;">ผู้สัมผัส</div><div class="small">${r.rep_contacts.replace(/\n/g,'<br>')}</div>`:''}
+    <div class="bold" style="margin-top:2px;">อื่นๆ</div>
+    <div class="small">${r.extraNote||'&nbsp;'}</div>
+  `;
+  const col10 = `
+    <div><b>${(r.rep_team||'').split('\n')[0] || '&nbsp;'}</b></div>
+    <div class="small">${(r.rep_team||'').split('\n').slice(1).join('<br>')||''}</div>
+    <div style="margin-top:3px;">วัน/เวลา:</div>
+    <div>${dInv||'<span class="dotted"></span>'}</div>
+    <div>${tInv||'<span class="dotted"></span>'} น.</div>
+    <div style="margin-top:3px;">ผู้รับแจ้ง: ${r.receiver||'—'}</div>
+  `;
+
+  const mainRow = `<tr>
+    <td class="col-no">${idx+1}</td>
+    <td class="col-1">${col2}</td>
+    <td class="col-2">${col3}</td>
+    <td class="col-3">${col4}</td>
+    <td class="col-4">${col5}</td>
+    <td class="col-5">${col6}</td>
+    <td class="col-6">${col7}</td>
+    <td class="col-7">${col8}</td>
+    <td class="col-8">${col9}</td>
+    <td class="col-9">${col10}</td>
+  </tr>`;
+
+  // ประเภทข่าว
+  const newsTypeRow = `<tr>
+    <td colspan="10" class="bottom-notes">
+      <b>ประเภทข่าว</b> &nbsp;
+      ${REPORT_CHECK_GROUPS.newsType.options.map(o=>`<span class="chk" style="display:inline-block;margin-right:14px;">${o}</span>`).join('')}
+    </td>
+  </tr>`;
+
+  // หมายเหตุ
+  const noteRow = `<tr>
+    <td colspan="10" class="bottom-notes">
+      <b>หมายเหตุ :</b><br>
+      1. สรุปจำนวนเหตุการณ์/รายงานโรคและภัยสุขภาพที่ได้รับแจ้ง เดือน<span class="dotted"></span> พ.ศ.25<span class="dotted"></span> จำนวน <span class="dotted" style="min-width:60px;"></span> เหตุการณ์/ราย<br>
+      2. สรุปมีเหตุการณ์ที่เข้าเกณฑ์ตรวจสอบข่าว จำนวน <span class="dotted" style="min-width:60px;"></span> เหตุการณ์/ราย<br>
+      3. สรุปเหตุการณ์ที่ส่งแจ้งเตือนพื้นที่ จำนวน <span class="dotted" style="min-width:60px;"></span> เหตุการณ์/ราย<br>
+      4. สรุปเหตุการณ์ที่ลงพื้นที่สอบสวน จำนวน <span class="dotted" style="min-width:60px;"></span> เหตุการณ์/ราย
+    </td>
+  </tr>`;
+
+  // ผู้รายงาน
+  const signRow = `<tr>
+    <td colspan="10" style="text-align:right;padding:18px 20px 8px;font-size:8pt;line-height:1.9;">
+      ลงชื่อ .................................................... ผู้รายงาน<br>
+      ( .................................................... )<br>
+      ตำแหน่ง ....................................................<br>
+      วันที่ ......... / ......... / .........
+    </td>
+  </tr>`;
+
+  // แถบคั่นแนวนอน (ขั้นระหว่างเคส)
+  const dividerRow = `<tr>
+    <td colspan="10" style="background:#000;height:4px;padding:0;border:none;"></td>
+  </tr>`;
+
+  return mainRow + newsTypeRow + noteRow + signRow + dividerRow;
+}
+
+function viewPrintForm(){
+  const candidates = state.records.filter(r=>
+    r.reportMonth===state.printMonth && String(normalizeYearBE(r.reportYear))===String(state.printYear)
+  );
+  const pfKey = state.printMonth+'|'+state.printYear;
+  if(!state.printInitKeys.has(pfKey)){
+    candidates.forEach(r=>{ if(r.rep_enabled) state.printSelected.add(r.id); });
+    state.printInitKeys.add(pfKey);
+  }
+  const selectedRecords = candidates.filter(r=>state.printSelected.has(r.id));
+
+  return `
+  <div class="page-head">
+    <p class="eyebrow">ส่งออกเป็นแบบฟอร์มราชการ</p>
+    <h1>พิมพ์แบบฟอร์ม (สสจ.)</h1>
+    <p class="sub">ทะเบียนรับแจ้งและตรวจสอบข่าว · 10 คอลัมน์ · พิมพ์ได้ทุกเดือน</p>
+  </div>
+
+  <div id="pf-controls">
+    <div class="toolbar">
+      <select id="pfMonth">${THAI_MONTHS.map(m=>`<option ${m===state.printMonth?'selected':''}>${m}</option>`).join('')}</select>
+      <select id="pfYear">${yearOptions(state.printYear, false)}</select>
+      <span class="tag">${candidates.length} เคส · เลือก ${selectedRecords.length}</span>
+      <button class="btn small ghost" id="pfSelectAll">เลือกทั้งหมด</button>
+      <button class="btn small ghost" id="pfSelectNone">ไม่เลือกเลย</button>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">เลือกเคสที่จะพิมพ์ / ส่งออก Excel</div>
+      ${candidates.length? candidates.map(r=>`
+        <label class="checklabel" style="margin-bottom:6px;">
+          <input type="checkbox" data-pfcase="${r.id}" ${state.printSelected.has(r.id)?'checked':''}>
+          ${r.prefix}${r.firstname} ${r.lastname} — ${diagnosisLabel(r)} — รับแจ้ง ${fmtThaiDate(r.reportDay,r.reportMonth,r.reportYear)}
+          ${r.rep_enabled?'':'<span class="status-pill pill-warn" style="margin-left:6px;">ยังไม่กรอกแบบฟอร์ม</span>'}
+        </label><br>`).join('') : `<div class="empty">ไม่พบเคสในเดือน/ปีนี้</div>`}
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+      <button class="btn gold" id="pfPrintBtn">🖨 พิมพ์ / บันทึกเป็น PDF (${selectedRecords.length} เคส)</button>
+      <button class="btn" id="pfExportBtn" style="background:#1E6F42;border-color:#1E6F42;">📊 ส่งออก Excel (1 ไฟล์/เคส)</button>
+      <button class="btn" id="pfExportAllBtn" style="background:#0B4F4A;border-color:#0B4F4A;">📊 ส่งออก Excel (รวมทุกเคส)</button>
+    </div>
+  </div>
+
+  <div class="note">A4 แนวนอน · ปุ่ม Excel แยกไฟล์ต่อเคส เบราว์เซอร์อาจขออนุญาตดาวน์โหลดหลายไฟล์</div>
+
+  <div id="printArea">
+    <div class="print-preview-wrap">
+      <table class="form-skh-table">
+        <thead>
+          <tr>
+            <th colspan="10" class="header-main">
+              ทะเบียนรับแจ้งและตรวจสอบข่าวการเกิดโรคและภัยสุขภาพและการแจ้งเตือนภัยสุขภาพ<br>
+              ศูนย์ระบาดวิทยา อ.พนมดงรัก จ.สุรินทร์ เดือน ${state.printMonth} พ.ศ. ${state.printYear}
+            </th>
+          </tr>
+          <tr>
+            <th>ที่</th>
+            <th>เนื้อหาข่าวสารที่ได้รับแจ้ง<br>(วันเวลารับแจ้ง/โรค/อาการ/จำนวนผู้ป่วย)</th>
+            <th>ที่อยู่ที่เกิดเหตุ/<br>ที่อยู่ขณะป่วยและเบอร์โทร</th>
+            <th>ชื่อผู้แจ้ง/แหล่งข่าว<br>ที่อยู่ และเบอร์โทร</th>
+            <th>ชื่อผู้รับแจ้ง<br>(วัน/เวลา)</th>
+            <th>สิ่งที่ต้องดำเนินการ/ปฏิบัติ<br>(กิจกรรม/หน่วยงาน/วัน-เวลา)</th>
+            <th>การยืนยันการเกิดโรค/เหตุการณ์</th>
+            <th>ผลการตรวจสอบข่าว</th>
+            <th>ผลการสอบสวน</th>
+            <th>ชื่อผู้ปฏิบัติ/<br>ทีมสอบสวนโรค (วัน/เวลา)</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${selectedRecords.length
+            ? selectedRecords.map((r,i)=>printBlock(r,i)).join('')
+            : `<tr><td colspan="10" style="text-align:center;padding:24px;">— ไม่มีเคสที่เลือก —</td></tr>`}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  `;
+}
+
+/* ============================================================
+   EXPORT EXCEL — 9 คอลัมน์ (A-I), 1 แถว = 1 เคส
+   ============================================================ */
+function loadSheetJS(){
+  return new Promise((resolve, reject)=>{
+    if(window.XLSX){ resolve(window.XLSX); return; }
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+    s.onload = ()=> resolve(window.XLSX);
+    s.onerror = ()=> reject(new Error('โหลด SheetJS ไม่สำเร็จ'));
+    document.head.appendChild(s);
+  });
+}
+
+/* สร้าง Worksheet ของ 1 เคส — 9 คอลัมน์ (A-I) */
+function buildCaseSheet(rec, XLSX){
+  const chk = (arr, opt) => (arr||[]).includes(opt) ? '☑' : '☐';
+  const dateStr = (d,m,y)=> d ? `${d}/${m}/${y}` : '';
+
+  const colA = [
+    `วันเวลารับแจ้ง`,
+    `ว/ด/ป: ${dateStr(rec.reportDay, rec.reportMonth, rec.reportYear) || '.............'}`,
+    `เวลา: ${toTimeInputValue(rec.reportTime) || '.............'}`,
+    ``,
+    `${chk([], 'พบเหตุการณ์ผิดปกติ')} พบเหตุการณ์ผิดปกติ`,
+    `${chk(rec.rep_confirm, 'ยืนยันการเกิดโรค')} ยืนยันการเกิดโรค`,
+    `${chk(rec.rep_confirm, 'ยืนยันการเกิดเหตุการณ์')} ยืนยันการเกิดเหตุการณ์`,
+    ``,
+    `จำนวน ......... เหตุการณ์`,
+    ``,
+    `${chk(rec.rep_checkResult, 'พบผู้ป่วย')} พบผู้ป่วย`,
+    `ชื่อ-สกุล: ${rec.prefix||''}${rec.firstname||''} ${rec.lastname||''}`,
+    `อายุ ${rec.age||'—'} ปี ${rec.hn?('ID: '+rec.hn):''}`,
+    `วันเริ่มป่วย: ${dateStr(rec.illDay, rec.illMonth, rec.illYear) || '.............'}`,
+    `วันรักษา: ${dateStr(rec.treatDay, rec.treatMonth, rec.treatYear) || '.............'}`,
+    `จำนวน ......... ราย`,
+    ``,
+    `${chk([], 'อื่นๆ')} อื่นๆ ${rec.extraNote||'.............'}`,
+  ].join('\n');
+
+  const colB = [
+    `ที่อยู่ที่เกิดเหตุ:`,
+    rec.rep_eventLocation || [
+      rec.houseNo && ('เลขที่ '+rec.houseNo),
+      rec.moo && villageLabel(rec.moo),
+      rec.tambon && ('ต.'+rec.tambon),
+      rec.amphoe && ('อ.'+rec.amphoe),
+      rec.changwat && ('จ.'+rec.changwat)
+    ].filter(Boolean).join(' ') || '.............',
+    ``,
+    `เบอร์โทร: ${rec.rep_reporterContact || '.............'}`,
+  ].join('\n');
+
+  const colC = [
+    `ชื่อผู้แจ้ง/แหล่งข่าว:`,
+    rec.rep_reporterName || '.............',
+    ``,
+    `ที่อยู่:`,
+    rec.rep_eventLocation || '.............',
+    ``,
+    `เบอร์โทร: ${rec.rep_reporterContact || '.............'}`,
+  ].join('\n');
+
+  const colD = [
+    `ชื่อผู้รับแจ้ง:`,
+    rec.receiver || '.............',
+    ``,
+    `วัน/เวลา:`,
+    `${dateStr(rec.reportDay, rec.reportMonth, rec.reportYear) || '.............'}`,
+    `${toTimeInputValue(rec.reportTime) || '.............'} น.`,
+    ``,
+    `สถานที่: ${rec.receivePlace || '.............'}`,
+  ].join('\n');
+
+  const colE = [
+    `${chk(rec.rep_confirm,'ยืนยันการเกิดโรค')} ยืนยันการเกิดโรค`,
+    `${chk(rec.rep_confirm,'ยืนยันการเกิดเหตุการณ์')} ยืนยันการเกิดเหตุการณ์`,
+    ``,
+    `${chk(rec.rep_notify,'แจ้งทีม SRRT รพ.')} แจ้งทีม SRRT รพ.`,
+    `   ${(rec.rep_team||'').split('\n')[0]||'.............'}`,
+    ``,
+    `${chk(rec.rep_notify,'แจ้งทีม SRRT ตำบล')} แจ้งทีม SRRT ตำบล`,
+    `${chk(rec.rep_notify,'แจ้งทีม SRRT อำเภอ')} แจ้งทีม SRRT อำเภอ`,
+    `${chk(rec.rep_notify,'แจ้งทีม SRRT จังหวัด')} แจ้งทีม SRRT จังหวัด`,
+    `${chk(rec.rep_notify,'แจ้ง อบต./เทศบาล')} แจ้งหน่วยงาน อปท.`,
+    `${chk(rec.rep_notify,'แจ้งปศุสัตว์อำเภอ')} แจ้งหน่วยงานปศุสัตว์`,
+    `${chk(rec.rep_notify,'รายงาน ผอ.รพ.')} รายงานผู้บริหารทราบ`,
+    ``,
+    `${chk(rec.rep_checkMethod,'ลงพื้นที่สอบสวนโรค')} ลงพื้นที่สอบสวนโรค ป้องกัน ควบคุมโรค`,
+    `${chk([], 'รง.เข้า D506')} รง.เข้า D506`,
+    `${chk([], 'อื่นๆ')} อื่นๆ ระบุ .............`,
+  ].join('\n');
+
+  const colF = [
+    `${chk(rec.rep_confirm,'เป็นโรคติดต่อจริง')} เป็นโรคติดต่อจริง คือ ${diagnosisLabel(rec)}`,
+    `วันที่วินิจฉัย: ${dateStr(rec.illDay, rec.illMonth, rec.illYear) || '.............'}`,
+    ``,
+    `${chk([], 'เป็นโรคที่ยังไม่สามารถระบุชนิดได้')} เป็นโรคที่ยังไม่สามารถระบุชนิดได้`,
+    `${chk([], 'เป็นการเจ็บป่วยผิดปกติ')} เป็นการเจ็บป่วยผิดปกติ`,
+    `${chk(rec.rep_confirm,'เป็นเหตุการณ์ผิดปกติ')} เป็นเหตุการณ์ผิดปกติ`,
+    ``,
+    `ผลการตรวจสอบ`,
+    `${chk(rec.rep_checkResult,'พบผู้ป่วย')} พบผู้ป่วย ......... ราย`,
+    `${chk([], 'พบผู้เสียชีวิต')} พบผู้เสียชีวิต ......... ราย`,
+    `${chk([], 'พบผู้มีอาการสงสัย')} พบผู้มีอาการสงสัย ......... ราย`,
+    ``,
+    `ประเภทข่าว`,
+    `${chk(rec.rep_newsType,'โรค/กลุ่มอาการที่พบบ่อย')} โรค/กลุ่มอาการที่พบบ่อย`,
+    `${chk(rec.rep_newsType,'โรคใหม่/กลุ่มอาการที่ไม่เคยพบในพื้นที่')} โรคใหม่/กลุ่มอาการที่ไม่เคยพบในพื้นที่`,
+    `${chk(rec.rep_newsType,'เหตุการณ์ที่เป็นปัจจัยเสี่ยงต่อสุขภาพ/การเกิดโรคในคน')} เหตุการณ์ที่เป็นปัจจัยเสี่ยงต่อสุขภาพ`,
+    ``,
+    `วิธีตรวจสอบข่าว`,
+    `${chk(rec.rep_checkMethod,'ตรวจสอบด้วยตนเอง')} ตรวจสอบด้วยตนเอง`,
+    `${chk(rec.rep_checkMethod,'โทรศัพท์สอบถาม')} โทรศัพท์สอบถาม`,
+    `${chk(rec.rep_checkMethod,'ทบทวนเวชระเบียน')} ทบทวนเวชระเบียน`,
+    `${chk(rec.rep_checkMethod,'ลงพื้นที่สอบสวนโรค')} ลงพื้นที่สอบสวนโรค`,
+  ].join('\n');
+
+  const colG = [
+    `${chk(rec.rep_checkResult,'ไม่เข้าเกณฑ์ตรวจสอบข่าว')} ไม่เข้าเกณฑ์`,
+    `${chk(rec.rep_checkResult,'เข้าเกณฑ์ตรวจสอบข่าว')} เข้าเกณฑ์ตรวจสอบข่าว`,
+    `${chk(rec.rep_escalation,'เข้าเกณฑ์ DCIR')} เข้าเกณฑ์ DCIR`,
+    `${chk(rec.rep_escalation,'เข้าเกณฑ์สอบสวนส่วนกลาง')} เข้าเกณฑ์สอบสวนส่วนกลาง`,
+    `${chk(rec.rep_escalation,'เข้าเกณฑ์ CIR เขต')} เข้าเกณฑ์ CIR เขต`,
+    `${chk(rec.rep_escalation,'เข้าเกณฑ์สอบสวนเขต')} เข้าเกณฑ์สอบสวนเขต`,
+    `${chk(rec.rep_escalation,'เข้าเกณฑ์ CIR จังหวัด')} เข้าเกณฑ์ CIR จังหวัด`,
+    `${chk(rec.rep_escalation,'เข้าเกณฑ์สอบสวนจังหวัด')} เข้าเกณฑ์สอบสวนจังหวัด`,
+    `${chk(rec.rep_escalation,'เข้าเกณฑ์ CIR อำเภอ')} เข้าเกณฑ์ CIR อำเภอ`,
+    `${chk(rec.rep_escalation,'เข้าเกณฑ์สอบสวนอำเภอ')} เข้าเกณฑ์สอบสวนอำเภอ`,
+  ].join('\n');
+
+  const colH = [
+    `กิจกรรมที่ดำเนินการ`,
+    `${chk(rec.rep_checkMethod,'ลงพื้นที่สอบสวนโรค')} ลงพื้นที่สอบสวนโรค`,
+    `   วัน/เวลา: ${dateStr(rec.investigateDay, rec.investigateMonth, rec.investigateYear) || '.............'} ${toTimeInputValue(rec.investigateTime)||''}`,
+    `${chk([], 'ลงพื้นที่เฝ้าระวัง')} ลงพื้นที่เฝ้าระวัง ป้องกัน ควบคุมโรค`,
+    `   วัน/เวลา: .............`,
+    `${chk([], 'ระงับเหตุการณ์')} ระงับเหตุการณ์`,
+    `   วัน/เวลา: .............`,
+    ``,
+    `โดย ${rec.rep_team||'.............'}`,
+    ``,
+    `ผลการสอบสวน`,
+    rec.rep_findings || '.............',
+    ``,
+    `ผู้สัมผัส:`,
+    rec.rep_contacts || '.............',
+    ``,
+    `อื่นๆ:`,
+    rec.extraNote || '.............',
+  ].join('\n');
+
+  const colI = [
+    `ชื่อผู้ปฏิบัติ/ทีมสอบสวนโรค:`,
+    rec.rep_team || '.............',
+    ``,
+    `วัน/เวลา:`,
+    `${dateStr(rec.investigateDay, rec.investigateMonth, rec.investigateYear) || '.............'}`,
+    `${toTimeInputValue(rec.investigateTime) || '.............'} น.`,
+    ``,
+    `ผู้รับแจ้ง: ${rec.receiver || '.............'}`,
+  ].join('\n');
+
+  const headerRow = [
+    '1. เนื้อหาข่าวสารที่ได้รับแจ้ง',
+    '2. ที่อยู่ที่เกิดเหตุ/ที่อยู่ขณะป่วยและเบอร์โทร',
+    '3. ชื่อผู้แจ้ง/แหล่งข่าว',
+    '4. ชื่อผู้รับแจ้ง',
+    '5. สิ่งที่ต้องดำเนินการ/ปฏิบัติ',
+    '6. การยืนยันการเกิดโรค/เหตุการณ์',
+    '7. ผลการตรวจสอบข่าว',
+    '8. ผลการสอบสวน',
+    '9. ชื่อผู้ปฏิบัติ/ทีมสอบสวนโรค'
+  ];
+  const dataRow = [colA, colB, colC, colD, colE, colF, colG, colH, colI];
+
+  const ws = XLSX.utils.aoa_to_sheet([headerRow, dataRow]);
+  ws['!cols'] = [
+    { wch: 42 }, { wch: 32 }, { wch: 26 }, { wch: 24 }, { wch: 42 },
+    { wch: 42 }, { wch: 30 }, { wch: 42 }, { wch: 30 }
+  ];
+  ws['!rows'] = [{ hpt: 30 }, { hpt: 420 }];
+
+  const range = XLSX.utils.decode_range(ws['!ref']);
+  for(let R = range.s.r; R <= range.e.r; ++R){
+    for(let C = range.s.c; C <= range.e.c; ++C){
+      const cell = ws[XLSX.utils.encode_cell({r:R, c:C})];
+      if(!cell) continue;
+      cell.s = {
+        alignment: { vertical: 'top', horizontal: 'left', wrapText: true },
+        font: R === 0 ? { bold: true, sz: 11 } : { sz: 10 },
+        border: {
+          top:    { style: 'thin', color: { rgb: '000000' } },
+          bottom: { style: 'thin', color: { rgb: '000000' } },
+          left:   { style: 'thin', color: { rgb: '000000' } },
+          right:  { style: 'thin', color: { rgb: '000000' } }
+        },
+        fill: R === 0 ? { fgColor: { rgb: 'F2F2F2' } } : undefined
+      };
+    }
+  }
+  return ws;
+}
+
+/* ส่งออก Excel — 1 ไฟล์/เคส */
+async function exportExcelPerCase(records){
+  try{
+    const XLSX = await loadSheetJS();
+    for(let i=0;i<records.length;i++){
+      const r = records[i];
+      const ws = buildCaseSheet(r, XLSX);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Form');
+      const safeName = `${r.prefix||''}${r.firstname||''}_${r.lastname||''}`.replace(/[\\/:*?"<>|]/g,'_');
+      XLSX.writeFile(wb, `สสจ_${String(i+1).padStart(2,'0')}_${safeName}.xlsx`);
+      await new Promise(r=> setTimeout(r, 300));
+    }
+  }catch(err){
+    console.error('Export Excel error:', err);
+    alert('ส่งออก Excel ไม่สำเร็จ: ' + err.message);
+  }
+}
+
+/* ส่งออก Excel — รวมทุกเคสในไฟล์เดียว (9 คอลัมน์ + N แถว) */
+async function exportExcelAll(records){
+  try{
+    const XLSX = await loadSheetJS();
+
+    const headerRow = [
+      'ที่',
+      '1. เนื้อหาข่าวสารที่ได้รับแจ้ง',
+      '2. ที่อยู่ที่เกิดเหตุ/ที่อยู่ขณะป่วยและเบอร์โทร',
+      '3. ชื่อผู้แจ้ง/แหล่งข่าว',
+      '4. ชื่อผู้รับแจ้ง',
+      '5. สิ่งที่ต้องดำเนินการ/ปฏิบัติ',
+      '6. การยืนยันการเกิดโรค/เหตุการณ์',
+      '7. ผลการตรวจสอบข่าว',
+      '8. ผลการสอบสวน',
+      '9. ชื่อผู้ปฏิบัติ/ทีมสอบสวนโรค'
+    ];
+
+    const dataRows = records.map((rec, i) => {
+      const ws1 = buildCaseSheet(rec, XLSX);
+      const row = [String(i+1)];
+      for(let C = 0; C <= 8; C++){
+        const cell = ws1[XLSX.utils.encode_cell({ r: 1, c: C })];
+        row.push(cell ? cell.v : '');
+      }
+      return row;
+    });
+
+    const ws = XLSX.utils.aoa_to_sheet([headerRow, ...dataRows]);
+    ws['!cols'] = [
+      { wch: 5 }, { wch: 42 }, { wch: 32 }, { wch: 26 }, { wch: 24 },
+      { wch: 42 }, { wch: 42 }, { wch: 30 }, { wch: 42 }, { wch: 30 }
+    ];
+    ws['!rows'] = [{ hpt: 30 }];
+    dataRows.forEach(()=> ws['!rows'].push({ hpt: 320 }));
+
+    const range = XLSX.utils.decode_range(ws['!ref']);
+    for(let R = range.s.r; R <= range.e.r; ++R){
+      for(let C = range.s.c; C <= range.e.c; ++C){
+        const cell = ws[XLSX.utils.encode_cell({r:R, c:C})];
+        if(!cell) continue;
+        cell.s = {
+          alignment: { vertical: 'top', horizontal: 'left', wrapText: true },
+          font: R === 0 ? { bold: true, sz: 11 } : { sz: 10 },
+          border: {
+            top:    { style: 'thin', color: { rgb: '000000' } },
+            bottom: { style: 'thin', color: { rgb: '000000' } },
+            left:   { style: 'thin', color: { rgb: '000000' } },
+            right:  { style: 'thin', color: { rgb: '000000' } }
+          },
+          fill: R === 0 ? { fgColor: { rgb: 'F2F2F2' } } : undefined
+        };
+      }
+    }
+
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Form');
+    XLSX.writeFile(wb, `สสจ_${state.printMonth}_${state.printYear}.xlsx`);
+  }catch(err){
+    console.error('Export Excel error:', err);
+    alert('ส่งออก Excel ไม่สำเร็จ: ' + err.message);
+  }
+}
+
+/* ================= BACKUP ================= */
+function downloadJSON(obj, filename){
+  const blob = new Blob([JSON.stringify(obj, null, 2)], {type:'application/json;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url; a.download=filename; a.click();
+  URL.revokeObjectURL(url);
+}
+function todayStr(){ const d=new Date(); return d.toISOString().slice(0,10); }
+function daysSince(iso){ if(!iso) return null; return Math.floor((Date.now()-new Date(iso).getTime())/86400000); }
+
+function viewBackup(){
+  const days = daysSince(state.lastBackupAt);
+  let statusCls='pill-red', statusTxt='ยังไม่เคยสำรองข้อมูล';
+  if(state.lastBackupAt){
+    statusTxt = `สำรองล่าสุด ${new Date(state.lastBackupAt).toLocaleString('th-TH')} (${days} วันที่แล้ว)`;
+    statusCls = days<=7 ? 'pill-ok' : (days<=14 ? 'pill-warn' : 'pill-red');
+  }
+  return `
+  <div class="page-head"><p class="eyebrow">ความปลอดภัยของข้อมูล</p><h1>สำรองและกู้คืนข้อมูล</h1></div>
+  <div class="panel">
+    <div class="flex-between" style="margin-bottom:10px;">
+      <div class="panel-title" style="margin:0;">สถานะการสำรองข้อมูล</div>
+      <span class="status-pill ${statusCls}">${statusTxt}</span>
+    </div>
+    <button class="btn gold" id="downloadBackupBtn">⬇ ดาวน์โหลด Backup</button>
+  </div>
+  <div class="panel">
+    <div class="panel-title">นำเข้า Backup</div>
+    <input type="file" id="importFile" accept="application/json">
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" id="importMergeBtn">ผสานกับข้อมูลปัจจุบัน</button>
+      <button class="btn danger" id="importReplaceBtn">แทนที่ทั้งหมด</button>
+    </div>
+  </div>
+  `;
+}
+async function doBackupDownload(){
+  const payload = { version:1, exportedAt: new Date().toISOString(), records: state.records, thresholds: state.thresholds };
+  downloadJSON(payload, `backup_ทะเบียนเฝ้าระวังโรค_${todayStr()}.json`);
+  state.lastBackupAt = new Date().toISOString();
+  try{ localStorage.setItem('lastBackupAt', state.lastBackupAt); }catch(e){}
+  render();
+}
+function readImportFile(cb){
+  const inp = document.getElementById('importFile');
+  if(!inp.files || !inp.files[0]){ alert('กรุณาเลือกไฟล์ .json'); return; }
+  const reader = new FileReader();
+  reader.onload = (e)=>{
+    try{ const data = JSON.parse(e.target.result); cb(data); }
+    catch(err){ alert('ไฟล์ไม่ถูกต้อง: '+err.message); }
+  };
+  reader.readAsText(inp.files[0]);
+}
+
+/* ================= CRITERIA ================= */
+function viewCriteria(){
+  return `
+  <div class="page-head"><p class="eyebrow">เกณฑ์การพิจารณาการระบาด</p><h1>เกณฑ์การระบาด</h1></div>
+  <div class="panel">
+    <div class="panel-title">เพิ่มโรคใหม่</div>
+    <div class="grid4">
+      <div class="field"><label>ชื่อโรค</label><input type="text" id="newDiseaseName"></div>
+      <div class="field"><label>จำนวนขั้นต่ำ</label><input type="number" id="newDiseaseMin" value="2" min="1"></div>
+      <div class="field"><label>นับภายใน (วัน)</label><input type="number" id="newDiseaseWindow" min="0"></div>
+      <div class="field"><label>สอบสวนภายใน (ชม.)</label><input type="number" id="newDiseaseDeadline" value="168" min="1"></div>
+    </div>
+    <div class="field"><label>คำอธิบาย</label><input type="text" id="newDiseaseNote"></div>
+    <button class="btn gold" id="addDiseaseBtn">+ เพิ่มโรค</button>
+  </div>
+  <div class="table-wrap">
+  <table><thead><tr>
+    <th style="min-width:220px;">โรค</th><th>ขั้นต่ำ</th><th>นับภายใน (วัน)</th><th>สอบสวนภายใน (ชม.)</th><th style="min-width:260px;">คำอธิบาย</th><th></th>
+  </tr></thead><tbody>
+  ${state.thresholds.map(t=>`
+    <tr>
+      <td><b>${t.name}</b>${t.custom?' <span class="tag" style="background:var(--gold);">เพิ่มเอง</span>':''}</td>
+      <td><input type="number" min="1" style="width:70px" data-th="${t.id}" data-field="minCases" value="${t.minCases}"></td>
+      <td><input type="number" min="0" style="width:70px" data-th="${t.id}" data-field="windowDays" value="${t.windowDays??''}"></td>
+      <td><input type="number" min="1" style="width:80px" data-th="${t.id}" data-field="deadlineHours" value="${t.deadlineHours}"></td>
+      <td><input type="text" style="width:100%" data-th="${t.id}" data-field="note" value="${(t.note||'').replace(/"/g,'&quot;')}"></td>
+      <td>${t.custom?`<button class="btn small danger" data-del-disease="${t.id}">ลบ</button>`:''}</td>
+    </tr>`).join('')}
+  </tbody></table>
+  </div>
+  `;
+}
+
+/* ================= EXPORT ================= */
+function viewExport(){
+  let filteredE0 = state.records;
+  if(state.exportMonth) filteredE0 = filteredE0.filter(r=>r.reportMonth===state.exportMonth);
+  if(state.exportYear) filteredE0 = filteredE0.filter(r=>String(normalizeYearBE(r.reportYear))===String(state.exportYear));
+  return `
+  <div class="page-head"><p class="eyebrow">ส่งออกข้อมูล</p><h1>ส่งออกทะเบียน (CSV)</h1></div>
+  <div class="panel">
+    <div class="panel-title">ทะเบียน E0</div>
+    <div class="toolbar">
+      <select id="exportMonth">${monthFilterOptions(state.exportMonth)}</select>
+      <select id="exportYear">${yearOptions(state.exportYear, true)}</select>
+    </div>
+    <p class="sub">${filteredE0.length} รายการ</p>
+    <button class="btn" id="exportE0">ดาวน์โหลด E0.csv</button>
+  </div>
+  <div class="panel">
+    <div class="panel-title">E1 เฉพาะโรค</div>
+    <div class="toolbar">
+      <select id="exportDisease">${state.thresholds.map(d=>`<option value="${d.id}">${d.name}</option>`).join('')}</select>
+      <button class="btn" id="exportE1">ดาวน์โหลด E1.csv</button>
+    </div>
+  </div>
+  `;
+}
+function toCSV(rows){
+  const headers = ['คำนำหน้า','ชื่อ','สกุล','HN','อายุ','เลขที่','หมู่','หมู่บ้าน','ตำบล','อำเภอ','จังหวัด','วันป่วย','วันรับการรักษา','วินิจฉัย','วันรับแจ้ง','เวลารับ','วันสอบสวน','เวลาสอบ','วันส่ง','เวลาส่ง','ผู้รับแจ้ง','สถานที่รับ','ไฟล์แนบ','หมายเหตุ'];
+  const lines = [headers.join(',')];
+  rows.forEach(r=>{
+    const vals = [
+      r.prefix, r.firstname, r.lastname, r.hn, r.age, r.houseNo, r.moo, (villageByMoo(r.moo)?villageByMoo(r.moo).name:''), r.tambon, r.amphoe, r.changwat,
+      fmtThaiDate(r.illDay,r.illMonth,r.illYear), fmtThaiDate(r.treatDay,r.treatMonth,r.treatYear),
+      diagnosisLabel(r), fmtThaiDate(r.reportDay,r.reportMonth,r.reportYear), toTimeInputValue(r.reportTime),
+      fmtThaiDate(r.investigateDay,r.investigateMonth,r.investigateYear), toTimeInputValue(r.investigateTime),
+      fmtThaiDate(r.sendDay,r.sendMonth,r.sendYear), toTimeInputValue(r.sendTime),
+      r.receiver, r.receivePlace, r.attachmentRef, r.extraNote
+    ].map(v=>`"${(v??'').toString().replace(/"/g,'""')}"`);
+    lines.push(vals.join(','));
+  });
+  return '\uFEFF'+lines.join('\n');
+}
+function downloadCSV(text, filename){
+  const blob = new Blob([text], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url; a.download=filename; a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* ================= MODAL ================= */
+function openModal(id){
+  state.editingId = id || null;
+  const rec = id ? state.records.find(r=>r.id===id) : emptyRecord();
+  document.getElementById('modalBody').innerHTML = modalForm(rec);
+  document.getElementById('overlay').classList.add('open');
+  bindModalEvents(rec);
+}
+function closeModal(){ document.getElementById('overlay').classList.remove('open'); }
+
+function modalForm(r){
+  return `
+  <button class="close" id="modalClose">×</button>
+  <h2>${state.editingId?'แก้ไขข้อมูลผู้ป่วย':'เพิ่มผู้ป่วยใหม่'}</h2>
+
+  <fieldset><legend>ข้อมูลผู้ป่วย</legend>
+    <div class="grid4">
+      <div class="field"><label>คำนำหน้า</label><select id="f_prefix">${PREFIXES.map(p=>`<option ${p===r.prefix?'selected':''}>${p}</option>`).join('')}</select></div>
+      <div class="field"><label>ชื่อ</label><input type="text" id="f_firstname" value="${r.firstname||''}"></div>
+      <div class="field"><label>สกุล</label><input type="text" id="f_lastname" value="${r.lastname||''}"></div>
+      <div class="field"><label>อายุ</label><input type="number" id="f_age" value="${r.age||''}"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>HN</label><input type="text" id="f_hn" value="${r.hn||''}"></div>
+      <div class="field"></div>
+    </div>
+  </fieldset>
+
+  <fieldset><legend>ที่อยู่</legend>
+    <div class="grid2">
+      <div class="field"><label>เลขที่</label><input type="text" id="f_houseNo" value="${r.houseNo||''}"></div>
+      <div class="field"><label>หมู่บ้าน</label>
+        <select id="f_moo">
+          <option value="">— เลือก —</option>
+          ${VILLAGES.map(v=>`<option value="${v.moo}" ${String(v.moo)===String(r.moo)?'selected':''}>ม.${v.moo} ${v.name}</option>`).join('')}
+          <option value="__other" ${r.moo && !villageByMoo(r.moo) ? 'selected':''}>อื่นๆ</option>
+        </select>
+      </div>
+    </div>
+    <div class="field" id="wrap_mooOther" style="display:${r.moo && !villageByMoo(r.moo) ? 'block':'none'}">
+      <label>ระบุหมู่</label><input type="text" id="f_mooOther" value="${r.moo && !villageByMoo(r.moo) ? r.moo : ''}">
+    </div>
+    <div class="grid3">
+      <div class="field"><label>ตำบล</label><input type="text" id="f_tambon" value="${r.tambon||''}"></div>
+      <div class="field"><label>อำเภอ</label><input type="text" id="f_amphoe" value="${r.amphoe||''}"></div>
+      <div class="field"><label>จังหวัด</label><input type="text" id="f_changwat" value="${r.changwat||'สุรินทร์'}"></div>
+    </div>
+  </fieldset>
+
+  <fieldset><legend>การวินิจฉัยและระยะป่วย</legend>
+    <div class="field"><label>วินิจฉัย</label>
+      <select id="f_diagnosisId">
+        ${state.thresholds.map(t=>`<option value="${t.id}" ${t.id===r.diagnosisId?'selected':''}>${t.name}</option>`).join('')}
+        <option value="other" ${r.diagnosisId==='other'?'selected':''}>อื่นๆ</option>
+      </select>
+    </div>
+    <div class="field" id="wrap_diagnosisText" style="display:${r.diagnosisId==='other'?'block':'none'}">
+      <label>ระบุชื่อโรค</label><input type="text" id="f_diagnosisText" value="${r.diagnosisText||''}">
+    </div>
+    <div class="grid2">
+      <div class="field"><label>วันป่วย</label><input type="date" id="f_illDate" value="${toDateInputValue(r.illDay,r.illMonth,r.illYear)}"></div>
+      <div class="field"><label>วันเริ่มรักษา</label><input type="date" id="f_treatDate" value="${toDateInputValue(r.treatDay,r.treatMonth,r.treatYear)}"></div>
+    </div>
+  </fieldset>
+
+  <fieldset><legend>การรับแจ้ง / สอบสวน / ส่งข้อมูล</legend>
+    <div class="grid3">
+      <div class="field"><label>วันรับแจ้ง</label>
+        <input type="date" id="f_reportDate" value="${toDateInputValue(r.reportDay,r.reportMonth,r.reportYear)}">
+        <input type="time" id="f_reportTime" style="margin-top:6px;width:100%" value="${toTimeInputValue(r.reportTime)}">
+        <button type="button" class="btn small ghost" data-nowbtn="f_reportDate|f_reportTime" style="margin-top:6px;">⏱ ตอนนี้</button>
+      </div>
+      <div class="field"><label>วันสอบสวน</label>
+        <input type="date" id="f_investigateDate" value="${toDateInputValue(r.investigateDay,r.investigateMonth,r.investigateYear)}">
+        <input type="time" id="f_investigateTime" style="margin-top:6px;width:100%" value="${toTimeInputValue(r.investigateTime)}">
+        <button type="button" class="btn small ghost" data-nowbtn="f_investigateDate|f_investigateTime" style="margin-top:6px;">⏱ ตอนนี้</button>
+      </div>
+      <div class="field"><label>วันส่งข้อมูล</label>
+        <input type="date" id="f_sendDate" value="${toDateInputValue(r.sendDay,r.sendMonth,r.sendYear)}">
+        <input type="time" id="f_sendTime" style="margin-top:6px;width:100%" value="${toTimeInputValue(r.sendTime)}">
+        <button type="button" class="btn small ghost" data-nowbtn="f_sendDate|f_sendTime" style="margin-top:6px;">⏱ ตอนนี้</button>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>ผู้รับแจ้ง</label><input type="text" id="f_receiver" value="${r.receiver||''}"></div>
+      <div class="field"><label>สถานที่รับแจ้ง</label><input type="text" id="f_receivePlace" value="${r.receivePlace||''}"></div>
+    </div>
+  </fieldset>
+
+  <fieldset><legend>ไฟล์แนบและหมายเหตุ</legend>
+    <div class="field"><label>ไฟล์แนบ</label><input type="text" id="f_attachmentRef" value="${r.attachmentRef||''}"></div>
+    <div class="field"><label>หมายเหตุ</label><input type="text" id="f_extraNote" value="${r.extraNote||''}"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>แบบฟอร์มแจ้ง-สอบสวนข่าว (ส่ง สสจ.)</legend>
+    <div class="field" style="margin-bottom:${r.rep_enabled?'12px':'0'};">
+      <label class="checklabel" style="font-size:14px;"><input type="checkbox" id="f_rep_enabled" ${r.rep_enabled?'checked':''}> บันทึกแบบฟอร์มสำหรับเคสนี้</label>
+    </div>
+    <div id="wrap_repDetails" style="display:${r.rep_enabled?'block':'none'}">
+      <div class="grid2">
+        <div class="field"><label>ชื่อผู้แจ้ง</label><input type="text" id="f_rep_reporterName" value="${r.rep_reporterName||''}"></div>
+        <div class="field"><label>ติดต่อ</label><input type="text" id="f_rep_reporterContact" value="${r.rep_reporterContact||''}"></div>
+      </div>
+      <div class="field"><label>ที่เกิดเหตุ</label><input type="text" id="f_rep_eventLocation" value="${r.rep_eventLocation||''}"></div>
+      ${Object.entries(REPORT_CHECK_GROUPS).map(([key,g])=>`
+        <div class="field"><label>${g.label}</label><div style="display:flex;flex-wrap:wrap;gap:10px;">
+          ${g.options.map(opt=>`<label class="checklabel"><input type="checkbox" data-repgroup="${key}" value="${opt}" ${(r['rep_'+key]||[]).includes(opt)?'checked':''}> ${opt}</label>`).join('')}
+        </div></div>`).join('')}
+      <div class="field"><label>กิจกรรม</label><textarea id="f_rep_activities" rows="2">${r.rep_activities||''}</textarea></div>
+      <div class="field"><label>ทีมสอบสวน</label><textarea id="f_rep_team" rows="2">${r.rep_team||''}</textarea></div>
+      <div class="field"><label>ผลสอบสวน</label><textarea id="f_rep_findings" rows="3">${r.rep_findings||''}</textarea></div>
+      <div class="field"><label>ผู้สัมผัส</label><textarea id="f_rep_contacts" rows="2">${r.rep_contacts||''}</textarea></div>
+    </div>
+  </fieldset>
+
+  <div style="display:flex;justify-content:flex-end;gap:10px;">
+    <button class="btn ghost" id="modalCancel">ยกเลิก</button>
+    <button class="btn gold" id="modalSave">บันทึกข้อมูล</button>
+  </div>
+  `;
+}
+
+function bindModalEvents(rec){
+  document.getElementById('modalClose').onclick = closeModal;
+  document.getElementById('modalCancel').onclick = closeModal;
+  document.getElementById('f_diagnosisId').onchange = (e)=>{
+    document.getElementById('wrap_diagnosisText').style.display = e.target.value==='other'?'block':'none';
+  };
+  document.getElementById('f_moo').onchange = (e)=>{
+    const v = e.target.value;
+    document.getElementById('wrap_mooOther').style.display = v==='__other' ? 'block' : 'none';
+    const vill = villageByMoo(v);
+    if(vill){
+      document.getElementById('f_tambon').value = vill.tambon;
+      document.getElementById('f_amphoe').value = vill.amphoe;
+      document.getElementById('f_changwat').value = vill.changwat;
+    }
+  };
+  const repToggle = document.getElementById('f_rep_enabled');
+  if(repToggle) repToggle.onchange = (e)=>{ document.getElementById('wrap_repDetails').style.display = e.target.checked?'block':'none'; };
+
+  document.querySelectorAll('[data-nowbtn]').forEach(btn=>{
+    btn.onclick = ()=>{
+      const [dateId, timeId] = btn.dataset.nowbtn.split('|');
+      document.getElementById(dateId).value = todayDateInputValue();
+      document.getElementById(timeId).value = nowTimeInputValue();
+    };
+  });
+
+  document.getElementById('modalSave').onclick = async ()=>{
+    const g = id=>document.getElementById(id).value;
+    const mooSel = g('f_moo');
+    const mooFinal = mooSel==='__other' ? (document.getElementById('f_mooOther')?g('f_mooOther'):'') : mooSel;
+
+    const illD     = splitDateInputValue(g('f_illDate'));
+    const treatD   = splitDateInputValue(g('f_treatDate'));
+    const reportD  = splitDateInputValue(g('f_reportDate'));
+    const investD  = splitDateInputValue(g('f_investigateDate'));
+    const sendD    = splitDateInputValue(g('f_sendDate'));
+
+    const repGroups = {};
+    Object.keys(REPORT_CHECK_GROUPS).forEach(key=>{
+      repGroups['rep_'+key] = Array.from(document.querySelectorAll(`[data-repgroup="${key}"]:checked`)).map(el=>el.value);
+    });
+
+    const updated = {
+      ...rec,
+      prefix:g('f_prefix'), firstname:g('f_firstname'), lastname:g('f_lastname'), hn:g('f_hn'), age:g('f_age'),
+      houseNo:g('f_houseNo'), moo:mooFinal, tambon:g('f_tambon'), amphoe:g('f_amphoe'), changwat:g('f_changwat'),
+      illDay:illD.day, illMonth:illD.month, illYear:illD.yearBE,
+      treatDay:treatD.day, treatMonth:treatD.month, treatYear:treatD.yearBE,
+      diagnosisId:g('f_diagnosisId'),
+      diagnosisText: document.getElementById('f_diagnosisText')? g('f_diagnosisText') : rec.diagnosisText,
+      reportDay:reportD.day, reportMonth:reportD.month, reportYear:reportD.yearBE, reportTime:g('f_reportTime'),
+      investigateDay:investD.day, investigateMonth:investD.month, investigateYear:investD.yearBE, investigateTime:g('f_investigateTime'),
+      sendDay:sendD.day, sendMonth:sendD.month, sendYear:sendD.yearBE, sendTime:g('f_sendTime'),
+      receiver:g('f_receiver'), receivePlace:g('f_receivePlace'),
+      attachmentRef:g('f_attachmentRef'), extraNote:g('f_extraNote'),
+      rep_enabled: document.getElementById('f_rep_enabled').checked,
+      rep_reporterName: g('f_rep_reporterName'), rep_reporterContact: g('f_rep_reporterContact'),
+      rep_eventLocation: g('f_rep_eventLocation'),
+      ...repGroups,
+      rep_activities: g('f_rep_activities'), rep_team: g('f_rep_team'),
+      rep_findings: g('f_rep_findings'), rep_contacts: g('f_rep_contacts'),
+    };
+    if(state.editingId){
+      const idx = state.records.findIndex(x=>x.id===state.editingId);
+      state.records[idx] = updated;
+    } else {
+      state.records.push(updated);
+    }
+    if(updated.diagnosisId==='other' && updated.diagnosisText.trim()){
+      const newId = findOrCreateThreshold(updated.diagnosisText.trim());
+      if(newId){ updated.diagnosisId = newId; await saveThresholds(); }
+    }
+    await saveRecords();
+    closeModal();
+    render();
+  };
+}
+
+/* ================= DYNAMIC BINDINGS ================= */
+function bindDynamicEvents(){
+  const btnAdd = document.getElementById('btnAdd');
+  if(btnAdd) btnAdd.onclick = ()=>openModal(null);
+
+  document.querySelectorAll('[data-edit]').forEach(b=> b.onclick = ()=>openModal(b.dataset.edit));
+  document.querySelectorAll('[data-del]').forEach(b=> b.onclick = async ()=>{
+    if(confirm('ยืนยันการลบ?')){
+      state.records = state.records.filter(r=>r.id!==b.dataset.del);
+      await saveRecords(); render();
+    }
+  });
+
+  const searchBox = document.getElementById('searchBox');
+  if(searchBox){ searchBox.oninput = (e)=>{ state.search = e.target.value; render(); document.getElementById('searchBox').focus(); document.getElementById('searchBox').setSelectionRange(state.search.length,state.search.length); }; }
+
+  const e0FilterMonth = document.getElementById('e0FilterMonth');
+  if(e0FilterMonth) e0FilterMonth.onchange = (e)=>{ state.e0FilterMonth = e.target.value; render(); };
+  const e0FilterYear = document.getElementById('e0FilterYear');
+  if(e0FilterYear) e0FilterYear.onchange = (e)=>{ state.e0FilterYear = e.target.value; render(); };
+  const e0FilterClear = document.getElementById('e0FilterClear');
+  if(e0FilterClear) e0FilterClear.onclick = ()=>{ state.e0FilterMonth=''; state.e0FilterYear=''; render(); };
+
+  const diseaseSelect = document.getElementById('diseaseSelect');
+  if(diseaseSelect) diseaseSelect.onchange = (e)=>{ state.e1Disease = e.target.value; render(); };
+
+  const e1FilterMonth = document.getElementById('e1FilterMonth');
+  if(e1FilterMonth) e1FilterMonth.onchange = (e)=>{ state.e1FilterMonth = e.target.value; render(); };
+  const e1FilterYear = document.getElementById('e1FilterYear');
+  if(e1FilterYear) e1FilterYear.onchange = (e)=>{ state.e1FilterYear = e.target.value; render(); };
+  const e1FilterClear = document.getElementById('e1FilterClear');
+  if(e1FilterClear) e1FilterClear.onclick = ()=>{ state.e1FilterMonth=''; state.e1FilterYear=''; render(); };
+
+  const wFromDate = document.getElementById('wFromDate');
+  if(wFromDate) wFromDate.onchange = (e)=>{ state.weeklyChartFromDate = e.target.value; render(); };
+  const wToDate = document.getElementById('wToDate');
+  if(wToDate) wToDate.onchange = (e)=>{ state.weeklyChartToDate = e.target.value; render(); };
+  const wClearRange = document.getElementById('wClearRange');
+  if(wClearRange) wClearRange.onclick = ()=>{ state.weeklyChartFromDate=''; state.weeklyChartToDate=''; render(); };
+  const wMainYear = document.getElementById('wMainYear');
+  if(wMainYear) wMainYear.onchange = (e)=>{ state.weeklyChartYear = parseInt(e.target.value,10); render(); };
+  document.querySelectorAll('[data-compareyear]').forEach(cb=>{
+    cb.onchange = (e)=>{
+      const yy = parseInt(cb.dataset.compareyear,10);
+      if(e.target.checked) state.weeklyChartCompareYears.add(yy); else state.weeklyChartCompareYears.delete(yy);
+      render();
+    };
+  });
+  document.querySelectorAll('[data-disease]').forEach(cb=>{
+    cb.onchange = (e)=>{
+      const id = cb.dataset.disease;
+      if(state.weeklyChartSelectedDiseases === null) state.weeklyChartSelectedDiseases = new Set(state.thresholds.map(t=>t.id));
+      if(e.target.checked) state.weeklyChartSelectedDiseases.add(id); else state.weeklyChartSelectedDiseases.delete(id);
+      state.weeklyChartShowAllDiseases = false;
+      render();
+    };
+  });
+  const wSelectAllDiseases = document.getElementById('wSelectAllDiseases');
+  if(wSelectAllDiseases) wSelectAllDiseases.onclick = ()=>{ state.weeklyChartSelectedDiseases = new Set(state.thresholds.map(t=>t.id)); state.weeklyChartShowAllDiseases = true; render(); };
+  const wClearAllDiseases = document.getElementById('wClearAllDiseases');
+  if(wClearAllDiseases) wClearAllDiseases.onclick = ()=>{ state.weeklyChartSelectedDiseases = new Set(); state.weeklyChartShowAllDiseases = false; render(); };
+
+  const pfMonth = document.getElementById('pfMonth');
+  if(pfMonth) pfMonth.onchange = (e)=>{ state.printMonth = e.target.value; render(); };
+  const pfYear = document.getElementById('pfYear');
+  if(pfYear) pfYear.onchange = (e)=>{ state.printYear = parseInt(e.target.value,10)||state.printYear; render(); };
+  document.querySelectorAll('[data-pfcase]').forEach(cb=> cb.onchange = (e)=>{
+    if(e.target.checked) state.printSelected.add(cb.dataset.pfcase); else state.printSelected.delete(cb.dataset.pfcase);
+    render();
+  });
+  const pfPrintBtn = document.getElementById('pfPrintBtn');
+  if(pfPrintBtn) pfPrintBtn.onclick = ()=> window.print();
+  const pfSelectAll = document.getElementById('pfSelectAll');
+  if(pfSelectAll) pfSelectAll.onclick = ()=>{
+    state.records.filter(r=> r.reportMonth===state.printMonth && String(normalizeYearBE(r.reportYear))===String(state.printYear))
+      .forEach(r=> state.printSelected.add(r.id));
+    render();
+  };
+  const pfSelectNone = document.getElementById('pfSelectNone');
+  if(pfSelectNone) pfSelectNone.onclick = ()=>{
+    state.records.filter(r=> r.reportMonth===state.printMonth && String(normalizeYearBE(r.reportYear))===String(state.printYear))
+      .forEach(r=> state.printSelected.delete(r.id));
+    render();
+  };
+
+  const pfExportBtn = document.getElementById('pfExportBtn');
+  if(pfExportBtn) pfExportBtn.onclick = async ()=>{
+    const candidates = state.records.filter(r=> r.reportMonth===state.printMonth && String(normalizeYearBE(r.reportYear))===String(state.printYear));
+    const selectedRecords = candidates.filter(r=>state.printSelected.has(r.id));
+    if(!selectedRecords.length){ alert('กรุณาเลือกเคสอย่างน้อย 1 รายการ'); return; }
+    if(selectedRecords.length > 5 && !confirm(`จะดาวน์โหลด ${selectedRecords.length} ไฟล์ ยืนยันหรือไม่?`)) return;
+    pfExportBtn.disabled = true;
+    pfExportBtn.textContent = '⏳ กำลังสร้างไฟล์...';
+    await exportExcelPerCase(selectedRecords);
+    pfExportBtn.disabled = false;
+    pfExportBtn.textContent = '📊 ส่งออก Excel (1 ไฟล์/เคส)';
+  };
+  const pfExportAllBtn = document.getElementById('pfExportAllBtn');
+  if(pfExportAllBtn) pfExportAllBtn.onclick = async ()=>{
+    const candidates = state.records.filter(r=> r.reportMonth===state.printMonth && String(normalizeYearBE(r.reportYear))===String(state.printYear));
+    const selectedRecords = candidates.filter(r=>state.printSelected.has(r.id));
+    if(!selectedRecords.length){ alert('กรุณาเลือกเคสอย่างน้อย 1 รายการ'); return; }
+    pfExportAllBtn.disabled = true;
+    pfExportAllBtn.textContent = '⏳ กำลังสร้างไฟล์...';
+    await exportExcelAll(selectedRecords);
+    pfExportAllBtn.disabled = false;
+    pfExportAllBtn.textContent = '📊 ส่งออก Excel (รวมทุกเคส)';
+  };
+
+  const downloadBackupBtn = document.getElementById('downloadBackupBtn');
+  if(downloadBackupBtn) downloadBackupBtn.onclick = doBackupDownload;
+
+  const importMergeBtn = document.getElementById('importMergeBtn');
+  if(importMergeBtn) importMergeBtn.onclick = ()=> readImportFile(async (data)=>{
+    if(!data || !Array.isArray(data.records) || !Array.isArray(data.thresholds)){ alert('ไฟล์ไม่ถูกต้อง'); return; }
+    const existingIds = new Set(state.records.map(r=>r.id));
+    let addedRecords = 0;
+    data.records.forEach(r=>{ if(!existingIds.has(r.id)){ state.records.push(r); addedRecords++; } });
+    let addedThresholds = 0;
+    data.thresholds.forEach(t=>{ if(!state.thresholds.some(x=>x.id===t.id)){ state.thresholds.push(t); addedThresholds++; } });
+    await saveRecords(); await saveThresholds();
+    alert(`ผสานสำเร็จ: +${addedRecords} ผู้ป่วย, +${addedThresholds} เกณฑ์`);
+    render();
+  });
+
+  const importReplaceBtn = document.getElementById('importReplaceBtn');
+  if(importReplaceBtn) importReplaceBtn.onclick = ()=> readImportFile(async (data)=>{
+    if(!data || !Array.isArray(data.records) || !Array.isArray(data.thresholds)){ alert('ไฟล์ไม่ถูกต้อง'); return; }
+    if(!confirm(`ยืนยันแทนที่ทั้งหมด? (${state.records.length} → ${data.records.length})`)) return;
+    state.records = data.records;
+    state.thresholds = data.thresholds;
+    await saveRecords(); await saveThresholds();
+    alert('กู้คืนสำเร็จ');
+    render();
+  });
+
+  const dashMonthSelect = document.getElementById('dashMonthSelect');
+  if(dashMonthSelect) dashMonthSelect.onchange = (e)=>{ state.dashMonth = e.target.value; render(); };
+  const dashYearInput = document.getElementById('dashYearInput');
+  if(dashYearInput) dashYearInput.onchange = (e)=>{ state.dashYear = parseInt(e.target.value,10)||state.dashYear; render(); };
+
+  document.querySelectorAll('[data-th]').forEach(inp=>{
+    inp.onchange = async (e)=>{
+      const t = state.thresholds.find(x=>x.id===e.target.dataset.th);
+      const f = e.target.dataset.field;
+      let v = e.target.value;
+      if(f==='windowDays'){ t[f] = v===''? null : parseInt(v,10); }
+      else if(f==='note'){ t[f] = v; }
+      else { t[f] = parseInt(v,10)||0; }
+      await saveThresholds();
+    };
+  });
+
+  const addDiseaseBtn = document.getElementById('addDiseaseBtn');
+  if(addDiseaseBtn) addDiseaseBtn.onclick = async ()=>{
+    const name = document.getElementById('newDiseaseName').value.trim();
+    if(!name){ alert('กรุณาระบุชื่อโรค'); return; }
+    if(state.thresholds.some(t=>t.name.trim().toLowerCase()===name.toLowerCase())){ alert('มีโรคนี้อยู่แล้ว'); return; }
+    const minCases = parseInt(document.getElementById('newDiseaseMin').value,10)||1;
+    const windowRaw = document.getElementById('newDiseaseWindow').value;
+    const windowDays = windowRaw===''? null : parseInt(windowRaw,10);
+    const deadlineHours = parseInt(document.getElementById('newDiseaseDeadline').value,10)||168;
+    const note = document.getElementById('newDiseaseNote').value.trim() || `เป็นกลุ่มก้อนตั้งแต่ ${minCases} ราย`;
+    state.thresholds.push({ id:'custom_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6), name, minCases, windowDays, deadlineHours, note, custom:true });
+    await saveThresholds(); render();
+  };
+
+  document.querySelectorAll('[data-del-disease]').forEach(b=> b.onclick = async ()=>{
+    const id = b.dataset.delDisease;
+    const t = state.thresholds.find(x=>x.id===id);
+    if(!confirm(`ลบเกณฑ์ "${t.name}"?`)) return;
+    state.records.forEach(r=>{ if(r.diagnosisId===id){ r.diagnosisId='other'; r.diagnosisText=t.name; } });
+    state.thresholds = state.thresholds.filter(x=>x.id!==id);
+    await saveThresholds(); await saveRecords(); render();
+  });
+
+  const exportMonth = document.getElementById('exportMonth');
+  if(exportMonth) exportMonth.onchange = (e)=>{ state.exportMonth = e.target.value; render(); };
+  const exportYear = document.getElementById('exportYear');
+  if(exportYear) exportYear.onchange = (e)=>{ state.exportYear = e.target.value; render(); };
+
+  const exportE0 = document.getElementById('exportE0');
+  if(exportE0) exportE0.onclick = ()=>{
+    let l = state.records;
+    if(state.exportMonth) l = l.filter(r=>r.reportMonth===state.exportMonth);
+    if(state.exportYear) l = l.filter(r=>String(normalizeYearBE(r.reportYear))===String(state.exportYear));
+    const suffix = (state.exportMonth||state.exportYear) ? `_${state.exportMonth||'ทุกเดือน'}_${state.exportYear||'ทุกปี'}` : '';
+    downloadCSV(toCSV(l), `E0_ทะเบียนรวม${suffix}.csv`);
+  };
+  const exportE1 = document.getElementById('exportE1');
+  if(exportE1) exportE1.onclick = ()=>{
+    const dId = document.getElementById('exportDisease').value;
+    const rows = state.records.filter(r=>r.diagnosisId===dId);
+    const t = thresholdFor(dId);
+    downloadCSV(toCSV(rows), `E1_${t.name.split(' ')[0]}.csv`);
+  };
+}
+
+loadState();
+</script>
+</body>
+</html>
