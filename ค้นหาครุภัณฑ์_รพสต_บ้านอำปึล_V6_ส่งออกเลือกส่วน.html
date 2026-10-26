@@ -160,9 +160,35 @@ function card(x){const bad=x.st!=='ok',c=bad?'#d62828':x.col;
 function cards(l,v){const m=v&&v.f==='ok'?l.filter(x=>x.st==='ok'):v&&v.f==='bad'?l.filter(x=>x.st!=='ok'):l;
   return(v?`<div class="chips">${[['all','ทั้งหมด'],['ok','ใช้งานได้'],['bad','ชำรุด/จำหน่าย']].map(([k,t])=>`<button class="${v.f===k?'on':''}" data-f="${k}">${t}</button>`).join('')}</div>`:'')+`<div class="cards">${m.map(card).join('')||'<p class="mut">ไม่พบรายการ</p>'}</div>`}
 function bindCards(l,v){document.querySelectorAll('.card').forEach(b=>b.onclick=()=>modal(+b.dataset.id));document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{v.f=b.dataset.f;draw()})}
+
+function fiscalYear(x){const p=pd(x.d);if(!p.y)return 0;return p.y+(p.m>=10?1:0)}
+function annual(v){
+ const fy=+v.y||2569;
+ const received=C.filter(x=>fiscalYear(x)===fy);
+ const disposed=C.filter(x=>x.st==='x'&&+yOf(x)===fy);
+ const broken=C.filter(x=>x.st==='b');
+ const degraded=C.filter(x=>x.st==='d');
+ const L=C.filter(x=>fiscalYear(x)===fy || (x.st==='x'&&+yOf(x)===fy) || x.st==='b'||x.st==='d');
+ const total=l=>l.reduce((n,x)=>n+(+x.q||1),0);
+ const moneyFmt=n=>Number(n||0).toLocaleString('th-TH',{maximumFractionDigits:2});
+ $('app').innerHTML=`<h2>📅 รายงานครุภัณฑ์ ปีงบประมาณ ${fy}</h2>
+ <p class="sub">ปีงบประมาณไทยนับตั้งแต่ 1 ตุลาคมถึง 30 กันยายนปีถัดไป โดยอิงวันที่รับ/วันที่ได้มาที่บันทึกไว้ และปีจำหน่ายที่ระบุในสถานะ</p>
+ <div class="hud"><span class="chip">📥 รับในปี ${fy}: ${total(received)} ชิ้น (${received.length} รายการ)</span><span class="chip">🗃️ จำหน่ายในปี ${fy}: ${total(disposed)} ชิ้น</span><span class="chip">🔧 ชำรุดปัจจุบัน: ${total(broken)} ชิ้น</span><span class="chip">⚠️ เสื่อมสภาพปัจจุบัน: ${total(degraded)} ชิ้น</span></div>
+ <div class="mtool"><label>เลือกปีงบประมาณ <select id="fyselect">${[2571,2570,2569,2568,2567].map(y=>`<option value="${y}"${y===fy?' selected':''}>${y}</option>`).join('')}</select></label><button class="btn" id="annualExport">⬇ ส่งออก Excel</button></div>
+ <div class="mg"><table id="annualTable"><thead><tr><th>ลำดับ</th><th>วัน/ปีที่รับ</th><th>เลขรหัสครุภัณฑ์</th><th>รายการ / ยี่ห้อ / ลักษณะ</th><th>จำนวน</th><th>ราคา/หน่วย</th><th>รวม</th><th>วิธีได้มา</th><th>ใช้ประจำที่</th><th>ผลตรวจสอบ/สถานะ</th></tr></thead><tbody>${L.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.d||'-')}</td><td>${esc(x.c||'-')}</td><td class="mn">${esc(x.n)}</td><td class="r">${x.q||1}</td><td class="r">${x.p==null?'-':moneyFmt(x.p)}</td><td class="r">${x.p==null?'-':moneyFmt(x.p*(x.q||1))}</td><td>${esc(x.s||'-')}</td><td>${esc(x.loc||'-')}</td><td>${esc(x.sl||SV[x.st]?.[1]||x.st)}</td></tr>`).join('')||'<tr><td colspan="10">ไม่พบรายการ</td></tr>'}</tbody></table></div>`;
+ $('fyselect').onchange=e=>{v.y=+e.target.value;draw()};
+ $('annualExport').onclick=()=>{
+ const rows=[['สรุปการสำรวจที่ดิน สิ่งก่อสร้าง ครุภัณฑ์ประจำปี โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านอำปึล ตำบลบักได อำเภอพนมดงรัก จังหวัดสุรินทร์ ประจำปี '+fy],
+ ['ลำดับ','วัน/ปีที่รับ','เลขรหัสครุภัณฑ์','ยี่ห้อ ชนิด แบบ ขนาด และลักษณะ','จำนวน','ราคา/หน่วย','รวม','วิธีการได้มา','ใช้ประจำที่','ผลการตรวจสอบประจำปี'],
+ ...L.map((x,i)=>[i+1,x.d||'',x.c||'',x.n,x.q||1,x.p==null?'':x.p,x.p==null?'':x.p*(x.q||1),x.s||'',x.loc||'',x.sl||SV[x.st]?.[1]||x.st])];
+ const html='<html><head><meta charset="UTF-8"></head><body><table>'+rows.map(r=>'<tr>'+r.map(c=>'<td>'+esc(c==null?'':String(c))+'</td>').join('')+'</tr>').join('')+'</table></body></html>';
+ const blob=new Blob(['\ufeff',html],{type:'application/vnd.ms-excel;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='รายงานครุภัณฑ์_ปีงบประมาณ_'+fy+'.xls';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000);toast('ส่งออกรายงานปีงบประมาณ '+fy+' แล้ว');
+ };
+}
 function draw(){const v=st[st.length-1],a=$('app');$('back').hidden=!st.length&&!q;$('crumb').textContent=q?'ผลการค้นหา':st.length?v.p.join(' › '):'';window.scrollTo(0,0);
   if(q){const t=q.toLowerCase(),l=C.filter(x=>(x.n+x.c+x.s).toLowerCase().includes(t));a.innerHTML=`<h2>ผลการค้นหา "${esc(q)}"</h2>${hud(l)}${cards(l)}`;bindCards();return}
   if(!st.length){a.innerHTML=`<div class="hero"><h1 style="font-size:30px;margin:8px 0">ค้นหาทะเบียนทรัพย์สิน</h1><p class="sub">กดที่อาคารเพื่อเข้าสำนักงาน หรือพิมพ์ค้นหาด้านบน</p>${hud(C)}<button class="office" id="enter" aria-label="เข้าสำนักงาน">${OFFICE}</button></div>`;$('enter').onclick=()=>{st.push({k:'type',p:[],c:{}});draw()};return}
+  if(v.k==='year'){annual(v);return}
   if(v.k==='type'){a.innerHTML=`<h2>เลือกประเภท</h2>${hud(C)}<div class="grid" id="g"></div>`;
     [['ที่ดิน','🌳'],['สิ่งก่อสร้าง','🏢'],['ครุภัณฑ์','🪑']].forEach(([t,e])=>{const l=C.filter(x=>x.t===t),s=sum(l),b=document.createElement('button');b.className='big';
       b.innerHTML=`<span style="font-size:52px;color:inherit">${e}</span><b>${t}</b><span>${s.u} ชิ้น · ใช้ได้ ${s.ok}</span><div class="mini"><i style="width:${s.u?s.ok/s.u*100:0}%"></i></div>`;b.onclick=()=>open('cat',{t},[t]);$('g').appendChild(b)});return}
@@ -250,28 +276,27 @@ function mgr(v){const [ic,T,hint]=SV[v.s],L=C.filter(x=>x.st===v.s);
  v.f=v.f||'';v.t=v.t||'';v.o=v.o||'c';v.sel=new Set([...(v.sel||[])].filter(x=>C.includes(x)&&x.st===v.s));
  $('app').innerHTML=`<h2>${ic} ${T}</h2><p class="sub">${hint}</p><div class="hud" id="ms"></div>
 <div class="mtool"><input id="mf" type="search" placeholder="กรองด้วยชื่อ / เลขรหัส / ที่มา" value="${esc(v.f)}"><select id="mt"><option value="">ทุกประเภท</option>${uniq(L.map(x=>x.t)).map(t=>`<option${t===v.t?' selected':''}>${esc(t)}</option>`).join('')}</select><select id="mo">${opt([['c','เรียงตามเลขรหัส'],['n','เรียงตามชื่อ'],['y','เรียงตามวันที่ได้มา'],['p','เรียงตามราคา (มาก→น้อย)']],v.o)}</select></div>
-<div class="mtool mbk"><b id="bn"></b><label>เปลี่ยนเป็น <select id="bs">${opt(STO,v.s==='ok'?'d':'ok')}</select></label><label>ปี พ.ศ. <input id="by" type="number" value="${curY}" style="width:92px"></label><button class="btn" id="bg">ใช้กับที่เลือก</button><button class="btn alt" id="bx">⬇ ส่งออก Excel หน้านี้</button></div>
-<div class="mg"><table><thead><tr><th><input type="checkbox" id="ma" aria-label="เลือกทั้งหมด"></th><th>ที่</th><th>เลขรหัสครุภัณฑ์</th><th>รายการ</th><th>จำนวน</th><th>ราคา/หน่วย</th><th>วัน เดือน ปี</th><th>วิธีได้มา</th><th>สถานะ</th><th></th></tr></thead><tbody id="mb"></tbody></table></div>`;
+<div class="mtool"><button class="btn alt" id="bx">⬇ ส่งออก Excel หน้านี้</button></div>
+<div class="mg"><table><thead><tr><th>ที่</th><th>เลขรหัสครุภัณฑ์</th><th>รายการ</th><th>จำนวน</th><th>ราคา/หน่วย</th><th>วัน เดือน ปี</th><th>วิธีได้มา</th><th>สถานะ</th><th></th></tr></thead><tbody id="mb"></tbody></table></div>`;
  const cnt=()=>$('bn').textContent='เลือกแล้ว '+v.sel.size+' รายการ';
  const fill=()=>{const k={c:x=>x.c||'~',n:x=>x.n,y:x=>{const p=pd(x.d);return(p.y||9999)*10000+(p.m||0)*100+(p.d||0)},p:x=>-(x.p||0)}[v.o],ft=v.f.toLowerCase();
   const l=L.filter(x=>(!v.t||x.t===v.t)&&(!ft||(x.n+' '+x.c+' '+x.s).toLowerCase().includes(ft))).sort((a,b)=>{const A=k(a),B=k(b);return A<B?-1:A>B?1:0});v.l=l;const s=sum(l);
   $('ms').innerHTML=`<span class="chip">📦 ${l.length} รายการ · ${s.u} ชิ้น</span><span class="chip ok">💰 ราคารวม ${money(s.pok+s.pbad)} บาท</span>`;
-  $('mb').innerHTML=l.map((x,i)=>`<tr><td><input type="checkbox" data-s="${x.id}"${v.sel.has(x)?' checked':''}></td><td>${i+1}</td><td>${esc(x.c||'-')}</td><td class="mn">${esc(x.n)}</td><td class="r">${x.q}</td><td class="r">${x.p!=null?money(x.p):'-'}</td><td>${esc(x.d||'-')}</td><td>${esc(x.s||'-')}</td><td><select data-st="${x.id}">${opt(STO,x.st)}</select>${yOf(x)?` <span class="mut">${yOf(x)}</span>`:''}</td><td><button class="btn alt" data-e="${x.id}" aria-label="แก้ไข">✏️</button></td></tr>`).join('')||'<tr><td colspan="10" class="mut">ไม่พบรายการ</td></tr>';
-  $('ma').checked=l.length>0&&l.every(x=>v.sel.has(x));cnt()};
+  $('mb').innerHTML=l.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.c||'-')}</td><td class="mn">${esc(x.n)}</td><td class="r">${x.q}</td><td class="r">${x.p!=null?money(x.p):'-'}</td><td>${esc(x.d||'-')}</td><td>${esc(x.s||'-')}</td><td><select data-st="${x.id}">${opt(STO,x.st)}</select>${yOf(x)?` <span class="mut">${yOf(x)}</span>`:''}</td><td><button class="btn alt" data-e="${x.id}" aria-label="แก้ไข">✏️</button></td></tr>`).join('')||'<tr><td colspan="9" class="mut">ไม่พบรายการ</td></tr>';
+  cnt()};
  $('mf').oninput=e=>{v.f=e.target.value.trim();fill()};$('mt').onchange=e=>{v.t=e.target.value;fill()};$('mo').onchange=e=>{v.o=e.target.value;fill()};
- $('ma').onchange=e=>{v.l.forEach(x=>e.target.checked?v.sel.add(x):v.sel.delete(x));fill()};
- $('mb').onchange=e=>{const t=e.target;if(t.dataset.s!=null){const x=C[+t.dataset.s];t.checked?v.sel.add(x):v.sel.delete(x);cnt()}
-  else if(t.dataset.st!=null){const x=C[+t.dataset.st],s=t.value;setS(x,s,+$('by').value||curY);keep();toast('ย้าย "'+x.n.slice(0,30)+'" ไปเป็น '+STO.find(a=>a[0]===s)[1]+' แล้ว');draw()}};
+ $('mb').onchange=e=>{const t=e.target;if(t.dataset.st!=null){const x=C[+t.dataset.st],s=t.value;setS(x,s,+$('by').value||curY);keep();toast('ย้าย "'+x.n.slice(0,30)+'" ไปเป็น '+STO.find(a=>a[0]===s)[1]+' แล้ว');draw()}};
  $('mb').onclick=e=>{const b=e.target.closest('[data-e]');if(b)edit(+b.dataset.e)};
  $('bg').onclick=()=>{if(!v.sel.size){toast('ยังไม่ได้ติ๊กเลือกรายการ');return}const s=$('bs').value,y=+$('by').value||curY,n=v.sel.size;v.sel.forEach(x=>setS(x,s,y));v.sel.clear();keep();toast('เปลี่ยนสถานะ '+n+' รายการเป็น '+STO.find(a=>a[0]===s)[1]+' แล้ว');draw()};
  $('bx').onclick=()=>dlx(v.sel.size?[...v.sel]:v.l,T.replace('รายการ',''));
  fill()}
 const _d=draw;draw=function(){const v=st[st.length-1];if(!q&&v&&v.k==='mgr'){$('back').hidden=false;$('crumb').textContent=SV[v.s][1];window.scrollTo(0,0);mgr(v)}else _d();nav()};
-document.querySelector('header').insertAdjacentHTML('afterend','<nav id="nav"><button class="btn alt" id="n0">🏠 หน้าหลัก</button><button class="btn alt" id="nok"></button><button class="btn alt" id="nb"></button><button class="btn alt" id="nd"></button><button class="btn alt" id="nx"></button></nav>');
-function nav(){const v=st[st.length-1],cur=!q&&v&&v.k==='mgr'?v.s:(!q&&!st.length?'h':'');$('n0').classList.toggle('on',cur==='h');
+document.querySelector('header').insertAdjacentHTML('afterend','<nav id="nav"><button class="btn alt" id="n0">🏠 หน้าหลัก</button><button class="btn alt" id="nok"></button><button class="btn alt" id="nb"></button><button class="btn alt" id="nd"></button><button class="btn alt" id="nx"></button><button class="btn alt" id="nyear">📅 รายงานปีงบประมาณ</button></nav>');
+function nav(){const v=st[st.length-1],cur=!q&&v&&v.k==='mgr'?v.s:(!q&&!st.length?'h':'');$('n0').classList.toggle('on',cur==='h');$('nyear').classList.toggle('on',!q&&v&&v.k==='year');
  ['ok','b','d','x'].forEach(s=>{const b=$('n'+s);b.textContent=SV[s][0]+' '+SV[s][1].replace('รายการ','')+' '+sum(C.filter(x=>x.st===s)).u;b.classList.toggle('on',cur===s)})}
 $('n0').onclick=()=>{st.length=0;q='';$('q').value='';draw()};
 ['ok','b','d','x'].forEach(s=>$('n'+s).onclick=()=>{st.length=0;q='';$('q').value='';st.push({k:'mgr',s,p:[],c:{}});draw()});
+$('nyear').onclick=()=>{st.length=0;q='';$('q').value='';st.push({k:'year',y:2569,p:['รายงานปีงบประมาณ'],c:{}});draw()};
 
 
 /* ===== ส่งออก Excel แบบเลือกส่วน (หลายแผ่นงาน) ===== */
