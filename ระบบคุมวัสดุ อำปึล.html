@@ -1,0 +1,1258 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ระบบคุมวัสดุ รพ.สต.บ้านอำปึล</title>
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@500;600;700&family=Sarabun:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a storeroom ledger — slim masthead, tab bar, one work surface per tab. Same blueprint-ink tokens as ระบบควบคุมภายในกองช่าง so the two read as one department's tools. */
+:root{
+  --bg:#f3f5f7; --surface:#ffffff; --sunk:#e9edf1; --line:#d5dce3;
+  --fg:#17212b; --muted:#5b6876; --ink:#1d4e7a; --ink-soft:#e2ecf5; --amber:#b9700e; --amber-soft:#fbefdc;
+  --ok:#2f7a4b; --ok-soft:#e1f1e7; --warn:#a15c00; --warn-soft:#fdf0d8; --bad:#a83a3a; --bad-soft:#f8e3e3;
+  --f-display:"IBM Plex Sans Thai","Sarabun","Leelawadee UI",Tahoma,system-ui,sans-serif;
+  --f-body:"Sarabun","Leelawadee UI",Tahoma,"IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --r:8px;
+  --s-in:#2a78d6; --s-out:#eb6834; --grid:#e3e8ed;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10161c; --surface:#18212a; --sunk:#1f2a35; --line:#2c3a48; --fg:#e4eaf0; --muted:#97a5b4; --ink:#7fb2e3; --ink-soft:#1c3247; --amber:#e3a34a; --amber-soft:#3a2a12;
+  --ok:#6cc48f; --ok-soft:#173326; --warn:#e7ad57; --warn-soft:#3a2b12; --bad:#ec8c8c; --bad-soft:#3d1d1d; --s-in:#3987e5; --s-out:#d95926; --grid:#26323e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10161c; --surface:#18212a; --sunk:#1f2a35; --line:#2c3a48; --fg:#e4eaf0; --muted:#97a5b4; --ink:#7fb2e3; --ink-soft:#1c3247; --amber:#e3a34a; --amber-soft:#3a2a12;
+  --ok:#6cc48f; --ok-soft:#173326; --warn:#e7ad57; --warn-soft:#3a2b12; --bad:#ec8c8c; --bad-soft:#3d1d1d; --s-in:#3987e5; --s-out:#d95926; --grid:#26323e; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:20px 48px}
+header.mast{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:2px solid var(--ink)}
+.mast h1{font-family:var(--f-display);font-weight:700;font-size:1.6rem;line-height:1.2;margin:0;text-wrap:balance}
+.mast .brand{display:flex;align-items:center;gap:14px;min-width:0}
+.mast .brand>div{min-width:0}
+.mast .logo{width:60px;height:60px;object-fit:contain;flex:none}
+.logobox{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.logoprev{width:96px;height:96px;border:1px dashed var(--line);border-radius:var(--r);display:grid;place-items:center;background:var(--sunk);color:var(--muted);font-size:.8rem;text-align:center;overflow:hidden}
+.logoprev img{width:100%;height:100%;object-fit:contain}
+@media (max-width:760px){.mast .logo{width:46px;height:46px}}
+.mast .org{font-size:.85rem;color:var(--muted);letter-spacing:.02em}
+.mast .stamp{font-family:var(--f-display);font-weight:600;font-size:.8rem;color:var(--amber);border:1px dashed var(--amber);padding:3px 8px;border-radius:4px}
+nav.tabs{display:flex;gap:4px;margin:16px 0 18px;overflow-x:auto}
+nav.tabs button{font-family:var(--f-display);font-weight:600;font-size:.95rem;border:1px solid var(--line);background:var(--surface);color:var(--muted);padding:8px 16px;border-radius:999px;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.notice{background:var(--warn-soft);color:var(--warn);border-radius:var(--r);padding:10px 14px;margin-bottom:14px;font-size:.9rem}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;min-width:0}
+.tile .k{font-size:.8rem;color:var(--muted)}
+.tile .v{font-family:var(--f-display);font-weight:700;font-size:1.6rem;font-variant-numeric:tabular-nums;line-height:1.2;overflow-wrap:anywhere}
+.tile .v small{font-size:.8rem;font-weight:500;color:var(--muted)}
+.tile.amber .v{color:var(--amber)} .tile.bad .v{color:var(--bad)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.filters input,.filters select{flex:1 1 150px;min-width:0}
+input,select,textarea{font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px;width:100%}
+textarea{min-height:70px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+.btn{font-family:var(--f-display);font-weight:600;font-size:.92rem;border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:8px 14px;border-radius:6px;cursor:pointer;white-space:nowrap}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.btn.danger{color:var(--bad);border-color:var(--bad)}
+.btn.small{padding:4px 10px;font-size:.82rem}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.tablebox{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-display);font-weight:600;font-size:.8rem;color:var(--muted);background:var(--sunk);white-space:nowrap;letter-spacing:.02em}
+thead tr.grp th{text-align:center;border-bottom:1px solid var(--line)}
+tbody tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.no{font-family:var(--f-mono);font-size:.85rem;color:var(--ink);white-space:nowrap}
+.sub{color:var(--muted);font-size:.83rem}
+.pill{display:inline-block;font-size:.78rem;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.st-low{background:var(--warn-soft);color:var(--warn)} .st-out{background:var(--bad-soft);color:var(--bad)} .st-ok{background:var(--ok-soft);color:var(--ok)}
+.rowact{display:flex;gap:6px;flex-wrap:wrap}
+.empty{padding:36px 20px;text-align:center;color:var(--muted)}
+.empty b{display:block;font-family:var(--f-display);color:var(--fg);font-size:1.05rem;margin-bottom:4px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;min-width:0}
+.cardhead{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.cardhead h3{font-family:var(--f-display);font-size:1.05rem;margin:0;color:var(--ink)}
+fieldset{border:0;padding:0;margin:0 0 16px;min-width:0}
+legend{font-family:var(--f-display);font-weight:600;font-size:1rem;color:var(--ink);padding:0;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
+.c2{grid-column:span 2}.c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}.c8{grid-column:span 8}.c9{grid-column:span 9}.c12{grid-column:span 12}
+label.f{display:block;font-size:.85rem;color:var(--muted);min-width:0}
+label.f>input,label.f>select,label.f>textarea{display:block;margin-top:4px}
+.req{color:var(--bad)}
+.formbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:flex-end;border-top:1px solid var(--line);padding-top:14px}
+.formbar .msg{margin-right:auto;font-size:.9rem;color:var(--muted)}
+.formbar .msg.err{color:var(--bad)}
+.stack{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+.lines{display:grid;gap:8px;margin-bottom:10px}
+.lnhead,.ln{display:grid;gap:8px;align-items:center}
+.lines.in .lnhead,.lines.in .ln{grid-template-columns:minmax(0,1fr) 110px 120px 120px auto}
+.lines.out .lnhead,.lines.out .ln{grid-template-columns:minmax(0,1fr) 120px 150px auto}
+.lnhead{font-size:.8rem;color:var(--muted);font-family:var(--f-display)}
+.ln .tot{text-align:right;font-variant-numeric:tabular-nums}
+.ln .bal{font-size:.82rem;color:var(--muted)}
+.linesum{display:flex;justify-content:flex-end;gap:8px;font-family:var(--f-display);font-weight:600;font-variant-numeric:tabular-nums}
+.repbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.repbar select{width:auto;max-width:100%}
+.repbar .sp{flex:1}
+.seg{display:flex;flex-wrap:wrap;min-width:0;max-width:100%}
+.seg .btn{border-radius:0;white-space:normal}.seg .btn:first-child{border-radius:6px 0 0 6px}.seg .btn:last-child{border-radius:0 6px 6px 0}.seg .btn+.btn{margin-left:-1px}
+.seg .btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.rephead{margin:0 0 10px}
+.rephead h3{font-family:var(--f-display);font-size:1.05rem;margin:0}
+tfoot td{font-weight:600;background:var(--sunk)}
+tr.open td{background:var(--sunk);font-style:italic}
+.in{color:var(--ok)} .out{color:var(--bad)}
+.hint{font-size:.85rem;color:var(--muted);margin:0 0 10px;max-width:75ch}
+.foot{margin-top:22px;font-size:.8rem;color:var(--muted);max-width:75ch}
+.modal{position:fixed;inset:0;z-index:8;background:rgba(10,16,22,.55);display:flex;flex-direction:column;padding:calc(12px + env(safe-area-inset-top,0px)) 12px calc(12px + env(safe-area-inset-bottom,0px))}
+.modal .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--surface);border-radius:var(--r) var(--r) 0 0;padding:10px 14px;border-bottom:1px solid var(--line)}
+.modal .bar h3{font-family:var(--f-display);font-size:1rem;margin:0 auto 0 0;color:var(--ink)}
+.modal .scroll{flex:1;overflow:auto;background:var(--sunk);border-radius:0 0 var(--r) var(--r);padding:16px}
+/* paper is printed matter: fixed black-on-white in both themes */
+.paper{width:794px;min-height:1123px;margin:0 auto;background:#fff;color:#000;padding:56px 60px 48px 68px;font-family:"Sarabun","Leelawadee UI",Tahoma,sans-serif;font-size:12.5pt;line-height:1.4;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.paper .c{text-align:center}.paper .r{text-align:right}
+.paper.ths{font-family:"TH SarabunPSK","TH Sarabun New",sans-serif;font-size:16pt;line-height:1.3}
+.paper .ttl{font-size:1.25em;font-weight:700;text-align:center;margin:4px 0 0}
+.paper .lg{display:block;margin:0 auto 6px;width:3cm;height:3cm;object-fit:contain}
+.paper .fl{display:inline-block;border-bottom:1px dotted #000;padding:0 10px;min-width:60px;text-align:center;line-height:1.25}
+.paper p{margin:0}
+.paper table{width:100%;border-collapse:collapse;margin:12px 0 6px;font-size:1em}
+.paper th,.paper td{border:1px solid #000;padding:2px 8px;color:#000;background:#fff;vertical-align:middle}
+.paper th{font-weight:700;text-align:center;font-family:inherit;font-size:1em;line-height:1.2;letter-spacing:0;white-space:normal}
+.paper td.cn{text-align:center}
+.paper tbody tr:last-child td{border-bottom:1px solid #000}
+.paper tr{height:36px}
+.paper .sigs{display:grid;grid-template-columns:1fr 1fr;gap:22px 20px;margin-top:28px;text-align:center}
+.paper .sigs div{line-height:1.45;white-space:nowrap}
+.dash{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);margin-bottom:22px}
+.kpis{display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr;gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;min-width:0;display:flex;flex-direction:column;gap:2px}
+.kpi .k{font-size:.82rem;color:var(--muted)}
+.kpi .v{font-family:var(--f-display);font-weight:700;font-size:1.55rem;line-height:1.2;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.kpi .v small{font-size:.8rem;font-weight:500;color:var(--muted);margin-left:2px}
+.kpi .d{font-size:.82rem;color:var(--muted)}
+.kpi.hero{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.kpi.hero .k,.kpi.hero .d,.kpi.hero .v small{color:var(--surface);opacity:.85}
+.kpi.hero .v{font-size:2rem}
+.kpi .mark{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:0}
+.kpi.alert{border-color:var(--bad);background:var(--bad-soft)}
+.kpi.alert .v,.kpi.alert .k{color:var(--bad)}
+.drow{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:14px}
+.dcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;min-width:0;position:relative}
+.dcard h3{font-family:var(--f-display);font-size:1rem;margin:0;color:var(--fg)}
+.dcard .dh{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.legend{display:flex;gap:14px;font-size:.82rem;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;background:var(--c)}
+.chart{overflow-x:auto}
+.chart svg{width:100%;min-width:560px;height:auto;display:block;overflow:visible}
+.chart text{fill:var(--muted);font-family:var(--f-body);font-size:11px}
+.vtip{position:absolute;pointer-events:none;background:var(--fg);color:var(--bg);border-radius:6px;padding:7px 10px;font-size:.82rem;line-height:1.45;white-space:nowrap;z-index:3;transform:translate(-50%,-100%)}
+.vtip b{font-family:var(--f-display)}
+.vtip i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px}
+.hbars{display:grid;gap:10px}
+.hb{display:grid;gap:3px}
+.hb .t{display:flex;justify-content:space-between;gap:10px;font-size:.88rem}
+.hb .t span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.hb .t span:last-child{font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+.hb .track{height:10px;background:var(--sunk);border-radius:4px;overflow:hidden}
+.hb .fill{height:100%;background:var(--s-in);border-radius:0 4px 4px 0;min-width:3px}
+.feed{display:grid;gap:0;margin:0;padding:0;list-style:none}
+.feed li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.feed li:last-child{border-bottom:0}
+.feed li:hover .ft{color:var(--ink)}
+.feed .ft{font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.feed .fs{font-size:.8rem;color:var(--muted)}
+.feed .fv{font-variant-numeric:tabular-nums;font-size:.88rem;text-align:right;white-space:nowrap}
+.kind{font-family:var(--f-display);font-size:.75rem;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.kind.in{background:var(--ink-soft);color:var(--ink)} .kind.out{background:var(--amber-soft);color:var(--amber)}
+.outlist{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.outlist li{display:flex;justify-content:space-between;gap:10px;font-size:.9rem;align-items:center}
+.dempty{color:var(--muted);font-size:.9rem;padding:18px 0;text-align:center}
+.sechead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:4px 0 10px}
+.sechead h3{font-family:var(--f-display);font-size:1.05rem;margin:0}
+@media (max-width:860px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.drow{grid-template-columns:minmax(0,1fr)}.kpi.hero .v{font-size:1.6rem}}
+.swatches{display:flex;flex-wrap:wrap;gap:10px}
+.sw{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:5px 12px 5px 6px;cursor:pointer;font:inherit;font-size:.88rem}
+.sw i{width:22px;height:22px;border-radius:50%;display:block;background:var(--c)}
+.sw[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+.nav-sup{background:#e8590c!important;border-color:#e8590c!important;color:#fff!important}
+nav.tabs button.nav-sup[aria-selected="true"]{background:#c94a06!important;border-color:#c94a06!important}
+.sup-hero{background:linear-gradient(135deg,#e8590c,#f08c3a);color:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px}
+.sup-hero h2{margin:0 0 6px;font-size:1.4rem;font-family:var(--f-display)}.sup-hero p{margin:0;line-height:1.7}
+.sup-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:16px}
+.pp-card{text-align:center;overflow:hidden}.pp-head{background:#113566;color:#fff;margin:-18px -18px 14px;padding:12px;font-weight:700;letter-spacing:.5px;font-family:var(--f-display)}
+.pp-qr{width:240px;max-width:80%;margin:0 auto;display:block;border:8px solid #fff;outline:1px solid var(--line);border-radius:8px;background:#fff}
+.pp-num{font-size:1.5rem;font-weight:700;margin-top:10px;letter-spacing:1px;font-variant-numeric:tabular-nums}
+.suph{font-family:var(--f-display);font-size:1.05rem;margin:0 0 12px;color:var(--ink)}
+.sup-av{width:56px;height:56px;border-radius:50%;background:var(--ink);color:var(--surface);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;flex:none}
+.ct-row{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.ct-row:last-child{border-bottom:0}
+.ct-ic{width:38px;height:38px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-size:18px;flex:none;color:#fff}
+.ct-row a{color:var(--fg);text-decoration:none;font-weight:600;word-break:break-all}
+.mright{display:flex;flex-direction:column;align-items:flex-end;gap:6px;min-width:0}
+.devcredit{font-size:.8rem;color:var(--muted);margin-top:4px}.devcredit a{color:var(--ink);font-weight:600;text-decoration:none;white-space:nowrap}
+@media print{.devcredit{display:none!important}}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:9px 16px;border-radius:6px;font-size:.9rem;z-index:9;max-width:calc(100% - 32px)}
+@media (max-width:760px){
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .c2,.c3,.c4,.c5,.c6,.c8,.c9{grid-column:span 12}
+  .mast h1{font-size:1.3rem}
+  .lnhead{display:none}
+  .lines.in .ln{grid-template-columns:1fr 1fr;padding-bottom:8px;border-bottom:1px dashed var(--line)}
+  .lines.in .ln select{grid-column:span 2}
+  .lines.out .ln{grid-template-columns:1fr 1fr;padding-bottom:8px;border-bottom:1px dashed var(--line)}
+  .lines.out .ln select{grid-column:span 2}
+}
+@page{size:A4 portrait;margin:12mm 14mm 12mm 18mm}
+@media print{
+  :root,:root[data-theme="dark"],:root:not([data-theme="light"]){--bg:#fff;--surface:#fff;--sunk:#eee;--line:#999;--fg:#000;--muted:#333;--ink:#000;--ok:#000;--bad:#000;--warn:#000;--amber:#000;color-scheme:light}
+  body{background:#fff}
+  .toast,.notice{display:none!important}
+  body.pr-slip .wrap{display:none!important}
+  body.pr-slip .modal{position:static;display:block;background:none;padding:0}
+  body.pr-slip .modal .bar{display:none}
+  body.pr-slip .modal .scroll{overflow:visible;padding:0;background:none}
+  body.pr-slip .paper{box-shadow:none;width:auto;min-height:0;margin:0;padding:0}
+  body.pr-rep nav.tabs,body.pr-rep .repbar,body.pr-rep .foot{display:none!important}
+  body.pr-rep .tablebox{overflow:visible;border:1px solid #999}
+  body.pr-rep table{font-size:13px}
+  body.pr-rep .mast .stamp{display:none!important}
+  body.pr-rep tfoot{display:table-row-group}
+  body.pr-rep tr{break-inside:avoid}
+  body.pr-rep th,body.pr-rep td{padding:4px 6px}
+  body.pr-rep .rephead{break-after:avoid}
+  body.pr-rep .tablebox{break-inside:auto}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ===== ชุดสีสดใส รพ.สต.บ้านอำปึล ===== */
+:root{--ink:#0f766e;--ink-soft:#d5f0ec;--bg:#eef6f6;--sunk:#e1efee;--line:#cde0de;--mast1:#0f766e;--mast2:#0f828d;
+  --c-stock:#0f766e;--c-in:#15803d;--c-out:#c2410c;--c-mat:#1d4ed8;--c-rep:#7e22ce;--c-set:#475569;--s-in:#16a34a;--s-out:#f97316}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0d1819;--surface:#14262a;--sunk:#1a3237;--line:#2a4a50;--ink:#5eead4;--ink-soft:#13383a;--mast1:#115e59;--mast2:#155e75;--s-in:#4ade80;--s-out:#fb923c;--grid:#244046}}
+:root[data-theme="dark"]{--bg:#0d1819;--surface:#14262a;--sunk:#1a3237;--line:#2a4a50;--ink:#5eead4;--ink-soft:#13383a;--mast1:#115e59;--mast2:#155e75;--s-in:#4ade80;--s-out:#fb923c;--grid:#244046}
+body{background:linear-gradient(180deg,var(--ink-soft) 0,var(--bg) 360px) no-repeat,var(--bg);min-height:100vh}
+header.mast{background:var(--mast1);background:linear-gradient(115deg,var(--mast1) 0%,var(--mast2) 100%);border:0;border-radius:18px;padding:16px 22px;color:#fff;position:relative;overflow:hidden;box-shadow:0 8px 20px -10px rgba(0,0,0,.45)}
+header.mast::before{content:"";position:absolute;right:-50px;top:-70px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.10);pointer-events:none}
+header.mast::after{content:"";position:absolute;right:130px;bottom:-90px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.07);pointer-events:none}
+.mast .brand,.mast .mright{position:relative;z-index:1}
+.mast h1{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.2)}
+.mast .org{color:rgba(255,255,255,.95);font-weight:600;font-size:.95rem}
+.mast .logo{background:#fff;border-radius:50%;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.brandmark{width:60px;height:60px;flex:none;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:32px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.mast .logo:not([hidden])+.brandmark{display:none}
+@media (max-width:760px){.brandmark{width:46px;height:46px;font-size:24px}}
+.mast .stamp{color:#fff;border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.18);border-radius:999px;padding:4px 14px}
+.devcredit{color:rgba(255,255,255,.92)!important;margin-top:4px}.devcredit b{font-weight:600}
+nav.tabs{gap:8px;padding:2px 2px 8px}
+nav.tabs button{--tc:var(--ink);color:color-mix(in srgb,var(--tc) 70%,var(--fg));background:color-mix(in srgb,var(--tc) 11%,var(--surface));border:1.5px solid color-mix(in srgb,var(--tc) 38%,var(--surface));padding:9px 18px;transition:transform .12s,box-shadow .12s}
+nav.tabs button:hover{transform:translateY(-1px);box-shadow:0 5px 12px -6px color-mix(in srgb,var(--tc) 70%,transparent)}
+nav.tabs button[aria-selected="true"]{background:var(--tc);border-color:var(--tc);color:#fff;box-shadow:0 5px 14px -6px color-mix(in srgb,var(--tc) 80%,transparent)}
+nav.tabs button:nth-child(1){--tc:var(--c-stock)}nav.tabs button:nth-child(2){--tc:var(--c-in)}nav.tabs button:nth-child(3){--tc:var(--c-out)}
+nav.tabs button:nth-child(4){--tc:var(--c-mat)}nav.tabs button:nth-child(5){--tc:var(--c-rep)}nav.tabs button:nth-child(6){--tc:var(--c-set)}
+.kpi{border-top:4px solid var(--kc,var(--ink));box-shadow:0 4px 12px -8px rgba(0,0,0,.35)}
+.kpis .kpi:nth-child(2){--kc:var(--s-in);background:color-mix(in srgb,var(--s-in) 9%,var(--surface))}
+.kpis .kpi:nth-child(3){--kc:var(--s-out);background:color-mix(in srgb,var(--s-out) 9%,var(--surface))}
+.kpis .kpi:nth-child(4){--kc:var(--c-rep);background:color-mix(in srgb,var(--c-rep) 8%,var(--surface))}
+.kpis .kpi:nth-child(2) .v{color:color-mix(in srgb,var(--s-in) 70%,var(--fg))}
+.kpis .kpi:nth-child(3) .v{color:color-mix(in srgb,var(--s-out) 65%,var(--fg))}
+.kpis .kpi.alert{--kc:var(--bad);background:var(--bad-soft)}
+.kpi.hero{background:linear-gradient(135deg,var(--mast1),var(--mast2));border:0;color:#fff}
+.kpi.hero .k,.kpi.hero .d,.kpi.hero .v small{color:#fff;opacity:.92}
+.dcard{border-top:4px solid var(--dc,var(--ink));box-shadow:0 4px 12px -9px rgba(0,0,0,.35)}
+.dcard h3{color:color-mix(in srgb,var(--dc,var(--ink)) 78%,var(--fg))}
+.dash>.drow:nth-child(2)>.dcard:nth-child(1){--dc:var(--c-stock)}.dash>.drow:nth-child(2)>.dcard:nth-child(2){--dc:var(--c-mat)}
+.dash>.drow:nth-child(3)>.dcard:nth-child(1){--dc:var(--c-rep)}.dash>.drow:nth-child(3)>.dcard:nth-child(2){--dc:var(--c-out)}
+.hb .fill{background:linear-gradient(90deg,var(--c-stock),var(--c-mat))}
+#view-in{--cc:var(--c-in)}#view-out{--cc:var(--c-out)}#view-mat{--cc:var(--c-mat)}#view-report{--cc:var(--c-rep)}#view-set{--cc:var(--c-set)}
+.card{border-top:4px solid var(--cc,var(--ink));box-shadow:0 4px 12px -9px rgba(0,0,0,.35)}
+.cardhead h3,.sechead h3,legend{color:color-mix(in srgb,var(--cc,var(--ink)) 78%,var(--fg));border-left:5px solid var(--cc,var(--ink));padding-left:10px}
+.sechead h3{color:color-mix(in srgb,var(--ink) 78%,var(--fg));border-left-color:var(--ink)}
+.btn.primary{background:var(--cc,var(--mast1));border-color:var(--cc,var(--mast1));color:#fff}
+.btn:hover:not(:disabled){filter:brightness(1.07)}
+.btn.small:not(.danger):not(.primary){color:color-mix(in srgb,var(--cc,var(--ink)) 75%,var(--fg));border-color:color-mix(in srgb,var(--cc,var(--ink)) 40%,var(--line))}
+.seg .btn[aria-pressed="true"]{background:var(--cc,var(--mast1));border-color:var(--cc,var(--mast1));color:#fff}
+.tablebox{box-shadow:0 4px 12px -9px rgba(0,0,0,.35)}
+.tablebox th{background:color-mix(in srgb,var(--cc,var(--ink)) 15%,var(--surface));color:color-mix(in srgb,var(--cc,var(--ink)) 80%,var(--fg))}
+.tablebox tbody tr:nth-child(even):not(.open) td{background:color-mix(in srgb,var(--cc,var(--ink)) 4%,var(--surface))}
+.tablebox tbody tr:hover td{background:color-mix(in srgb,var(--cc,var(--ink)) 10%,var(--surface))}
+.no{color:color-mix(in srgb,var(--cc,var(--ink)) 80%,var(--fg))}
+.pill{box-shadow:inset 0 0 0 1px color-mix(in srgb,currentColor 25%,transparent)}
+.notice{border-left:5px solid var(--warn)}
+.foot{max-width:none}
+.credit{margin:10px 0 0;padding:10px 14px;border-radius:12px;text-align:center;font-size:.85rem;font-weight:600;color:#fff;background:linear-gradient(115deg,var(--mast1),var(--mast2))}
+@media print{.credit,header.mast::before,header.mast::after{display:none!important}}
+@media print{header.mast{background:#fff!important;color:#000!important;box-shadow:none!important;border-radius:0!important;border-bottom:2px solid #000!important;padding:0 0 8px!important}.mast h1,.mast .org{color:#000!important;text-shadow:none!important}.mast .logo,.brandmark{box-shadow:none!important}}
+</style>
+<style id="themeStyle"></style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <div class="brand"><img class="logo" id="mastLogo" alt="โลโก้หน่วยงาน" hidden><span class="brandmark" aria-hidden="true">🏥</span>
+    <div>
+      <div class="org" id="mastOrg">รพ.สต.บ้านอำปึล</div>
+      <h1>ระบบคุมวัสดุ</h1>
+      <div class="devcredit">พัฒนาโดย <b>นายกริชฎา ศรีวรรณชัย</b> · นักวิชาการสาธารณสุข</div>
+    </div></div>
+    <div class="mright"><span class="stamp" id="fyStamp">ปีงบประมาณ —</span></div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="stock">📦 วัสดุคงคลัง</button>
+    <button role="tab" aria-selected="false" data-tab="in">📥 รับเข้า</button>
+    <button role="tab" aria-selected="false" data-tab="out">📤 ใบเบิกวัสดุ</button>
+    <button role="tab" aria-selected="false" data-tab="mat">📋 ทะเบียนวัสดุ</button>
+    <button role="tab" aria-selected="false" data-tab="report">📊 รายงาน</button>
+    <button role="tab" aria-selected="false" data-tab="set">⚙️ ตั้งค่า / สำรองข้อมูล</button>
+  </nav>
+
+  <div class="notice" id="notice" hidden></div>
+
+  <!-- วัสดุคงคลัง -->
+  <section id="view-stock">
+    <div class="dash">
+      <div class="kpis">
+        <div class="kpi hero"><div class="k">มูลค่าวัสดุคงเหลือ</div><div class="v" id="kVal">0.00<small>บาท</small></div><div class="d" id="kValD">วัสดุในทะเบียน 0 รายการ</div></div>
+        <div class="kpi"><div class="k"><span class="mark" style="background:var(--s-in)"></span>รับเข้า ปีงบนี้</div><div class="v" id="kIn">0.00<small>บาท</small></div><div class="d" id="kInD">0 ใบรับ</div></div>
+        <div class="kpi"><div class="k"><span class="mark" style="background:var(--s-out)"></span>เบิกจ่าย ปีงบนี้</div><div class="v" id="kOut">0.00<small>บาท</small></div><div class="d" id="kOutD">0 ใบเบิก</div></div>
+        <div class="kpi" id="kOutBox"><div class="k" id="kOutK">วัสดุหมดคลัง</div><div class="v" id="kEmpty">0<small>รายการ</small></div><div class="d" id="kEmptyD">ทุกรายการมีของในคลัง</div></div>
+      </div>
+      <div class="drow">
+        <div class="dcard"><div class="dh"><h3 id="chTitle">มูลค่ารับเข้า-เบิกจ่ายรายเดือน</h3><div class="legend"><span style="--c:var(--s-in)">รับเข้า</span><span style="--c:var(--s-out)">เบิกจ่าย</span></div></div>
+          <div class="chart" id="chMonthly"></div><div class="vtip" id="vtip" hidden></div></div>
+        <div class="dcard"><div class="dh"><h3>มูลค่าคงเหลือสูงสุด</h3><span class="sub">บาท</span></div><div class="hbars" id="topVal"></div></div>
+      </div>
+      <div class="drow">
+        <div class="dcard"><div class="dh"><h3>ความเคลื่อนไหวล่าสุด</h3><span class="sub">คลิกเพื่อเปิดเอกสาร</span></div><ul class="feed" id="feed"></ul></div>
+        <div class="dcard"><div class="dh"><h3>วัสดุหมดคลัง</h3><span class="sub" id="outCnt"></span></div><ul class="outlist" id="outList"></ul></div>
+      </div>
+    </div>
+    <div class="sechead"><h3>วัสดุคงคลังทั้งหมด</h3><span class="sub" id="tCount"></span></div>
+    <div class="filters">
+      <input id="sQ" type="search" placeholder="ค้นหาชื่อวัสดุ">
+      <select id="sCat"><option value="">ทุกประเภทวัสดุ</option></select>
+      <select id="sState"><option value="">ทุกสถานะ</option><option value="out">หมดคลัง</option><option value="ok">มีในคลัง</option></select>
+    </div>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>รายการวัสดุ</th><th>หน่วย</th><th class="num">คงเหลือ</th><th class="num">ราคาเฉลี่ย/หน่วย</th><th class="num">มูลค่าคงเหลือ</th><th>สถานะ</th><th></th></tr></thead>
+        <tbody id="stockRows"></tbody>
+      </table>
+      <div class="empty" id="emptyStock" hidden></div>
+    </div>
+  </section>
+
+  <!-- รับเข้า -->
+  <section id="view-in" hidden>
+    <div class="stack">
+      <form class="card" id="inForm" autocomplete="off">
+        <div class="cardhead"><h3 id="inTitle">บันทึกรับวัสดุเข้าคลัง</h3><span class="sub">ราคาต่อหน่วยใช้คิดมูลค่าในบัญชีวัสดุ</span></div>
+        <fieldset><div class="grid">
+          <label class="f c3">เลขที่ใบรับ<input id="inNo" placeholder="001/2570"></label>
+          <label class="f c3">วันที่รับ <span class="req">*</span><input id="inDate" type="date" required></label>
+          <label class="f c3">ที่มา<select id="inSrc"></select></label>
+          <label class="f c3" id="inInspectLbl">วันที่ตรวจรับ <span class="req">*</span><input id="inInspect" type="date" required></label>
+          <label class="f c4" id="inPoLbl">เลขที่ใบสั่งซื้อ/สัญญา<input id="inPo" placeholder="เช่น 45/2570"></label>
+          <label class="f c4" id="inVendorLbl"><span id="inVendorTxt">ผู้ขาย / รับจาก</span> <span class="req" id="inVendorReq">*</span><input id="inVendor" required placeholder="ชื่อร้านค้า / หน่วยงาน"></label>
+          <label class="f c4">เลขที่ใบส่งของ/ใบกำกับ<input id="inInvoice"></label>
+          <label class="f c12">หมายเหตุ<input id="inNote" placeholder="เช่น โครงการซ่อมแซมถนนในตำบล"></label>
+        </div></fieldset>
+        <fieldset>
+          <legend>รายการวัสดุที่รับ</legend>
+          <div class="lines in" id="inLines"><div class="lnhead"><span>วัสดุ</span><span>จำนวน</span><span>ราคา/หน่วย (บาท)</span><span style="text-align:right">รวมเงิน</span><span></span></div></div>
+          <div class="repbar" style="margin:0"><button type="button" class="btn small" id="inAdd">+ เพิ่มรายการ</button><span class="sp"></span><div class="linesum">รวมทั้งสิ้น <span id="inSum">0.00</span> บาท</div></div>
+        </fieldset>
+        <div class="formbar">
+          <span class="msg" id="inMsg"></span>
+          <button type="button" class="btn danger" id="inDel" hidden>ลบใบรับนี้</button>
+          <button type="button" class="btn" id="inReset">ล้างฟอร์ม</button>
+          <button type="submit" class="btn primary" id="inSave">บันทึกรับเข้า</button>
+        </div>
+      </form>
+      <div class="card">
+        <div class="cardhead"><h3>ทะเบียนใบรับวัสดุ</h3>
+          <div class="filters" style="margin:0;flex:0 1 420px"><input id="inQ" type="search" placeholder="ค้นหา เลขที่ ผู้ขาย"><select id="inFy"></select></div></div>
+        <div class="tablebox"><table>
+          <thead><tr><th>เลขที่</th><th>วันที่รับ</th><th>ที่มา / ผู้ขาย</th><th>ใบสั่งซื้อ</th><th>รายการ</th><th class="num">มูลค่า (บาท)</th><th></th></tr></thead>
+          <tbody id="inRows"></tbody></table>
+          <div class="empty" id="emptyIn" hidden></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ใบเบิก -->
+  <section id="view-out" hidden>
+    <div class="stack">
+      <form class="card" id="outForm" autocomplete="off">
+        <div class="cardhead"><h3 id="outTitle">ออกใบเบิกวัสดุ</h3><span class="sub">บันทึกแล้วตัดยอดคงเหลือทันที และพิมพ์ใบเบิกได้จากปุ่ม “พิมพ์”</span></div>
+        <fieldset><div class="grid">
+          <label class="f c3">เลขที่ใบเบิก<input id="outNo" placeholder="001/2570"></label>
+          <label class="f c3">วันที่เบิก <span class="req">*</span><input id="outDate" type="date" required></label>
+          <label class="f c6">ผู้เบิก <span class="req">*</span><input id="outReq" required list="peopleList" placeholder="ชื่อ-สกุล"></label>
+          <label class="f c4">ตำแหน่ง<input id="outPos" list="posList"></label>
+          <label class="f c8">เพื่อใช้ในงาน <span class="req">*</span><input id="outPurpose" required placeholder="เช่น ซ่อมแซมถนนลาดยาง หมู่ 3 ตามคำร้องเลขรับ 012/2570"></label>
+          <label class="f c12">หมายเหตุ<input id="outNote"></label>
+        </div></fieldset>
+        <datalist id="peopleList"></datalist><datalist id="posList"></datalist>
+        <fieldset>
+          <legend>รายการวัสดุที่เบิก</legend>
+          <div class="lines out" id="outLines"><div class="lnhead"><span>วัสดุ</span><span>จำนวน</span><span>คงเหลือในคลัง</span><span></span></div></div>
+          <button type="button" class="btn small" id="outAdd">+ เพิ่มรายการ</button>
+        </fieldset>
+        <div class="formbar">
+          <span class="msg" id="outMsg"></span>
+          <button type="button" class="btn danger" id="outDel" hidden>ลบใบเบิกนี้ (คืนคลัง)</button>
+          <button type="button" class="btn" id="outReset">ล้างฟอร์ม</button>
+          <button type="submit" class="btn" data-print="0">บันทึก</button>
+          <button type="submit" class="btn primary" data-print="1">บันทึกและพิมพ์ใบเบิก</button>
+        </div>
+      </form>
+      <div class="card">
+        <div class="cardhead"><h3>ทะเบียนใบเบิกวัสดุ</h3>
+          <div class="filters" style="margin:0;flex:0 1 420px"><input id="outQ" type="search" placeholder="ค้นหา เลขที่ ผู้เบิก งาน"><select id="outFy"></select></div></div>
+        <div class="tablebox"><table>
+          <thead><tr><th>เลขที่</th><th>วันที่</th><th>ผู้เบิก</th><th>เพื่อใช้ในงาน</th><th>รายการ</th><th class="num">มูลค่า (บาท)</th><th></th></tr></thead>
+          <tbody id="outRows"></tbody></table>
+          <div class="empty" id="emptyOut" hidden></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ทะเบียนวัสดุ -->
+  <section id="view-mat" hidden>
+    <div class="stack">
+      <form class="card" id="matForm" autocomplete="off">
+        <div class="cardhead"><h3 id="matTitle">เพิ่มวัสดุเข้าทะเบียน</h3></div>
+        <div class="grid">
+          <label class="f c8">ชื่อวัสดุ <span class="req">*</span><input id="mName" required placeholder="เช่น ยางมะตอยสำเร็จรูป (ถุง 20 กก.)"></label>
+          <label class="f c4">ประเภทวัสดุ<input id="mCat" list="catList" placeholder="เลือกจากรายการ หรือพิมพ์เอง"></label><datalist id="catList"></datalist>
+          <label class="f c4">หน่วยนับ <span class="req">*</span><input id="mUnit" required list="unitList" placeholder="ถุง"></label>
+          <label class="f c8">หมายเหตุ / ขนาด / ยี่ห้อ<input id="mNote"></label>
+        </div>
+        <datalist id="unitList"><option value="ถุง"><option value="กระสอบ"><option value="ถัง"><option value="ลิตร"><option value="กิโลกรัม"><option value="ตัน"><option value="คิว"><option value="ท่อน"><option value="เส้น"><option value="แผ่น"><option value="ม้วน"><option value="หลอด"><option value="ชุด"><option value="อัน"><option value="ตัว"><option value="เมตร"></datalist>
+        <div class="formbar" style="margin-top:14px">
+          <span class="msg" id="mMsg"></span>
+          <button type="button" class="btn danger" id="mDel" hidden>ลบวัสดุนี้</button>
+          <button type="button" class="btn" id="mReset">ล้างฟอร์ม</button>
+          <button type="submit" class="btn primary">บันทึกวัสดุ</button>
+        </div>
+      </form>
+      <div class="tablebox"><table>
+        <thead><tr><th>ชื่อวัสดุ</th><th>ประเภท</th><th>หน่วย</th><th></th></tr></thead>
+        <tbody id="matRows"></tbody></table>
+        <div class="empty" id="emptyMat" hidden></div></div>
+    </div>
+  </section>
+
+  <!-- รายงาน -->
+  <section id="view-report" hidden>
+    <div class="repbar">
+      <div class="seg" role="group" aria-label="รายงาน">
+        <button class="btn" data-rk="sum" aria-pressed="true">สรุปรับ-จ่าย-คงเหลือ</button>
+        <button class="btn" data-rk="card" aria-pressed="false">บัญชีวัสดุ (รายตัว)</button>
+      </div>
+    </div>
+    <div class="repbar">
+      <label for="rFy" class="sub">ปีงบประมาณ</label><select id="rFy"></select>
+      <label for="rMonth" class="sub" id="rMonthLbl">ช่วง</label><select id="rMonth"></select>
+      <label for="rMat" class="sub" id="rMatLbl" hidden>วัสดุ</label><select id="rMat" hidden></select>
+      <span class="sp"></span>
+      <button class="btn" id="btnPrintRep">พิมพ์รายงาน</button>
+      <button class="btn primary" id="btnXlsx">ส่งออก Excel</button>
+    </div>
+    <div id="rep"></div>
+  </section>
+
+  <!-- ตั้งค่า -->
+  <section id="view-set" hidden>
+    <div class="stack">
+      <form class="card" id="setForm" autocomplete="off">
+        <div class="cardhead"><h3>หน่วยงานและผู้ลงนาม</h3><span class="sub">ใช้กับหัวหน้าเว็บ หัวใบเบิก หัวรายงาน Excel และช่องลงชื่อในใบเบิก (ผู้ลงนามเว้นว่างได้)</span></div>
+        <div class="grid">
+          <label class="f c6">กลุ่มงาน / ฝ่าย<input id="gDiv" list="divList" placeholder="เช่น งานบริหารทั่วไป (เว้นว่างได้)"></label>
+          <label class="f c6">งาน<input id="gWork" list="workList" placeholder="เช่น งานพัสดุ (เว้นว่างได้)"></label>
+          <datalist id="workList"><option value="งานพัสดุ"><option value="งานการเงินและบัญชี"><option value="งานก่อสร้าง"><option value="งานออกแบบและควบคุมอาคาร"><option value="งานประสานสาธารณูปโภค"><option value="งานธุรการ"></datalist>
+          <label class="f c12">ชื่อหน่วยงาน <span class="req">*</span><input id="gOrg" required placeholder="เช่น รพ.สต.บ้านอำปึล ตำบล... อำเภอ... จังหวัด..."></label>
+          <datalist id="divList"><option value="งานบริหารทั่วไป"><option value="งานส่งเสริมสุขภาพ"><option value="งานเวชปฏิบัติ"><option value="งานเภสัชกรรม"><option value="งานสาธารณสุขมูลฐาน"></datalist>
+          <label class="f c6">ผู้อนุมัติ<input id="gAppr"></label>
+          <label class="f c6">ตำแหน่งผู้อนุมัติ<select id="gApprPos"></select><input id="gApprPosX" placeholder="พิมพ์ตำแหน่งผู้อนุมัติ" hidden></label>
+          <label class="f c6">ผู้จ่ายของ<input id="gPayer"></label>
+          <label class="f c6">ตำแหน่งผู้จ่ายของ<input id="gPayerPos" placeholder="พิมพ์ตำแหน่ง เช่น เจ้าพนักงานพัสดุ"></label>
+        </div>
+        <fieldset style="margin:16px 0 0"><legend>สีของระบบ</legend>
+          <div class="swatches" id="swatches"></div>
+          <div class="rowact" style="margin-top:10px;align-items:center"><label class="sub" for="themeCustom" style="display:flex;align-items:center;gap:8px">เลือกสีเอง <input type="color" id="themeCustom" value="#0f766e" style="width:44px;height:32px;padding:2px;cursor:pointer"></label><button type="button" class="btn small" id="themeReset">กลับเป็นสีเริ่มต้น</button></div>
+          <p class="sub" style="margin:8px 0 0">เลือกแล้วบันทึกทันที ถ้าสีอ่อนเกินไป ระบบจะปรับให้เข้มขึ้นเล็กน้อยเพื่อให้ตัวหนังสือบนแถบสีอ่านง่าย</p>
+        </fieldset>
+        <fieldset style="margin:16px 0 0"><legend>โลโก้หน่วยงาน</legend>
+          <div class="logobox">
+            <div class="logoprev" id="logoPrev">ยังไม่มีโลโก้</div>
+            <div style="display:grid;gap:8px;min-width:0">
+              <div class="rowact"><label class="btn" for="logoFile" style="cursor:pointer">เลือกรูปโลโก้…</label><button type="button" class="btn danger" id="logoDel" hidden>ลบโลโก้</button></div>
+              <span class="sub">ไฟล์ PNG หรือ JPG ใช้รูปพื้นใสจะสวยที่สุด ระบบย่อขนาดให้อัตโนมัติ เลือกแล้วบันทึกทันที</span>
+            </div>
+            <input id="logoFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+          </div>
+        </fieldset>
+        <div class="formbar" style="margin-top:14px"><span class="msg" id="gMsg"></span><button type="submit" class="btn primary">บันทึกการตั้งค่า</button></div>
+      </form>
+      <div class="card">
+        <div class="cardhead"><h3>สำรองและกู้คืนข้อมูล</h3></div>
+        <p class="hint"><b>ข้อมูลเก็บอยู่ใน Google Sheet ของหน่วยงาน</b> ทุกเครื่องที่เปิดไฟล์นี้ด้วยลิงก์เดียวกันจะเห็นข้อมูลชุดเดียวกัน (รีเฟรชอัตโนมัติทุก 1 นาที) ไฟล์สำรองยังดาวน์โหลดเก็บไว้ได้เพื่อความปลอดภัย การกู้คืนจะเขียนทับรายการเดียวกัน และไม่ลบรายการที่มีอยู่แล้ว <span id="lastBackup"></span></p>
+        <div class="repbar" style="margin:0">
+          <button class="btn primary" id="btnBackup">ดาวน์โหลดไฟล์สำรอง</button>
+          <label class="btn" for="restoreFile" style="cursor:pointer">เลือกไฟล์สำรองเพื่อกู้คืน…</label>
+          <input id="restoreFile" type="file" accept=".json,application/json" hidden>
+          <button class="btn danger" id="btnRestore" hidden>กู้คืนข้อมูล</button>
+          <span class="sub" id="restoreMsg"></span>
+          <button class="btn danger" id="btnWipe" style="margin-left:auto">ล้างแคชในเครื่องนี้</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">มูลค่าคงเหลือคิดแบบราคาเฉลี่ยถ่วงน้ำหนัก (เฉลี่ยใหม่ทุกครั้งที่รับเข้า) ปีงบประมาณเริ่ม 1 ตุลาคม · ยอดยกมาครั้งแรกให้บันทึกที่ “รับเข้า” โดยเลือกที่มาเป็น “ยอดยกมา”</p>
+  <p class="credit">🏥 ระบบคุมวัสดุ รพ.สต.บ้านอำปึล · พัฒนาโดย นายกริชฎา ศรีวรรณชัย นักวิชาการสาธารณสุข</p>
+</div>
+<div class="modal" id="printModal" hidden role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+  <div class="bar"><h3 id="pmTitle">ใบเบิกวัสดุ</h3>
+    <button class="btn primary" id="pmPdf">พิมพ์ใบเบิก</button>
+    <button class="btn" id="pmWord">แก้ไขก่อนพิมพ์ (Word)</button>
+    <button class="btn" id="pmClose">ปิด</button></div>
+  <div class="scroll"><div class="paper" id="paper"></div></div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ---- MiniZip: store-only ZIP writer (แทน JSZip, ไม่ต้องใช้อินเทอร์เน็ต) ---- */
+(function(){
+const T=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;T[n]=c>>>0}
+const crc=b=>{let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=T[(c^b[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0};
+const enc=new TextEncoder();
+class MiniZip{
+  constructor(){this.f=[]}
+  file(n,d){this.f.push([n,typeof d==='string'?enc.encode(d):d]);return this}
+  generate(){
+    const parts=[],cen=[];let off=0;const d=new Date();
+    const time=(d.getHours()<<11)|(d.getMinutes()<<5)|(d.getSeconds()>>1),date=((d.getFullYear()-1980)<<9)|((d.getMonth()+1)<<5)|d.getDate();
+    for(const [n,data] of this.f){
+      const nb=enc.encode(n),c=crc(data),h=new DataView(new ArrayBuffer(30));
+      h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint16(6,0x0800,true);h.setUint16(8,0,true);h.setUint16(10,time,true);h.setUint16(12,date,true);
+      h.setUint32(14,c,true);h.setUint32(18,data.length,true);h.setUint32(22,data.length,true);h.setUint16(26,nb.length,true);h.setUint16(28,0,true);
+      parts.push(new Uint8Array(h.buffer),nb,data);
+      const ch=new DataView(new ArrayBuffer(46));
+      ch.setUint32(0,0x02014b50,true);ch.setUint16(4,20,true);ch.setUint16(6,20,true);ch.setUint16(8,0x0800,true);ch.setUint16(10,0,true);ch.setUint16(12,time,true);ch.setUint16(14,date,true);
+      ch.setUint32(16,c,true);ch.setUint32(20,data.length,true);ch.setUint32(24,data.length,true);ch.setUint16(28,nb.length,true);ch.setUint32(42,off,true);
+      cen.push(new Uint8Array(ch.buffer),nb);off+=30+nb.length+data.length;
+    }
+    const cs=cen.reduce((s,a)=>s+a.length,0),e=new DataView(new ArrayBuffer(22));
+    e.setUint32(0,0x06054b50,true);e.setUint16(8,this.f.length,true);e.setUint16(10,this.f.length,true);e.setUint32(12,cs,true);e.setUint32(16,off,true);
+    const all=[...parts,...cen,new Uint8Array(e.buffer)],out=new Uint8Array(all.reduce((s,a)=>s+a.length,0));let p=0;all.forEach(a=>{out.set(a,p);p+=a.length});return out;
+  }
+  async generateAsync(o){return new Blob([this.generate()],{type:o?.mimeType||'application/zip'})}
+}
+window.JSZip=MiniZip;
+
+/* ---- MiniXLSX: เขียนไฟล์ Excel (.xlsx) แบบพื้นฐาน ---- */
+const x=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const colName=i=>{let s='';i++;while(i>0){const m=(i-1)%26;s=String.fromCharCode(65+m)+s;i=(i-1-m)/26}return s};
+const MAIN='http://schemas.openxmlformats.org/spreadsheetml/2006/main',REL='http://schemas.openxmlformats.org/officeDocument/2006/relationships',PR='http://schemas.openxmlformats.org/package/2006/relationships';
+window.XLSX={
+  utils:{book_new:()=>({sheets:[]}),aoa_to_sheet:aoa=>({aoa}),book_append_sheet:(wb,ws,name)=>{ws.name=name;wb.sheets.push(ws)}},
+  write(wb){
+    const z=new MiniZip(),S=wb.sheets;
+    z.file('[Content_Types].xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${S.map((s,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}</Types>`);
+    z.file('_rels/.rels',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="${PR}"><Relationship Id="rId1" Type="${REL}/officeDocument" Target="xl/workbook.xml"/></Relationships>`);
+    z.file('xl/workbook.xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="${MAIN}" xmlns:r="${REL}"><sheets>${S.map((s,i)=>`<sheet name="${x(s.name||'Sheet'+(i+1))}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('')}</sheets></workbook>`);
+    z.file('xl/_rels/workbook.xml.rels',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="${PR}">${S.map((s,i)=>`<Relationship Id="rId${i+1}" Type="${REL}/worksheet" Target="worksheets/sheet${i+1}.xml"/>`).join('')}<Relationship Id="rId${S.length+1}" Type="${REL}/styles" Target="styles.xml"/></Relationships>`);
+    z.file('xl/styles.xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="${MAIN}"><fonts count="2"><font><sz val="16"/><name val="TH SarabunPSK"/></font><font><b/><sz val="16"/><name val="TH SarabunPSK"/></font></fonts><fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="4"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="3" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="4" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`);
+    S.forEach((s,i)=>{
+      const cols=(s['!cols']||[]).map((c,j)=>`<col min="${j+1}" max="${j+1}" width="${(c&&c.wch)||10}" customWidth="1"/>`).join('');
+      const rows=(s.aoa||[]).map((row,r)=>`<row r="${r+1}">${(row||[]).map((v,c)=>{
+        if(v===''||v==null)return '';const ref=colName(c)+(r+1);
+        if(typeof v==='number'&&isFinite(v))return `<c r="${ref}" s="${Number.isInteger(v)?1:2}"><v>${v}</v></c>`;
+        return `<c r="${ref}" t="inlineStr"${r===0?' s="3"':''}><is><t xml:space="preserve">${x(v)}</t></is></c>`}).join('')}</row>`).join('');
+      z.file(`xl/worksheets/sheet${i+1}.xml`,`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="${MAIN}">${cols?`<cols>${cols}</cols>`:''}<sheetData>${rows}</sheetData></worksheet>`);
+    });
+    return z.generate();
+  }
+};
+
+/* ---- ฐานข้อมูล Google Sheets (ผ่าน Google Apps Script) ---- */
+const SHEET_API_URL='';   // วาง Web App URL ตรงนี้ได้เลย หรือเว้นว่างไว้ ระบบจะถามตอนเปิดครั้งแรกแล้วจำไว้ในเครื่อง
+const KEY='kumwatsadu-sheets-v1',OLD_KEY='kumwatsadu-db-v1',POLL_MS=60000,CHUNK=100;
+const ls={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}},del:k=>{try{localStorage.removeItem(k)}catch(e){}}};
+let store={materials:{},moves:{},settings:{}},loaded=false,seq=0,pending=0,started=false,statusCb=null,offlineShown=false;
+const subs=[];
+const clone=v=>JSON.parse(JSON.stringify(v));
+const snapColl=c=>{const o=store[c]||{},docs=Object.keys(o).map(id=>({id,exists:true,data:()=>o[id]}));return{docs,size:docs.length,empty:!docs.length}};
+const snapDoc=(c,id)=>{const v=(store[c]||{})[id];return{id,exists:!!v,data:()=>v}};
+const notify=c=>subs.forEach(s=>{if(s.c===c)s.cb(s.id?snapDoc(c,s.id):snapColl(c))});
+const notifyAll=()=>['materials','moves','settings'].forEach(notify);
+const gen=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,10);
+const status=m=>{if(statusCb)statusCb(m)};
+function getUrl(){
+  let u=SHEET_API_URL||ls.get(KEY+':url')||'';
+  if(!u){u=(prompt('วางลิงก์ Web App ของ Google Apps Script\n(ขึ้นต้นด้วย https://script.google.com/macros/s/…/exec)')||'').trim();
+    if(/^https:\/\/script\.google\.com\//.test(u))ls.set(KEY+':url',u);else u=''}
+  return u;
+}
+async function api(payload,retry){
+  const url=getUrl();if(!url)throw{code:'no_url'};
+  let j;
+  try{
+    const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({...payload,pass:ls.get(KEY+':pass')||''})});
+    j=await r.json();
+  }catch(e){throw{code:'network',message:String(e)}}
+  if(j&&j.error){
+    if(j.error==='unauthorized'){
+      ls.del(KEY+':pass');
+      if(!retry){const p=prompt('ใส่รหัสผ่านฐานข้อมูล (ตั้งไว้ในไฟล์ Code.gs)');if(p!==null&&p!==''){ls.set(KEY+':pass',p);return api(payload,true)}}
+    }
+    throw{code:j.error,message:j.message};
+  }
+  return j;
+}
+/* ย้ายข้อมูลเดิมที่เคยเก็บในเบราว์เซอร์ (ถ้ามี) ขึ้น Google Sheet ครั้งแรก */
+async function maybeMigrate(){
+  try{
+    if(Object.keys(store.materials).length||Object.keys(store.moves).length)return;
+    if(ls.get(KEY+':migrated'))return;
+    const old=JSON.parse(ls.get(OLD_KEY)||'null');if(!old)return;
+    const ops=[];
+    Object.keys(old.materials||{}).forEach(id=>ops.push({op:'set',c:'materials',id,data:old.materials[id]}));
+    Object.keys(old.moves||{}).forEach(id=>ops.push({op:'set',c:'moves',id,data:old.moves[id]}));
+    if(old.settings&&old.settings.main)ops.push({op:'set',c:'settings',id:'main',data:old.settings.main});
+    if(!ops.length)return;
+    if(!confirm('พบข้อมูลเดิมในเครื่องนี้ '+ops.length+' รายการ\nต้องการย้ายขึ้น Google Sheet ตอนนี้หรือไม่?'))return;
+    await write(ops);ls.set(KEY+':migrated','1');
+  }catch(e){}
+}
+async function sync(){
+  if(pending)return;const my=seq;
+  try{
+    const j=await api({action:'list'});
+    if(pending||my!==seq)return;
+    store={materials:j.materials||{},moves:j.moves||{},settings:j.settings||{}};
+    ls.set(KEY,JSON.stringify(store));
+    const first=!loaded;loaded=true;offlineShown=false;
+    notifyAll();
+    if(first){await maybeMigrate();notifyAll()}
+  }catch(e){
+    if(!loaded){
+      let c=null;try{c=JSON.parse(ls.get(KEY)||'null')}catch(_){}
+      if(c){store={materials:c.materials||{},moves:c.moves||{},settings:c.settings||{}};loaded=true;notifyAll()}
+    }
+    if(!offlineShown||!loaded){offlineShown=true;status(e.code==='unauthorized'?'รหัสผ่านไม่ถูกต้อง รีเฟรชหน้าแล้วใส่รหัสใหม่':e.code==='no_url'?'ยังไม่ได้ตั้งลิงก์ Google Sheet':'เชื่อมต่อ Google Sheet ไม่ได้'+(loaded?' (กำลังแสดงข้อมูลที่เก็บไว้ล่าสุด ยังบันทึกไม่ได้)':' ตรวจอินเทอร์เน็ตแล้วรีเฟรชหน้า'))}
+  }
+}
+/* เขียนหลายรายการ: อัปเดตหน้าจอทันที แล้วส่งไป Sheet ถ้าล้มเหลวจะย้อนกลับ */
+async function write(ops){
+  const prevs=ops.map(o=>{const m=store[o.c]=store[o.c]||{};return{c:o.c,id:o.id,had:o.id in m,v:m[o.id]}});
+  ops.forEach(o=>{if(o.op==='delete')delete store[o.c][o.id];else store[o.c][o.id]=clone(o.data)});
+  seq++;pending++;
+  const cs=[...new Set(ops.map(o=>o.c))];cs.forEach(notify);
+  try{
+    for(let i=0;i<ops.length;i+=CHUNK)await api({action:'write',ops:ops.slice(i,i+CHUNK)});
+    ls.set(KEY,JSON.stringify(store));
+  }catch(e){
+    for(let i=prevs.length-1;i>=0;i--){const p=prevs[i];if(p.had)store[p.c][p.id]=p.v;else delete store[p.c][p.id]}
+    cs.forEach(notify);
+    throw e;
+  }finally{pending--;seq++}
+}
+function docRef(c,id){return{id,
+  async set(data){await write([{op:'set',c,id,data}])},
+  async delete(){if(!store[c]||!(id in store[c]))return;await write([{op:'delete',c,id}])},
+  onSnapshot(cb){const s={c,id,cb};subs.push(s);if(loaded)setTimeout(()=>cb(snapDoc(c,id)));return()=>subs.splice(subs.indexOf(s),1)}}}
+window.localDb={
+  available:()=>{
+    if(!getUrl())return false;
+    if(!started){started=true;sync();setInterval(()=>{if(!document.hidden)sync()},POLL_MS);document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync()})}
+    return true;
+  },
+  onStatus(cb){statusCb=cb},
+  bulk:ops=>write(ops.map(o=>({op:'set',c:o.c,id:o.id,data:o.data}))),
+  collection(c){return{doc:id=>docRef(c,id||gen()),onSnapshot(cb){const s={c,cb};subs.push(s);if(loaded)setTimeout(()=>cb(snapColl(c)));return()=>subs.splice(subs.indexOf(s),1)}}},
+  doc(p){const [c,id]=p.split('/');return docRef(c,id)},
+  meta(k,v){const mk=KEY+':'+k;if(v===undefined)return ls.get(mk);ls.set(mk,v)}
+};
+})();
+</script>
+<script>
+(function(){
+const CATS=['วัสดุก่อสร้าง','วัสดุไฟฟ้าและวิทยุ','วัสดุประปา','วัสดุยานพาหนะและขนส่ง','วัสดุเชื้อเพลิงและหล่อลื่น','วัสดุสำนักงาน','วัสดุงานบ้านงานครัว','วัสดุการเกษตร','วัสดุวิทยาศาสตร์หรือการแพทย์','วัสดุเครื่องแต่งกาย','วัสดุคอมพิวเตอร์','วัสดุการศึกษา','วัสดุอื่น'];
+const allCats=()=>[...new Set([...CATS,...materials.map(m=>m.cat).filter(Boolean)])];
+function refreshCats(){const v=$('sCat').value;fillSelect($('sCat'),allCats().map(c=>[c,c]),true);$('sCat').value=[...$('sCat').options].some(o=>o.value===v)?v:'';$('catList').innerHTML=allCats().map(c=>`<option value="${esc(c)}">`).join('')}
+const SRC={purchase:'จัดซื้อ/จัดจ้าง',opening:'ยอดยกมา',transfer:'รับโอน/บริจาค',other:'อื่น ๆ'};
+const TH_M=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const TH_MF=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const DEF_SET={div:'',org:'รพ.สต.บ้านอำปึล',appr:'',apprPos:'ผู้อำนวยการ รพ.สต.บ้านอำปึล',payer:'',payerPos:''};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad2=n=>String(n).padStart(2,'0');
+const todayISO=()=>{const d=new Date();return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate())};
+const fyOf=iso=>{if(!iso)return 0;const y=+iso.slice(0,4)+543,m=+iso.slice(5,7);return m>=10?y+1:y};
+const fyRange=fy=>[(fy-544)+'-10-01',(fy-543)+'-09-30'];
+const thDate=iso=>{if(!iso)return '';const[y,m,d]=iso.split('-');return (+d)+' '+TH_M[+m-1]+' '+String(+y+543).slice(2)};
+const thDateFull=iso=>{if(!iso)return '';const[y,m,d]=iso.split('-');return (+d)+' '+TH_MF[+m-1]+' '+(+y+543)};
+const r2=n=>Math.round((+n||0)*100)/100;
+const fmtQ=n=>(+n||0).toLocaleString('th-TH',{maximumFractionDigits:2});
+const fmtB=n=>(+n||0).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
+const CUR_FY=fyOf(todayISO());
+const fmtNo=(seq,fy)=>String(seq).padStart(3,'0')+'/'+fy;
+
+let db=null,canWrite=true,materials=[],moves=[],settings={...DEF_SET};
+const THEMES=[['#0f766e','เขียวมรกต (เริ่มต้น)'],['#1d4e7a','น้ำเงิน'],['#2f6b3f','เขียว'],['#5b3f8c','ม่วง'],['#8a2f3b','แดงเลือดหมู'],['#8a5a1c','น้ำตาลทอง'],['#37424d','เทาเข้ม']];
+const hex2rgb=h=>{h=h.replace('#','');return [0,2,4].map(i=>parseInt(h.substr(i,2),16))};
+const rgb2hex=a=>'#'+a.map(v=>Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,'0')).join('');
+const cmix=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
+const clum=a=>{const c=a.map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]};
+function applyTheme(h){const st=$('themeStyle');
+  if(!h||!/^#[0-9a-f]{6}$/i.test(h)){st.textContent='';return}
+  let a=hex2rgb(h),k=0;while(1.05/(clum(a)+.05)<4.5&&k<30){a=cmix(a,[0,0,0],.08);k++}
+  const W=[255,255,255],D=[16,22,28],L=`--ink:${rgb2hex(a)};--ink-soft:${rgb2hex(cmix(a,W,.86))};--mast1:${rgb2hex(a)};--mast2:${rgb2hex(cmix(a,[14,165,233],.22))};`,K=`--ink:${rgb2hex(cmix(a,W,.5))};--ink-soft:${rgb2hex(cmix(a,D,.7))};--mast1:${rgb2hex(cmix(a,D,.4))};--mast2:${rgb2hex(cmix(cmix(a,D,.4),[14,116,144],.35))};`;
+  st.textContent=`@media screen{:root{${L}}}@media screen and (prefers-color-scheme: dark){:root:not([data-theme="light"]){${K}}}@media screen{:root[data-theme="dark"]{${K}}}`}
+function renderSwatches(){const cur=(settings.theme||THEMES[0][0]).toLowerCase();
+  $('swatches').innerHTML=THEMES.map(([c,n])=>`<button type="button" class="sw" data-theme-c="${c}" aria-pressed="${c===cur}" style="--c:${c}"><i></i>${n}</button>`).join('')+(THEMES.some(t=>t[0]===cur)?'':`<button type="button" class="sw" aria-pressed="true" style="--c:${esc(cur)}"><i></i>สีที่เลือกเอง</button>`);
+  $('themeCustom').value=cur}
+const fullOrg=()=>[settings.work,settings.div,settings.org].filter(Boolean).join(' ');
+function applySet(raw){raw=raw||{};const d={...DEF_SET,...raw};if(!('div' in raw)&&raw.org){const m=String(raw.org).match(/^((?:กอง|สำนัก)\S*)\s+(.+)$/);if(m){d.div=m[1];d.org=m[2]}else d.div=''}settings=d;applyTheme(d.theme);renderSwatches();$('mastOrg').textContent=[d.work,d.div,d.org].filter(Boolean).join(' · ');const lg=$('mastLogo');if(d.logo){lg.src=d.logo;lg.hidden=false}else{lg.hidden=true;lg.removeAttribute('src')}renderLogo()}
+function renderLogo(){const p=$('logoPrev');p.innerHTML=settings.logo?'<img alt="โลโก้หน่วยงาน">':'ยังไม่มีโลโก้';if(settings.logo)p.firstChild.src=settings.logo;$('logoDel').hidden=!settings.logo}
+let L=new Map(); // ledger cache: mid -> rows
+let editIn=null,editOut=null,editMat=null,armed=null,repKind='sum',restoreData=null;
+
+function toast(t){const el=$('toast');el.textContent=t;el.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>el.hidden=true,3000)}
+function notice(t){$('notice').textContent=t||'';$('notice').hidden=!t}
+function msg(id,t,err){const el=$(id);el.textContent=t||'';el.classList.toggle('err',!!err)}
+function confirmClick(key,btn,label){if(armed===key){armed=null;return true}armed=key;const old=btn.textContent;btn.textContent=label||'กดอีกครั้งเพื่อยืนยัน';setTimeout(()=>{if(armed===key){armed=null}btn.textContent=old},4000);return false}
+function fillSelect(sel,opts,keepFirst){const first=keepFirst?sel.querySelector('option'):null;sel.innerHTML='';if(first)sel.appendChild(first);opts.forEach(([v,l])=>{const o=document.createElement('option');o.value=v;o.textContent=l;sel.appendChild(o)})}
+function errText(err){const c=err?.code;if(c==='invalid_argument'){canWrite=false;return 'บัญชีนี้ดูได้อย่างเดียว ไม่มีสิทธิ์บันทึก'}if(c==='quota_exceeded')return 'พื้นที่ฐานข้อมูลเต็ม ดาวน์โหลดไฟล์สำรองเก็บไว้ แล้วลบรายการเก่าที่ไม่ใช้';if(c==='network')return 'เชื่อมต่อ Google Sheet ไม่ได้ ตรวจอินเทอร์เน็ตแล้วลองอีกครั้ง';if(c==='unauthorized')return 'รหัสผ่านไม่ถูกต้อง รีเฟรชหน้าแล้วใส่รหัสใหม่';if(c==='too_large')return 'ข้อมูลรายการนี้ใหญ่เกินไป (เซลล์ Google Sheet จำกัด 50,000 ตัวอักษร)';return 'บันทึกไม่สำเร็จ ('+(c||'error')+') ลองอีกครั้ง'}
+
+/* ---------- ledger (moving weighted average) ---------- */
+const matById=id=>materials.find(m=>m.id===id);
+const kindOrder=k=>k==='in'?0:1;
+const mvSort=(a,b)=>(a.date||'').localeCompare(b.date||'')||kindOrder(a.kind)-kindOrder(b.kind)||(+a.seq||0)-(+b.seq||0)||(a.createdAt||'').localeCompare(b.createdAt||'');
+function rebuildLedgers(){
+  L=new Map();materials.forEach(m=>L.set(m.id,[]));
+  const sorted=moves.slice().sort(mvSort);
+  const run={};
+  sorted.forEach(mv=>(mv.lines||[]).forEach(l=>{
+    if(!L.has(l.mid))return;
+    const s=run[l.mid]||(run[l.mid]={q:0,v:0});const qty=+l.qty||0;
+    let row={mv,date:mv.date,inQ:0,inV:0,outQ:0,outV:0,price:0};
+    if(mv.kind==='in'){row.inQ=qty;row.price=+l.price||0;row.inV=r2(qty*row.price);s.q+=qty;s.v=r2(s.v+row.inV)}
+    else{row.price=s.q>0?s.v/s.q:0;row.outQ=qty;row.outV=qty>=s.q?s.v:r2(qty*row.price);s.q=r2(s.q-qty);s.v=r2(s.v-row.outV);if(s.q<=0)s.v=s.q<0?s.v:0}
+    row.balQ=s.q;row.balV=s.v;L.get(l.mid).push(row);
+  }));
+}
+function stateBefore(mid,iso){const rows=L.get(mid)||[];let s={q:0,v:0};for(const r of rows){if(r.date<iso)s={q:r.balQ,v:r.balV};else break}return s}
+function stateUpto(mid,iso){const rows=L.get(mid)||[];let s={q:0,v:0};for(const r of rows){if(r.date<=iso)s={q:r.balQ,v:r.balV};else break}return s}
+function current(mid){const rows=L.get(mid)||[];const r=rows[rows.length-1];return r?{q:r.balQ,v:r.balV}:{q:0,v:0}}
+function stockState(m,q){if(q<=0)return['st-out','หมด'];return['st-ok','มีในคลัง']}
+const matSort=(a,b)=>a.name.localeCompare(b.name,'th');
+const matLabel=m=>m.name;
+const linesText=mv=>(mv.lines||[]).map(l=>{const m=matById(l.mid);return (m?m.name:'(วัสดุถูกลบ)')+' '+fmtQ(l.qty)+' '+(m?.unit||'')}).join(', ');
+function moveValue(mv){
+  if(mv.kind==='in')return (mv.lines||[]).reduce((s,l)=>s+r2((+l.qty||0)*(+l.price||0)),0);
+  let v=0;(mv.lines||[]).forEach(l=>{const r=(L.get(l.mid)||[]).find(x=>x.mv===mv);if(r)v+=r.outV});return v;
+}
+
+/* ---------- static options ---------- */
+
+fillSelect($('inSrc'),Object.entries(SRC));
+$('fyStamp').textContent='ปีงบประมาณ '+CUR_FY;
+function fyList(){const s=new Set([CUR_FY,...moves.map(m=>m.fy||fyOf(m.date))]);return [...s].filter(Boolean).sort((a,b)=>b-a)}
+function refreshFy(){
+  const list=fyList();
+  [['inFy',true],['outFy',true],['rFy',false]].forEach(([id,all])=>{const s=$(id),v=s.value||String(CUR_FY);fillSelect(s,[...(all?[['all','ทุกปีงบ']]:[]),...list.map(y=>[String(y),'ปีงบ '+y])]);s.value=[...s.options].some(o=>o.value===v)?v:String(CUR_FY)});
+}
+
+/* ---------- tabs ---------- */
+function showTab(t){
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===t));
+  ['stock','in','out','mat','report','set'].forEach(k=>$('view-'+k).hidden=k!==t);
+  renderTab(t);
+}
+const curTab=()=>document.querySelector('nav.tabs button[aria-selected="true"]').dataset.tab;
+function renderTab(t){({stock:renderStock,in:renderIn,out:renderOut,mat:renderMat,report:renderReport,set:renderSet,sup:()=>{}})[t]()}
+document.querySelectorAll('nav.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+function renderAll(){rebuildLedgers();refreshCats();refreshFy();renderTab(curTab());}
+
+/* ---------- วัสดุคงคลัง ---------- */
+function renderDash(){
+  const [fs,fe]=fyRange(CUR_FY),em=materials.slice();let val=0;const outs=[];
+  em.forEach(m=>{const c=current(m.id);val+=c.v;if(c.q<=0)outs.push(m)});
+  const fyMoves=moves.filter(m=>m.date>=fs&&m.date<=fe),ins=fyMoves.filter(m=>m.kind==='in'&&m.src!=='opening'),outsM=fyMoves.filter(m=>m.kind==='out');
+  const inV=ins.reduce((t,m)=>t+moveValue(m),0),outV=outsM.reduce((t,m)=>t+moveValue(m),0);
+  $('kVal').innerHTML=esc(fmtB(val))+'<small>บาท</small>';$('kValD').textContent='วัสดุในทะเบียน '+em.length+' รายการ';
+  $('kIn').innerHTML=esc(fmtB(inV))+'<small>บาท</small>';$('kInD').textContent=ins.length+' ใบรับ (ไม่รวมยอดยกมา)';
+  $('kOut').innerHTML=esc(fmtB(outV))+'<small>บาท</small>';$('kOutD').textContent=outsM.length+' ใบเบิก';
+  $('kEmpty').innerHTML=outs.length+'<small>รายการ</small>';$('kOutBox').classList.toggle('alert',outs.length>0);
+  $('kOutK').textContent=(outs.length?'⚠ ':'')+'วัสดุหมดคลัง';$('kEmptyD').textContent=outs.length?'ควรจัดซื้อเพิ่ม':'ทุกรายการมีของในคลัง';
+  // monthly chart
+  $('chTitle').textContent='มูลค่ารับเข้า-เบิกจ่ายรายเดือน ปีงบ '+CUR_FY;
+  const MO=[10,11,12,1,2,3,4,5,6,7,8,9].map(m=>{const y=m>=10?CUR_FY-544:CUR_FY-543;return{key:y+'-'+pad2(m),lbl:TH_M[m-1],full:TH_MF[m-1]+' '+(y+543),i:0,o:0,ni:0,no:0}});
+  const byKey=Object.fromEntries(MO.map(x=>[x.key,x]));
+  fyMoves.forEach(m=>{const b=byKey[m.date.slice(0,7)];if(!b||m.src==='opening')return;const v=moveValue(m);if(m.kind==='in'){b.i+=v;b.ni++}else{b.o+=v;b.no++}});
+  drawMonthly(MO);
+  // top values
+  const top=em.map(m=>({m,v:current(m.id).v,q:current(m.id).q})).filter(x=>x.v>0).sort((a,b)=>b.v-a.v).slice(0,6),mx=top[0]?.v||1;
+  $('topVal').innerHTML=top.length?top.map(x=>`<div class="hb" title="${esc(x.m.name)}: คงเหลือ ${fmtQ(x.q)} ${esc(x.m.unit)} มูลค่า ${fmtB(x.v)} บาท"><div class="t"><span>${esc(x.m.name)}</span><span>${fmtB(x.v)}</span></div><div class="track"><div class="fill" style="width:${Math.max(1.5,x.v/mx*100)}%"></div></div><div class="sub">คงเหลือ ${fmtQ(x.q)} ${esc(x.m.unit)}</div></div>`).join(''):'<div class="dempty">ยังไม่มีวัสดุคงเหลือ บันทึกรับเข้าที่แท็บ “รับเข้า”</div>';
+  // feed
+  const recent=moves.slice().sort((a,b)=>mvSort(b,a)).slice(0,6);
+  $('feed').innerHTML=recent.length?recent.map(m=>`<li data-open="${esc(m.id)}" tabindex="0"><span class="kind ${m.kind}">${m.kind==='in'?'รับเข้า':'เบิก'}</span><div style="min-width:0"><div class="ft">${esc(m.kind==='in'?(m.vendor||SRC[m.src]||''):(m.requester+(m.purpose?' · '+m.purpose:'')))}</div><div class="fs">${esc(thDate(m.date))} · ${m.kind==='in'?'ใบรับ':'ใบเบิก'} ${esc(m.no)} · ${esc(linesText(m))}</div></div><span class="fv">${fmtB(moveValue(m))}</span></li>`).join(''):'<div class="dempty">ยังไม่มีการรับหรือเบิกวัสดุ</div>';
+  // out of stock
+  $('outCnt').textContent=outs.length?outs.length+' รายการ':'';
+  $('outList').innerHTML=outs.length?outs.sort(matSort).slice(0,8).map(m=>`<li><span>${esc(m.name)}</span><span class="pill st-out">หมด</span></li>`).join('')+(outs.length>8?`<li class="sub">และอีก ${outs.length-8} รายการ</li>`:''):'<div class="dempty">✓ ไม่มีวัสดุหมดคลัง</div>';
+}
+function niceMax(v){if(v<=0)return 1000;const p=Math.pow(10,Math.floor(Math.log10(v))),n=v/p;return (n<=1?1:n<=2?2:n<=2.5?2.5:n<=5?5:10)*p}
+const fmtAxis=v=>v>=1e6?(v/1e6).toLocaleString('th-TH',{maximumFractionDigits:1})+' ล้าน':v.toLocaleString('th-TH');
+function drawMonthly(MO){
+  const W=640,H=230,L=58,Rr=8,T=10,B=26,ih=H-T-B,iw=W-L-Rr,mx=niceMax(Math.max(...MO.map(m=>Math.max(m.i,m.o)))),y=v=>T+ih-(v/mx)*ih,cw=iw/12,bw=Math.min(16,(cw-10)/2);
+  const bar=(x,v,c)=>{if(v<=0)return '';const h=Math.max(1.5,(v/mx)*ih),r=Math.min(4,h,bw/2),yt=T+ih-h;return `<path d="M${x},${T+ih}V${yt+r}Q${x},${yt} ${x+r},${yt}H${x+bw-r}Q${x+bw},${yt} ${x+bw},${yt+r}V${T+ih}Z" fill="var(${c})"/>`};
+  let g='';for(let k=0;k<=4;k++){const v=mx*k/4,yy=y(v);g+=`<line x1="${L}" x2="${W-Rr}" y1="${yy}" y2="${yy}" stroke="var(--grid)" stroke-width="1"/><text x="${L-8}" y="${yy+4}" text-anchor="end">${fmtAxis(v)}</text>`}
+  let b='',hit='';MO.forEach((m,i)=>{const cx=L+cw*i+cw/2;b+=bar(cx-bw-1,m.i,'--s-in')+bar(cx+1,m.o,'--s-out')+`<text x="${cx}" y="${H-8}" text-anchor="middle">${m.lbl}</text>`;hit+=`<rect x="${L+cw*i}" y="${T}" width="${cw}" height="${ih}" fill="transparent" data-m="${i}" style="cursor:default"/>`});
+  const empty=MO.every(m=>!m.i&&!m.o);
+  $('chMonthly').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="กราฟแท่งมูลค่ารับเข้าและเบิกจ่ายรายเดือน">${g}<line x1="${L}" x2="${W-Rr}" y1="${T+ih}" y2="${T+ih}" stroke="var(--line)"/>${b}<rect id="hov" x="0" y="${T}" width="${cw}" height="${ih}" fill="var(--fg)" opacity="0" />${hit}${empty?`<text x="${L+iw/2}" y="${T+ih/2}" text-anchor="middle" style="font-size:13px">ยังไม่มีการรับ-จ่ายในปีงบนี้</text>`:''}</svg>`;
+  const svg=$('chMonthly').querySelector('svg'),tip=$('vtip'),hov=svg.querySelector('#hov');
+  const show=e=>{const r=e.target.closest('[data-m]');if(!r){tip.hidden=true;hov.setAttribute('opacity',0);return}const m=MO[+r.dataset.m];hov.setAttribute('x',r.getAttribute('x'));hov.setAttribute('opacity',.05);
+    const box=$('chMonthly').getBoundingClientRect(),card=$('chMonthly').parentElement.getBoundingClientRect(),sc=box.width/W,cx=(+r.getAttribute('x')+cw/2)*sc+box.left-card.left;
+    tip.innerHTML=`<b>${esc(m.full)}</b><br><i style="background:var(--s-in)"></i>รับเข้า ${fmtB(m.i)} บาท (${m.ni} ใบ)<br><i style="background:var(--s-out)"></i>เบิกจ่าย ${fmtB(m.o)} บาท (${m.no} ใบ)`;
+    tip.hidden=false;const tw=tip.offsetWidth;tip.style.left=Math.min(card.width-tw/2-6,Math.max(tw/2+6,cx))+'px';tip.style.top=(box.top-card.top+Math.max(T,y(Math.max(m.i,m.o))-10)*sc)+'px'};
+  svg.addEventListener('mousemove',show);svg.addEventListener('mouseleave',()=>{tip.hidden=true;hov.setAttribute('opacity',0)});
+}
+function openDoc(id){const mv=moves.find(m=>m.id===id);if(!mv)return;if(mv.kind==='in'){showTab('in');resetIn(mv)}else{showTab('out');resetOut(mv)}window.scrollTo({top:0})}
+document.addEventListener('click',e=>{const li=e.target.closest('#feed [data-open]');if(li)openDoc(li.dataset.open)});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'){const li=e.target.closest?.('#feed [data-open]');if(li)openDoc(li.dataset.open)}});
+function renderStock(){
+  renderDash();
+  $('tCount').textContent=materials.length+' รายการ';
+  const q=$('sQ').value.trim().toLowerCase(),cat=$('sCat').value,st=$('sState').value;
+  const rows=materials.slice().sort(matSort).filter(m=>{
+    if(cat&&m.cat!==cat)return false;
+    const s=stockState(m,current(m.id).q)[0];
+    if(st==='out'&&s!=='st-out')return false;if(st==='ok'&&s!=='st-ok')return false;
+    if(q&&!(m.name+' '+(m.note||'')).toLowerCase().includes(q))return false;return true});
+  $('stockRows').innerHTML=rows.map(m=>{const c=current(m.id),[cls,lbl]=stockState(m,c.q);return `<tr>
+    <td>${esc(m.name)}<div class="sub">${esc(m.cat||'')}</div></td><td>${esc(m.unit)}</td>
+    <td class="num"><b>${fmtQ(c.q)}</b></td><td class="num">${c.q>0?fmtB(c.v/c.q):'—'}</td><td class="num">${fmtB(c.v)}</td>
+    <td><span class="pill ${cls}">${lbl}</span></td>
+    <td><div class="rowact"><button class="btn small" data-card="${esc(m.id)}">บัญชีวัสดุ</button></div></td></tr>`}).join('');
+  const em=$('emptyStock');
+  if(!db){em.hidden=false;em.innerHTML='<b>กำลังโหลดข้อมูล…</b>ถ้าข้อความนี้ค้างอยู่ ให้เปิดไฟล์นี้ด้วย Chrome หรือ Edge'}
+  else if(!materials.length){em.hidden=false;em.innerHTML='<b>ยังไม่มีวัสดุในทะเบียน</b>เริ่มที่แท็บ “ทะเบียนวัสดุ” เพิ่มรายการ เช่น ยางมะตอยสำเร็จรูป แล้วบันทึกยอดยกมาที่แท็บ “รับเข้า”'}
+  else if(!rows.length){em.hidden=false;em.innerHTML='<b>ไม่พบวัสดุตามเงื่อนไข</b>ลองล้างคำค้นหาหรือเปลี่ยนตัวกรอง'}
+  else em.hidden=true;
+}
+['sQ','sCat','sState'].forEach(id=>$(id).addEventListener('input',renderStock));
+document.addEventListener('click',e=>{const b=e.target.closest('[data-card]');if(!b)return;repKind='card';setRepSeg();showTab('report');$('rMat').value=b.dataset.card;renderReport();});
+
+/* ---------- line editors ---------- */
+function matOpts(withBal){return materials.slice().sort(matSort).map(m=>[m.id,matLabel(m)+(withBal?' (เหลือ '+fmtQ(current(m.id).q)+' '+m.unit+')':'')])}
+function addLine(kind,l){
+  const box=$(kind+'Lines');if(!materials.length){toast('ยังไม่มีวัสดุในทะเบียน เพิ่มได้ที่แท็บ “ทะเบียนวัสดุ”');return}
+  const row=document.createElement('div');row.className='ln';
+  row.innerHTML=kind==='in'
+    ?'<select aria-label="วัสดุ"></select><input type="number" min="0" step="any" placeholder="จำนวน" aria-label="จำนวน"><input type="number" min="0" step="any" placeholder="ราคา/หน่วย" aria-label="ราคาต่อหน่วย"><span class="tot">0.00</span><button type="button" class="btn small" aria-label="ลบบรรทัด">ลบ</button>'
+    :'<select aria-label="วัสดุ"></select><input type="number" min="0" step="any" placeholder="จำนวน" aria-label="จำนวน"><span class="bal"></span><button type="button" class="btn small" aria-label="ลบบรรทัด">ลบ</button>';
+  const sel=row.querySelector('select'),ins=row.querySelectorAll('input');
+  fillSelect(sel,matOpts(false));
+  if(l){sel.value=l.mid;ins[0].value=l.qty;if(kind==='in')ins[1].value=l.price??''}
+  else if(kind==='in'){const last=lastPrice(sel.value);if(last)ins[1].value=last}
+  const upd=()=>{
+    if(kind==='in'){row.querySelector('.tot').textContent=fmtB(r2((+ins[0].value||0)*(+ins[1].value||0)));sumIn()}
+    else{const m=matById(sel.value),avail=availFor(sel.value);row.querySelector('.bal').textContent=m?'เหลือ '+fmtQ(avail)+' '+m.unit:'';row.querySelector('.bal').className='bal'+((+ins[0].value||0)>avail?' out':'')}
+  };
+  sel.addEventListener('change',()=>{if(kind==='in'&&!ins[1].value){const p=lastPrice(sel.value);if(p)ins[1].value=p}upd()});
+  ins.forEach(i=>i.addEventListener('input',upd));
+  row.querySelector('button').addEventListener('click',()=>{row.remove();if(kind==='in')sumIn()});
+  box.appendChild(row);upd();if(!l)sel.focus();
+}
+function lastPrice(mid){const rows=(L.get(mid)||[]).filter(r=>r.mv.kind==='in'&&r.price);return rows.length?rows[rows.length-1].price:''}
+function oldQty(mv,mid){return mv?(mv.lines||[]).filter(l=>l.mid===mid).reduce((s,l)=>s+(+l.qty||0),0):0}
+function availFor(mid){const mv=editOut&&moves.find(x=>x.id===editOut);return r2(current(mid).q+oldQty(mv,mid))}
+function readLines(kind){return [...$(kind+'Lines').querySelectorAll('.ln')].map(r=>{const s=r.querySelector('select'),i=r.querySelectorAll('input');const o={mid:s.value,qty:+i[0].value||0};if(kind==='in')o.price=+i[1].value||0;return o}).filter(l=>l.mid&&l.qty>0)}
+function clearLines(kind){$(kind+'Lines').querySelectorAll('.ln').forEach(r=>r.remove())}
+function sumIn(){$('inSum').textContent=fmtB(readLines('in').reduce((s,l)=>s+r2(l.qty*l.price),0))}
+function nextSeq(kind,fy){return moves.filter(m=>m.kind===kind&&m.fy===fy).reduce((x,m)=>Math.max(x,+m.seq||0),0)+1}
+function parseNo(v,kind,date){const s=String(v||'').trim(),m=s.match(/^(\d+)\s*\/\s*(\d{4})$/);if(m)return{seq:+m[1],fy:+m[2],no:fmtNo(+m[1],+m[2])};const fy=fyOf(date);if(!s){const seq=nextSeq(kind,fy);return{seq,fy,no:fmtNo(seq,fy)}}return{seq:0,fy,no:s}}
+
+/* ---------- รับเข้า ---------- */
+function resetIn(mv){
+  editIn=mv?mv.id:null;msg('inMsg','');delete $('inNo').dataset.touched;
+  $('inTitle').textContent=mv?'แก้ไขใบรับเลขที่ '+mv.no:'บันทึกรับวัสดุเข้าคลัง';$('inDel').hidden=!mv;
+  const d=mv?.date||todayISO();$('inDate').value=d;$('inNo').value=mv?mv.no:fmtNo(nextSeq('in',fyOf(d)),fyOf(d));
+  $('inSrc').value=mv?.src||'purchase';$('inInspect').value=mv?.inspectDate||'';$('inPo').value=mv?.poNo||'';$('inVendor').value=mv?.vendor||'';$('inInvoice').value=mv?.invoiceNo||'';$('inNote').value=mv?.note||'';
+  clearLines('in');if(mv)(mv.lines||[]).forEach(l=>addLine('in',l));else if(materials.length)addLine('in');sumIn();srcUi();
+}
+function srcUi(){const o=$('inSrc').value==='opening';$('inPoLbl').hidden=o;$('inInspectLbl').hidden=o;$('inInspect').required=!o;$('inVendor').required=!o;$('inVendorReq').hidden=o;$('inVendorTxt').textContent=o?'ยกมาจาก':'ผู้ขาย / รับจาก'}
+$('inSrc').addEventListener('change',srcUi);
+$('inDate').addEventListener('change',()=>{if(editIn)return;const fy=fyOf($('inDate').value);if(fy)$('inNo').value=fmtNo(nextSeq('in',fy),fy)});
+$('inAdd').addEventListener('click',()=>addLine('in'));
+$('inReset').addEventListener('click',()=>resetIn(null));
+$('inForm').addEventListener('submit',async e=>{
+  e.preventDefault();if(!db)return msg('inMsg','เบราว์เซอร์นี้บันทึกข้อมูลไม่ได้',1);
+  const lines=readLines('in');if(!lines.length)return msg('inMsg','เพิ่มรายการวัสดุอย่างน้อย 1 รายการ และใส่จำนวน',1);
+  const date=$('inDate').value,n=parseNo($('inNo').value,'in',date),opening=$('inSrc').value==='opening';
+  if(!opening&&!$('inVendor').value.trim()){$('inVendor').focus();return msg('inMsg','กรอกชื่อผู้ขาย / รับจาก',1)}
+  if(!opening&&!$('inInspect').value){$('inInspect').focus();return msg('inMsg','กรอกวันที่ตรวจรับ',1)}
+  if(moves.some(m=>m.kind==='in'&&m.no===n.no&&m.id!==editIn))return msg('inMsg','เลขที่ใบรับ '+n.no+' ซ้ำกับใบที่มีอยู่แล้ว',1);
+  const old=editIn&&moves.find(x=>x.id===editIn);
+  if(old){for(const l of old.lines||[]){const after=r2(current(l.mid).q-oldQty(old,l.mid)+lines.filter(x=>x.mid===l.mid).reduce((s,x)=>s+x.qty,0));if(after<0){const m=matById(l.mid);return msg('inMsg',`แก้ไม่ได้: ${m?.name||'วัสดุ'} ถูกเบิกไปแล้ว ยอดจะติดลบ ${fmtQ(-after)} ${m?.unit||''}`,1)}}}
+  const now=new Date().toISOString();
+  const body={kind:'in',no:n.no,seq:n.seq,fy:n.fy,date,src:$('inSrc').value,inspectDate:opening?'':$('inInspect').value,poNo:$('inPo').value.trim(),vendor:$('inVendor').value.trim(),invoiceNo:$('inInvoice').value.trim(),note:$('inNote').value.trim(),lines,createdAt:old?.createdAt||now,updatedAt:now};
+  const btn=$('inSave');btn.disabled=true;msg('inMsg','กำลังบันทึก…');
+  try{const id=editIn||db.collection('moves').doc().id;await db.doc('moves/'+id).set(body);toast('บันทึกใบรับ '+n.no+' แล้ว');resetIn(null)}
+  catch(err){msg('inMsg',errText(err),1)}finally{btn.disabled=false}
+});
+$('inDel').addEventListener('click',async()=>{
+  const mv=moves.find(x=>x.id===editIn);if(!mv)return;
+  for(const l of mv.lines||[]){if(r2(current(l.mid).q-oldQty(mv,l.mid))<0){const m=matById(l.mid);return msg('inMsg',`ลบไม่ได้: ${m?.name||'วัสดุ'} ถูกเบิกไปแล้ว ยอดจะติดลบ ลบใบเบิกที่เกี่ยวข้องก่อน`,1)}}
+  if(!confirmClick('delin',$('inDel'),'กดอีกครั้งเพื่อลบใบรับ'))return;
+  try{await db.doc('moves/'+mv.id).delete();toast('ลบใบรับ '+mv.no+' แล้ว');resetIn(null)}catch(err){msg('inMsg',errText(err),1)}
+});
+function renderIn(){
+  if(!$('inLines').querySelector('.ln')&&!editIn&&materials.length)addLine('in');
+  if(!editIn){const fy=fyOf($('inDate').value||todayISO());if(!$('inDate').value)$('inDate').value=todayISO();if(!$('inNo').dataset.touched)$('inNo').value=fmtNo(nextSeq('in',fy),fy)}
+  const q=$('inQ').value.trim().toLowerCase(),fy=$('inFy').value;
+  const rows=moves.filter(m=>m.kind==='in'&&(fy==='all'||String(m.fy)===fy)).filter(m=>!q||[m.no,m.vendor,m.poNo,m.invoiceNo,m.note,linesText(m)].join(' ').toLowerCase().includes(q)).sort((a,b)=>mvSort(b,a));
+  $('inRows').innerHTML=rows.map(m=>`<tr><td class="no">${esc(m.no)}</td><td style="white-space:nowrap">${esc(thDate(m.date))}</td>
+    <td>${esc(m.vendor||'—')}<div class="sub">${esc(SRC[m.src]||'')}${m.invoiceNo?' · ใบส่งของ '+esc(m.invoiceNo):''}</div></td><td>${esc(m.poNo||'')}</td>
+    <td style="min-width:200px">${esc(linesText(m))}</td><td class="num">${fmtB(moveValue(m))}</td>
+    <td><button class="btn small" data-edin="${esc(m.id)}">${canWrite?'แก้ไข':'ดู'}</button></td></tr>`).join('');
+  const em=$('emptyIn');em.hidden=!!rows.length;em.innerHTML=moves.some(m=>m.kind==='in')?'<b>ไม่พบใบรับตามเงื่อนไข</b>ลองเปลี่ยนปีงบหรือคำค้นหา':'<b>ยังไม่มีการรับวัสดุ</b>บันทึกยอดยกมาหรือการรับจากการจัดซื้อด้วยฟอร์มด้านบน';
+}
+$('inNo').addEventListener('input',()=>$('inNo').dataset.touched=1);
+['inQ','inFy'].forEach(id=>$(id).addEventListener('input',renderIn));
+$('inRows').addEventListener('click',e=>{const b=e.target.closest('[data-edin]');if(b){resetIn(moves.find(m=>m.id===b.dataset.edin));window.scrollTo({top:0,behavior:'smooth'})}});
+
+/* ---------- ใบเบิก ---------- */
+function resetOut(mv){
+  editOut=mv?mv.id:null;msg('outMsg','');delete $('outNo').dataset.touched;
+  $('outTitle').textContent=mv?'แก้ไขใบเบิกเลขที่ '+mv.no:'ออกใบเบิกวัสดุ';$('outDel').hidden=!mv;
+  const d=mv?.date||todayISO();$('outDate').value=d;$('outNo').value=mv?mv.no:fmtNo(nextSeq('out',fyOf(d)),fyOf(d));
+  $('outReq').value=mv?.requester||'';$('outPos').value=mv?.reqPos||'';$('outPurpose').value=mv?.purpose||'';$('outNote').value=mv?.note||'';
+  clearLines('out');if(mv)(mv.lines||[]).forEach(l=>addLine('out',l));else if(materials.length)addLine('out');
+}
+$('outDate').addEventListener('change',()=>{if(editOut)return;const fy=fyOf($('outDate').value);if(fy)$('outNo').value=fmtNo(nextSeq('out',fy),fy)});
+$('outAdd').addEventListener('click',()=>addLine('out'));
+$('outReset').addEventListener('click',()=>resetOut(null));
+$('outReq').addEventListener('change',()=>{if($('outPos').value)return;const p=moves.filter(m=>m.kind==='out'&&m.requester===$('outReq').value.trim()&&m.reqPos).sort(mvSort).pop();if(p)$('outPos').value=p.reqPos});
+$('outForm').addEventListener('submit',async e=>{
+  e.preventDefault();const print=e.submitter?.dataset.print==='1';
+  if(!db)return msg('outMsg','เบราว์เซอร์นี้บันทึกข้อมูลไม่ได้',1);
+  const lines=readLines('out');if(!lines.length)return msg('outMsg','เพิ่มรายการวัสดุอย่างน้อย 1 รายการ และใส่จำนวน',1);
+  const need={};lines.forEach(l=>need[l.mid]=(need[l.mid]||0)+l.qty);
+  for(const mid in need){const a=availFor(mid);if(need[mid]>a+1e-9){const m=matById(mid);return msg('outMsg',`${m?.name||'วัสดุ'} คงเหลือ ${fmtQ(a)} ${m?.unit||''} ไม่พอเบิก ${fmtQ(need[mid])}`,1)}}
+  const date=$('outDate').value,n=parseNo($('outNo').value,'out',date);
+  if(moves.some(m=>m.kind==='out'&&m.no===n.no&&m.id!==editOut))return msg('outMsg','เลขที่ใบเบิก '+n.no+' ซ้ำกับใบที่มีอยู่แล้ว',1);
+  const old=editOut&&moves.find(x=>x.id===editOut),now=new Date().toISOString();
+  const body={kind:'out',no:n.no,seq:n.seq,fy:n.fy,date,requester:$('outReq').value.trim(),reqPos:$('outPos').value.trim(),purpose:$('outPurpose').value.trim(),note:$('outNote').value.trim(),lines,createdAt:old?.createdAt||now,updatedAt:now};
+  const btns=$('outForm').querySelectorAll('button[type=submit]');btns.forEach(b=>b.disabled=true);msg('outMsg','กำลังบันทึก…');
+  try{const id=editOut||db.collection('moves').doc().id;await db.doc('moves/'+id).set(body);toast('บันทึกใบเบิก '+n.no+' และตัดยอดคงเหลือแล้ว');resetOut(null);if(print){openPrint({...body,id});doPrintSlip(true)}}
+  catch(err){msg('outMsg',errText(err),1)}finally{btns.forEach(b=>b.disabled=false)}
+});
+$('outDel').addEventListener('click',async()=>{
+  const mv=moves.find(x=>x.id===editOut);if(!mv)return;
+  if(!confirmClick('delout',$('outDel'),'กดอีกครั้ง: ลบใบเบิกและคืนวัสดุเข้าคลัง'))return;
+  try{await db.doc('moves/'+mv.id).delete();toast('ลบใบเบิก '+mv.no+' แล้ว วัสดุคืนเข้าคลัง');resetOut(null)}catch(err){msg('outMsg',errText(err),1)}
+});
+function renderOut(){
+  if(!$('outLines').querySelector('.ln')&&!editOut&&materials.length)addLine('out');
+  $('outLines').querySelectorAll('.ln input').forEach(i=>i.dispatchEvent(new Event('input')));
+  if(!$('outDate').value)$('outDate').value=todayISO();
+  if(!editOut&&!$('outNo').dataset.touched){const fy=fyOf($('outDate').value);$('outNo').value=fmtNo(nextSeq('out',fy),fy)}
+  const people=[...new Set(moves.filter(m=>m.kind==='out').map(m=>m.requester).filter(Boolean))],pos=[...new Set(moves.filter(m=>m.kind==='out').map(m=>m.reqPos).filter(Boolean))];
+  $('peopleList').innerHTML=people.map(p=>`<option value="${esc(p)}">`).join('');$('posList').innerHTML=pos.map(p=>`<option value="${esc(p)}">`).join('');
+  const q=$('outQ').value.trim().toLowerCase(),fy=$('outFy').value;
+  const rows=moves.filter(m=>m.kind==='out'&&(fy==='all'||String(m.fy)===fy)).filter(m=>!q||[m.no,m.requester,m.purpose,m.note,linesText(m)].join(' ').toLowerCase().includes(q)).sort((a,b)=>mvSort(b,a));
+  $('outRows').innerHTML=rows.map(m=>`<tr><td class="no">${esc(m.no)}</td><td style="white-space:nowrap">${esc(thDate(m.date))}</td>
+    <td>${esc(m.requester)}${m.reqPos?`<div class="sub">${esc(m.reqPos)}</div>`:''}</td><td style="min-width:180px">${esc(m.purpose)}</td>
+    <td style="min-width:180px">${esc(linesText(m))}</td><td class="num">${fmtB(moveValue(m))}</td>
+    <td><div class="rowact"><button class="btn small primary" data-prn="${esc(m.id)}">พิมพ์</button><button class="btn small" data-slip="${esc(m.id)}">Word</button><button class="btn small" data-edout="${esc(m.id)}">${canWrite?'แก้ไข':'ดู'}</button></div></td></tr>`).join('');
+  const em=$('emptyOut');em.hidden=!!rows.length;em.innerHTML=moves.some(m=>m.kind==='out')?'<b>ไม่พบใบเบิกตามเงื่อนไข</b>ลองเปลี่ยนปีงบหรือคำค้นหา':'<b>ยังไม่มีใบเบิกวัสดุ</b>ออกใบเบิกใบแรกด้วยฟอร์มด้านบน ระบบจะรันเลขที่ใบเบิกตามปีงบประมาณให้';
+}
+$('outNo').addEventListener('input',()=>$('outNo').dataset.touched=1);
+['outQ','outFy'].forEach(id=>$(id).addEventListener('input',renderOut));
+$('outRows').addEventListener('click',e=>{
+  const pr=e.target.closest('[data-prn]');if(pr){openPrint(moves.find(m=>m.id===pr.dataset.prn));doPrintSlip(true);return}
+  const s=e.target.closest('[data-slip]');if(s){downloadSlip(moves.find(m=>m.id===s.dataset.slip));return}
+  const b=e.target.closest('[data-edout]');if(b){resetOut(moves.find(m=>m.id===b.dataset.edout));window.scrollTo({top:0,behavior:'smooth'})}
+});
+
+/* ---------- ใบเบิก .docx ---------- */
+function buildSlipDocx(d){
+  const x=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const R=(t,o={})=>`<w:r><w:rPr>${o.b?'<w:b/><w:bCs/>':''}${o.sz?`<w:sz w:val="${o.sz}"/><w:szCs w:val="${o.sz}"/>`:''}${o.u?'<w:u w:val="dotted"/>':''}</w:rPr><w:t xml:space="preserve">${x(t)}</w:t></w:r>`;
+  const F=(v,min)=>{let s=String(v??'').trim();if(!s)return R('.'.repeat(Math.round(min*1.6)));s=' '+s+' ';const p=Math.max(0,min-s.length);return R(' '.repeat(Math.ceil(p/2))+s+' '.repeat(Math.floor(p/2)),{u:1})};
+  const P=(runs,o={})=>`<w:p><w:pPr><w:spacing w:before="${o.before||0}" w:after="${o.after||0}"/>${o.first?`<w:ind w:firstLine="${o.first}"/>`:''}${o.jc?`<w:jc w:val="${o.jc}"/>`:''}</w:pPr>${[].concat(runs).join('')}</w:p>`;
+  const cellP=(t,o={})=>P(R(t,o),{jc:o.jc||'left'});
+  const tc=(w,inner,o={})=>`<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/>${o.fill?`<w:shd w:val="clear" w:color="auto" w:fill="${o.fill}"/>`:''}<w:vAlign w:val="center"/></w:tcPr>${inner}</w:tc>`;
+  const bd=v=>`<w:tblBorders>${['top','left','bottom','right','insideH','insideV'].map(s=>v?`<w:${s} w:val="single" w:sz="6" w:space="0" w:color="000000"/>`:`<w:${s} w:val="nil"/>`).join('')}</w:tblBorders>`;
+  const b=[];
+  b.push(P(R('ใบเบิกวัสดุ',{b:1,sz:40}),{jc:'center'}));
+  b.push(P(R(d.org),{jc:'center',after:200}));
+  b.push(P([R('เลขที่ '),F(d.no,12)],{jc:'right'}));
+  b.push(P([R('วันที่ '),F(thDateFull(d.date),22)],{jc:'right',after:160}));
+  b.push(P([R('ข้าพเจ้า'),F(d.requester,34),R('ตำแหน่ง'),F(d.reqPos,26)],{first:720}));
+  b.push(P([R('มีความประสงค์ขอเบิกวัสดุตามรายการข้างล่างนี้ เพื่อใช้ในงาน'),F(d.purpose,40)],{after:160}));
+  const W=[700,3900,1150,1250,1250,1256];
+  const items=d.items.slice();while(items.length<6)items.push(null);
+  let t=`<w:tbl><w:tblPr><w:tblW w:w="${W.reduce((a,c)=>a+c,0)}" w:type="dxa"/>${bd(1)}<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${W.map(w=>`<w:gridCol w:w="${w}"/>`).join('')}</w:tblGrid>`;
+  t+='<w:tr>'+['ลำดับ','รายการ','หน่วยนับ','จำนวนที่ขอเบิก','จำนวนที่จ่าย','หมายเหตุ'].map((h,i)=>tc(W[i],cellP(h,{b:1,jc:'center'}),{fill:'EEEEEE'})).join('')+'</w:tr>';
+  items.forEach((it,i)=>{t+='<w:tr><w:trPr><w:trHeight w:val="440" w:hRule="atLeast"/></w:trPr>'+[tc(W[0],cellP(it?String(i+1):'',{jc:'center'})),tc(W[1],cellP(it?it.name:'')),tc(W[2],cellP(it?it.unit:'',{jc:'center'})),tc(W[3],cellP(it?it.qty:'',{jc:'center'})),tc(W[4],cellP(it?it.qty:'',{jc:'center'})),tc(W[5],cellP(''))].join('')+'</w:tr>'});
+  t+='</w:tbl>';b.push(t);
+  if(d.note)b.push(P(R('หมายเหตุ '+d.note),{before:120}));
+  const sig=(title,name,pos)=>[P([R('(ลงชื่อ)'),R('.'.repeat(30)),R(title)],{jc:'center',before:360}),P(R('('+(name||'.'.repeat(34))+')'),{jc:'center'}),P(R('ตำแหน่ง '+(pos||'.'.repeat(30))),{jc:'center'}),P([R('วันที่ '),F(thDateFull(d.date),20)],{jc:'center'})].join('');
+  const SW=[4753,4753],row=(a,c)=>`<w:tr>${tc(SW[0],a)}${tc(SW[1],c)}</w:tr>`;
+  b.push(`<w:tbl><w:tblPr><w:tblW w:w="9506" w:type="dxa"/>${bd(0)}<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${SW.map(w=>`<w:gridCol w:w="${w}"/>`).join('')}</w:tblGrid>`+
+    row(sig('ผู้เบิก',d.requester,d.reqPos),sig('ผู้จ่ายของ',d.payer,d.payerPos))+`<w:tr><w:tc><w:tcPr><w:tcW w:w="9506" w:type="dxa"/><w:gridSpan w:val="2"/></w:tcPr>${sig('ผู้อนุมัติ',d.appr,d.apprPos)}</w:tc></w:tr>`+'</w:tbl>');
+  const doc=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${b.join('')}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1266" w:header="567" w:footer="567" w:gutter="0"/></w:sectPr></w:body></w:document>`;
+  const font='TH SarabunPSK';
+  const styles=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="${font}" w:hAnsi="${font}" w:eastAsia="${font}" w:cs="${font}"/><w:sz w:val="32"/><w:szCs w:val="32"/><w:lang w:val="th-TH" w:bidi="th-TH"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>`;
+  const z=new JSZip();
+  z.file('[Content_Types].xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>');
+  z.file('_rels/.rels','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>');
+  z.file('word/_rels/document.xml.rels','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>');
+  z.file('word/document.xml',doc);z.file('word/styles.xml',styles);
+  return z;
+}
+async function saveFile(filename,data,okText){
+  try{const blob=data instanceof Blob?data:new Blob([data]);const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),4000);toast(okText);return true}
+  catch(err){toast('บันทึกไฟล์ไม่สำเร็จ ('+(err?.message||'error')+')');return false}
+}
+/* ---------- พิมพ์ใบเบิก (ตัวอย่างบนจอ + PDF) ---------- */
+let printMv=null;
+function slipHtml(mv){
+  const F=(v,w)=>`<span class="fl" style="min-width:${w}px">${esc(v||'')||'&nbsp;'}</span>`;
+  const items=(mv.lines||[]).map(l=>{const m=matById(l.mid);return{name:m?m.name:'',unit:m?.unit||'',qty:fmtQ(l.qty)}});
+  while(items.length<8)items.push(null);
+  const dt=mv.date?`<span class="fl" style="min-width:170px">${esc(thDateFull(mv.date))}</span>`:'........./........./.........';
+  const sig=(t,n,p)=>`<div>(ลงชื่อ)..................................${t}<br>(${n?esc(n):'......................................................'})<br>ตำแหน่ง ${p?esc(p):'...............................................'}<br>วันที่ ${dt}</div>`;
+  return `${settings.logo?`<img class="lg" src="${esc(settings.logo)}" alt="">`:''}
+  <p class="ttl">ใบเบิกวัสดุ</p><p class="c" style="margin-bottom:14px">${esc(fullOrg())}</p>
+  <p class="r">เลขที่ ${F(mv.no,110)}</p><p class="r" style="margin-bottom:12px">วันที่ ${F(thDateFull(mv.date),200)}</p>
+  <p style="text-indent:48px">ข้าพเจ้า ${F(mv.requester,230)} ตำแหน่ง ${F(mv.reqPos,190)}</p>
+  <p>มีความประสงค์ขอเบิกวัสดุตามรายการข้างล่างนี้ เพื่อใช้ในงาน ${F(mv.purpose,180)}</p>
+  <table><thead><tr><th style="width:56px">ลำดับ</th><th>รายการ</th><th style="width:86px">หน่วยนับ</th><th style="width:96px">จำนวนที่<br>ขอเบิก</th><th style="width:96px">จำนวนที่<br>จ่าย</th><th style="width:100px">หมายเหตุ</th></tr></thead>
+  <tbody>${items.map((it,i)=>`<tr><td class="cn">${it?i+1:''}</td><td>${it?esc(it.name):''}</td><td class="cn">${it?esc(it.unit):''}</td><td class="cn">${it?esc(it.qty):''}</td><td class="cn">${it?esc(it.qty):''}</td><td></td></tr>`).join('')}</tbody></table>
+  ${mv.note?`<p>หมายเหตุ ${esc(mv.note)}</p>`:''}
+  <div class="sigs">${sig('ผู้เบิก',mv.requester,mv.reqPos)}${sig('ผู้จ่ายของ',settings.payer,settings.payerPos)}<div style="grid-column:1/-1">${sig('ผู้อนุมัติ',settings.appr,settings.apprPos)}</div></div>`;
+}
+function hasTHS(){try{const c=document.createElement('canvas').getContext('2d'),t='ทดสอบภาษาไทย mmmwwwiii';c.font='40px monospace';const a=c.measureText(t).width;c.font='40px "TH SarabunPSK",monospace';const b=c.measureText(t).width;c.font='40px "TH Sarabun New",monospace';const d=c.measureText(t).width;return Math.abs(a-b)>1||Math.abs(a-d)>1}catch(e){return false}}
+function openPrint(mv){
+  if(!mv)return;printMv=mv;$('pmTitle').textContent='ใบเบิกวัสดุ เลขที่ '+mv.no;$('paper').innerHTML=slipHtml(mv);$('paper').classList.toggle('ths',hasTHS());
+  $('printModal').hidden=false;document.body.style.overflow='hidden';$('pmPdf').focus();
+}
+function closePrint(){$('printModal').hidden=true;document.body.style.overflow='';printMv=null}
+$('pmClose').addEventListener('click',closePrint);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('printModal').hidden)closePrint()});
+$('pmWord').addEventListener('click',()=>downloadSlip(printMv));
+$('pmPdf').addEventListener('click',()=>doPrintSlip(false));
+let autoClose=false;
+function doPrintSlip(auto){autoClose=auto;document.body.classList.add('pr-slip');setTimeout(()=>window.print(),50)}
+window.addEventListener('afterprint',()=>{const was=document.body.classList.contains('pr-slip');document.body.classList.remove('pr-slip','pr-rep');const rp=document.getElementById('repPage');if(rp)rp.textContent='';if(was&&autoClose)closePrint();autoClose=false});
+$('btnPrintRep').addEventListener('click',()=>{renderReport();let st=document.getElementById('repPage');if(!st){st=document.createElement('style');st.id='repPage';document.head.appendChild(st)}st.textContent='@page{size:A4 landscape;margin:10mm}';document.body.classList.add('pr-rep');setTimeout(()=>window.print(),50)});
+async function downloadSlip(mv){
+  if(!mv)return;if(typeof JSZip==='undefined'){toast('โหลดตัวสร้างไฟล์ Word ไม่สำเร็จ ลองโหลดหน้าใหม่');return}
+  const d={...settings,...mv,org:fullOrg(),items:(mv.lines||[]).map(l=>{const m=matById(l.mid);return{name:m?matLabel(m):'',unit:m?.unit||'',qty:fmtQ(l.qty)}})};
+  const blob=await buildSlipDocx(d).generateAsync({type:'blob',mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+  saveFile('ใบเบิกวัสดุ_'+mv.no.replace('/','-')+'.docx',blob,'ดาวน์โหลดใบเบิก '+mv.no+' แล้ว');
+}
+
+/* ---------- ทะเบียนวัสดุ ---------- */
+function resetMat(m){
+  editMat=m?m.id:null;msg('mMsg','');$('matTitle').textContent=m?'แก้ไขวัสดุ '+m.name:'เพิ่มวัสดุเข้าทะเบียน';$('mDel').hidden=!m;
+$('mName').value=m?.name||'';$('mCat').value=m?.cat||'';$('mUnit').value=m?.unit||'';$('mNote').value=m?.note||'';
+}
+$('mReset').addEventListener('click',()=>resetMat(null));
+$('matForm').addEventListener('submit',async e=>{
+  e.preventDefault();if(!db)return msg('mMsg','เบราว์เซอร์นี้บันทึกข้อมูลไม่ได้',1);
+  const name=$('mName').value.trim();
+  if(materials.some(m=>m.name===name&&m.id!==editMat))return msg('mMsg','มีวัสดุชื่อนี้ในทะเบียนแล้ว',1);
+  const old=editMat&&matById(editMat),now=new Date().toISOString();
+  const body={name,cat:$('mCat').value.trim().replace(/\s+/g,' ')||'วัสดุอื่น',unit:$('mUnit').value.trim(),note:$('mNote').value.trim(),createdAt:old?.createdAt||now,updatedAt:now};
+  try{const id=editMat||db.collection('materials').doc().id;await db.doc('materials/'+id).set(body);toast('บันทึกวัสดุ '+name+' แล้ว');resetMat(null)}catch(err){msg('mMsg',errText(err),1)}
+});
+$('mDel').addEventListener('click',async()=>{
+  const m=matById(editMat);if(!m)return;
+  if(moves.some(mv=>(mv.lines||[]).some(l=>l.mid===m.id)))return msg('mMsg','ลบไม่ได้ เพราะมีรายการรับ-จ่ายของวัสดุนี้แล้ว (ประวัติในบัญชีวัสดุต้องเก็บไว้)',1);
+  if(!confirmClick('delmat',$('mDel'),'กดอีกครั้งเพื่อลบวัสดุ'))return;
+  try{await db.doc('materials/'+m.id).delete();toast('ลบวัสดุแล้ว');resetMat(null)}catch(err){msg('mMsg',errText(err),1)}
+});
+function renderMat(){
+  const rows=materials.slice().sort(matSort);
+  $('matRows').innerHTML=rows.map(m=>`<tr><td>${esc(m.name)}${m.note?`<div class="sub">${esc(m.note)}</div>`:''}</td><td>${esc(m.cat||'')}</td><td>${esc(m.unit)}</td><td><button class="btn small" data-edmat="${esc(m.id)}">${canWrite?'แก้ไข':'ดู'}</button></td></tr>`).join('');
+  const em=$('emptyMat');em.hidden=!!rows.length;em.innerHTML='<b>ทะเบียนวัสดุยังว่าง</b>กรอกฟอร์มด้านบนเพื่อเพิ่มวัสดุรายการแรก';
+}
+$('matRows').addEventListener('click',e=>{const b=e.target.closest('[data-edmat]');if(b){resetMat(matById(b.dataset.edmat));window.scrollTo({top:0,behavior:'smooth'})}});
+
+/* ---------- รายงาน ---------- */
+function setRepSeg(){document.querySelectorAll('[data-rk]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.rk===repKind));const c=repKind==='card';$('rMat').hidden=!c;$('rMatLbl').hidden=!c;$('rMonth').hidden=c;$('rMonthLbl').hidden=c}
+document.querySelectorAll('[data-rk]').forEach(b=>b.addEventListener('click',()=>{repKind=b.dataset.rk;setRepSeg();renderReport()}));
+['rFy','rMonth','rMat'].forEach(id=>$(id).addEventListener('change',renderReport));
+function period(){
+  const fy=+$('rFy').value||CUR_FY,[s,e]=fyRange(fy),mv=$('rMonth').value;
+  if(repKind==='card'||!mv||mv==='all')return{fy,from:s,to:e,label:'ปีงบประมาณ '+fy+' (1 ต.ค. '+(fy-1)+' – 30 ก.ย. '+fy+')'};
+  const [y,m]=mv.split('-').map(Number),last=new Date(y,m,0).getDate();
+  return{fy,from:mv+'-01',to:mv+'-'+pad2(last),label:'เดือน'+TH_MF[m-1]+' '+(y+543)};
+}
+function fillRepSelects(){
+  const fy=+$('rFy').value||CUR_FY,mv=$('rMonth').value;
+  const months=[10,11,12,1,2,3,4,5,6,7,8,9].map(m=>{const y=(m>=10?fy-544:fy-543);return[y+'-'+pad2(m),TH_MF[m-1]+' '+(y+543)]});
+  fillSelect($('rMonth'),[['all','ทั้งปีงบประมาณ'],...months]);$('rMonth').value=[...$('rMonth').options].some(o=>o.value===mv)?mv:'all';
+  const mm=$('rMat').value;fillSelect($('rMat'),[['all','ทุกรายการ (ส่งออก Excel ได้ทุกแผ่น)'],...materials.slice().sort(matSort).map(m=>[m.id,matLabel(m)])]);
+  $('rMat').value=[...$('rMat').options].some(o=>o.value===mm)?mm:(materials.length?materials.slice().sort(matSort)[0].id:'all');
+}
+function summaryRows(p){
+  return materials.slice().sort(matSort).map(m=>{
+    const o=stateBefore(m.id,p.from),c=stateUpto(m.id,p.to);let iq=0,iv=0,oq=0,ov=0;
+    (L.get(m.id)||[]).forEach(r=>{if(r.date>=p.from&&r.date<=p.to){iq+=r.inQ;iv+=r.inV;oq+=r.outQ;ov+=r.outV}});
+    return{m,oq0:o.q,ov0:o.v,iq,iv,oq,ov,cq:c.q,cv:c.v};
+  });
+}
+function cardRows(mid,p){
+  const o=stateBefore(mid,p.from);
+  const rows=(L.get(mid)||[]).filter(r=>r.date>=p.from&&r.date<=p.to).map(r=>{const mv=r.mv;return{
+    date:r.date,party:mv.kind==='in'?(mv.src==='opening'?'ยอดยกมา'+(mv.vendor?' ('+mv.vendor+')':''):(mv.vendor||SRC[mv.src]||'')):(mv.requester||''),
+    doc:(mv.kind==='in'?'ใบรับ ':'ใบเบิก ')+mv.no+(mv.poNo?' / ใบสั่งซื้อ '+mv.poNo:''),price:r.price,inQ:r.inQ,outQ:r.outQ,balQ:r.balQ,inV:r.inV,outV:r.outV,balV:r.balV,
+    note:mv.kind==='out'?(mv.purpose||''):(mv.note||'')}});
+  return{open:o,rows};
+}
+function renderReport(){
+  fillRepSelects();setRepSeg();const p=period(),box=$('rep');
+  if(!materials.length){box.innerHTML='<div class="tablebox"><div class="empty"><b>ยังไม่มีข้อมูลสำหรับรายงาน</b>เพิ่มวัสดุในทะเบียนและบันทึกรับ-จ่ายก่อน</div></div>';return}
+  if(repKind==='sum'){
+    const rows=summaryRows(p),T=rows.reduce((t,r)=>({ov0:t.ov0+r.ov0,iv:t.iv+r.iv,ov:t.ov+r.ov,cv:t.cv+r.cv}),{ov0:0,iv:0,ov:0,cv:0});
+    box.innerHTML=`<div class="rephead"><h3>รายงานสรุปการรับ-จ่ายวัสดุ</h3><div class="sub">${esc(p.label)}</div></div>
+    <div class="tablebox"><table><thead><tr class="grp"><th colspan="2"></th><th colspan="2">ยกมา</th><th colspan="2">รับ</th><th colspan="2">จ่าย</th><th colspan="2">คงเหลือ</th></tr>
+    <tr><th>รายการ</th><th>หน่วย</th>${'<th class="num">จำนวน</th><th class="num">มูลค่า</th>'.repeat(4)}</tr></thead>
+    <tbody>${rows.map(r=>`<tr><td>${esc(r.m.name)}</td><td>${esc(r.m.unit)}</td>
+      <td class="num">${fmtQ(r.oq0)}</td><td class="num">${fmtB(r.ov0)}</td><td class="num in">${r.iq?fmtQ(r.iq):'—'}</td><td class="num">${r.iq?fmtB(r.iv):'—'}</td>
+      <td class="num out">${r.oq?fmtQ(r.oq):'—'}</td><td class="num">${r.oq?fmtB(r.ov):'—'}</td><td class="num"><b>${fmtQ(r.cq)}</b></td><td class="num">${fmtB(r.cv)}</td></tr>`).join('')}</tbody>
+    <tfoot><tr><td colspan="2">รวมมูลค่า (บาท)</td><td></td><td class="num">${fmtB(T.ov0)}</td><td></td><td class="num">${fmtB(T.iv)}</td><td></td><td class="num">${fmtB(T.ov)}</td><td></td><td class="num">${fmtB(T.cv)}</td></tr></tfoot></table></div>`;
+  }else{
+    const mid=$('rMat').value;
+    const ids=mid==='all'?materials.slice().sort(matSort).map(m=>m.id):[mid];
+    box.innerHTML=ids.map(id=>{const m=matById(id),c=cardRows(id,p);return `<div class="rephead" style="margin-top:6px"><h3>บัญชีวัสดุ: ${esc(matLabel(m))}</h3><div class="sub">ประเภท ${esc(m.cat||'-')} · หน่วยนับ ${esc(m.unit)} · ${esc(p.label)}</div></div>
+      <div class="tablebox" style="margin-bottom:18px"><table><thead><tr><th>วัน เดือน ปี</th><th>รับจาก / จ่ายให้</th><th>เลขที่เอกสาร</th><th class="num">ราคา/หน่วย</th><th class="num">รับ</th><th class="num">จ่าย</th><th class="num">คงเหลือ</th><th class="num">มูลค่าคงเหลือ</th><th>หมายเหตุ</th></tr></thead>
+      <tbody><tr class="open"><td>${esc(thDate(p.from))}</td><td>ยอดยกมา</td><td></td><td class="num">${c.open.q>0?fmtB(c.open.v/c.open.q):''}</td><td></td><td></td><td class="num">${fmtQ(c.open.q)}</td><td class="num">${fmtB(c.open.v)}</td><td></td></tr>
+      ${c.rows.map(r=>`<tr><td style="white-space:nowrap">${esc(thDate(r.date))}</td><td>${esc(r.party)}</td><td class="no">${esc(r.doc)}</td><td class="num">${fmtB(r.price)}</td><td class="num in">${r.inQ?fmtQ(r.inQ):''}</td><td class="num out">${r.outQ?fmtQ(r.outQ):''}</td><td class="num"><b>${fmtQ(r.balQ)}</b></td><td class="num">${fmtB(r.balV)}</td><td class="sub">${esc(r.note)}</td></tr>`).join('')}
+      ${c.rows.length?'':'<tr><td colspan="9" class="sub">ไม่มีการรับ-จ่ายในปีงบนี้</td></tr>'}</tbody></table></div>`}).join('');
+  }
+}
+$('btnXlsx').addEventListener('click',()=>{
+  if(typeof XLSX==='undefined'){toast('โหลดตัวสร้างไฟล์ Excel ไม่สำเร็จ');return}
+  if(!materials.length){toast('ยังไม่มีข้อมูลให้ส่งออก');return}
+  const p=period(),wb=XLSX.utils.book_new();let fname;
+  if(repKind==='sum'){
+    const aoa=[['รายงานสรุปการรับ-จ่ายวัสดุ '+fullOrg()],[p.label],[],['รายการ','หน่วย','ยกมา (จำนวน)','ยกมา (มูลค่า)','รับ (จำนวน)','รับ (มูลค่า)','จ่าย (จำนวน)','จ่าย (มูลค่า)','คงเหลือ (จำนวน)','คงเหลือ (มูลค่า)']];
+    const rows=summaryRows(p);rows.forEach(r=>aoa.push([r.m.name,r.m.unit,r.oq0,r2(r.ov0),r.iq,r2(r.iv),r.oq,r2(r.ov),r.cq,r2(r.cv)]));
+    aoa.push(['รวมมูลค่า','','',r2(rows.reduce((s,r)=>s+r.ov0,0)),'',r2(rows.reduce((s,r)=>s+r.iv,0)),'',r2(rows.reduce((s,r)=>s+r.ov,0)),'',r2(rows.reduce((s,r)=>s+r.cv,0))]);
+    const ws=XLSX.utils.aoa_to_sheet(aoa);ws['!cols']=[{wch:34},{wch:8},...Array(8).fill({wch:13})];XLSX.utils.book_append_sheet(wb,ws,'สรุปรับจ่าย');
+    fname='สรุปรับจ่ายวัสดุ_'+($('rMonth').value==='all'?'ปีงบ'+p.fy:$('rMonth').value)+'.xlsx';
+  }else{
+    const mid=$('rMat').value,ids=mid==='all'?materials.slice().sort(matSort).map(m=>m.id):[mid],used=new Set();
+    ids.forEach(id=>{const m=matById(id),c=cardRows(id,p);
+      const aoa=[['บัญชีวัสดุ '+fullOrg()],['ประเภท '+(m.cat||'-')+'   ชื่อหรือชนิดวัสดุ '+matLabel(m)+'   หน่วยนับ '+m.unit],[p.label],[],
+        ['วัน เดือน ปี','รับจาก / จ่ายให้','เลขที่เอกสาร','ราคาต่อหน่วย','รับ (จำนวน)','จ่าย (จำนวน)','คงเหลือ (จำนวน)','มูลค่ารับ','มูลค่าจ่าย','มูลค่าคงเหลือ','หมายเหตุ'],
+        [thDate(p.from),'ยอดยกมา','',c.open.q>0?r2(c.open.v/c.open.q):'','','',c.open.q,'','',r2(c.open.v),'']];
+      c.rows.forEach(r=>aoa.push([thDate(r.date),r.party,r.doc,r2(r.price),r.inQ||'',r.outQ||'',r.balQ,r.inV||'',r.outV||'',r2(r.balV),r.note]));
+      const ws=XLSX.utils.aoa_to_sheet(aoa);ws['!cols']=[{wch:11},{wch:26},{wch:24},{wch:11},{wch:10},{wch:10},{wch:11},{wch:11},{wch:11},{wch:12},{wch:30}];
+      let nm=m.name.replace(/[\\\/\?\*\[\]:]/g,' ').slice(0,28),k=nm,i=2;while(used.has(k))k=nm.slice(0,26)+'_'+i++;used.add(k);
+      XLSX.utils.book_append_sheet(wb,ws,k);
+    });
+    fname='บัญชีวัสดุ_ปีงบ'+p.fy+(mid==='all'?'_ทุกรายการ':'_'+matById(mid).name.replace(/[\\\/:*?"<>|]/g,'-'))+'.xlsx';
+  }
+  saveFile(fname,XLSX.write(wb,{type:'array',bookType:'xlsx'}),'ส่งออกไฟล์ Excel แล้ว');
+});
+
+/* ---------- ตั้งค่า / สำรองข้อมูล ---------- */
+const POS={
+  gApprPos:['ผู้อำนวยการ รพ.สต.บ้านอำปึล','นักวิชาการสาธารณสุข','เจ้าพนักงานสาธารณสุข','พยาบาลวิชาชีพ','เจ้าพนักงานธุรการ','นายกองค์การบริหารส่วนตำบล','รองนายกองค์การบริหารส่วนตำบล','ปลัดองค์การบริหารส่วนตำบล','รองปลัดองค์การบริหารส่วนตำบล','หัวหน้าสำนักปลัด','ผู้อำนวยการกองคลัง','ผู้อำนวยการกองช่าง','ผู้อำนวยการกองการศึกษา ศาสนาและวัฒนธรรม','ผู้อำนวยการกองสาธารณสุขและสิ่งแวดล้อม','ผู้อำนวยการกองสวัสดิการสังคม','หัวหน้าเจ้าหน้าที่']};
+const OTHER='__other';
+Object.keys(POS).forEach(id=>{fillSelect($(id),[['','— ไม่ระบุ —'],...POS[id].map(p=>[p,p]),[OTHER,'อื่น ๆ (กรอกเอง)']]);$(id).addEventListener('change',()=>{const o=$(id).value===OTHER;$(id+'X').hidden=!o;if(o)$(id+'X').focus()})});
+function posSet(id,v){v=v||'';const known=v===''||POS[id].includes(v);$(id).value=known?v:OTHER;$(id+'X').value=known?'':v;$(id+'X').hidden=known}
+function posGet(id){return $(id).value===OTHER?$(id+'X').value.trim():$(id).value}
+function renderSet(){const s=settings;$('gDiv').value=s.div||'';$('gWork').value=s.work||'';$('gOrg').value=s.org||'';$('gAppr').value=s.appr||'';posSet('gApprPos',s.apprPos);$('gPayer').value=s.payer||'';$('gPayerPos').value=s.payerPos||''}
+$('setForm').addEventListener('submit',async e=>{
+  e.preventDefault();if(!db)return msg('gMsg','เบราว์เซอร์นี้บันทึกข้อมูลไม่ได้',1);
+  const body={logo:settings.logo||'',theme:settings.theme||'',div:$('gDiv').value.trim(),work:$('gWork').value.trim(),org:$('gOrg').value.trim()||DEF_SET.org,appr:$('gAppr').value.trim(),apprPos:posGet('gApprPos'),payer:$('gPayer').value.trim(),payerPos:$('gPayerPos').value.trim()};
+  try{await db.doc('settings/main').set(body);msg('gMsg','บันทึกแล้ว');toast('บันทึกการตั้งค่าแล้ว')}catch(err){msg('gMsg',errText(err),1)}
+});
+$('btnBackup').addEventListener('click',()=>{
+  const data={app:'kongchang-stock',version:1,exportedAt:new Date().toISOString(),settings,materials,moves};
+  saveFile('สำรองข้อมูลคุมวัสดุ_'+todayISO()+'.json',JSON.stringify(data,null,1),'ดาวน์โหลดไฟล์สำรองแล้ว').then(ok=>{if(ok){localDb.meta('lastBackup',todayISO());backupNote()}});
+});
+$('restoreFile').addEventListener('change',async()=>{
+  const f=$('restoreFile').files[0];restoreData=null;$('btnRestore').hidden=true;if(!f)return;
+  try{const d=JSON.parse(await f.text());if(d.app!=='kongchang-stock'||!Array.isArray(d.materials)||!Array.isArray(d.moves))throw 0;
+    restoreData=d;$('restoreMsg').textContent=`ไฟล์ ${f.name}: วัสดุ ${d.materials.length} รายการ, ใบรับ-ใบเบิก ${d.moves.length} ใบ (สำรองเมื่อ ${thDate((d.exportedAt||'').slice(0,10))})`;$('btnRestore').hidden=false}
+  catch{$('restoreMsg').textContent='ไฟล์นี้ไม่ใช่ไฟล์สำรองของระบบคุมวัสดุ'}
+  $('restoreFile').value='';
+});
+$('btnRestore').addEventListener('click',async()=>{
+  if(!restoreData||!db)return;if(!confirmClick('restore',$('btnRestore'),'กดอีกครั้งเพื่อกู้คืน (เขียนทับรายการเดิมที่ซ้ำกัน)'))return;
+  const d=restoreData,clean=o=>{const{id,...rest}=o;return rest};let n=0;$('btnRestore').disabled=true;
+  try{
+    if(d.settings){applySet(d.settings);await db.doc('settings/main').set({...settings})}
+    const ops=[];for(const m of d.materials){if(m.id)ops.push({c:'materials',id:m.id,data:clean(m)})}
+    for(const mv of d.moves){if(mv.id)ops.push({c:'moves',id:mv.id,data:clean(mv)})}$('restoreMsg').textContent='กำลังกู้คืน '+ops.length+' รายการ…';await db.bulk(ops);n+=ops.length;
+    $('restoreMsg').textContent='กู้คืนเรียบร้อย '+n+' รายการ';$('btnRestore').hidden=true;restoreData=null;toast('กู้คืนข้อมูลแล้ว');
+  }catch(err){$('restoreMsg').textContent=errText(err)}finally{$('btnRestore').disabled=false}
+});
+
+/* ---------- โลโก้ ---------- */
+function shrinkImage(file,max){return new Promise((res,rej)=>{const url=URL.createObjectURL(file),im=new Image();im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height)),w=Math.max(1,Math.round(im.width*k)),h=Math.max(1,Math.round(im.height*k)),c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);URL.revokeObjectURL(url);let d=c.toDataURL('image/png');if(d.length>180000)d=c.toDataURL('image/jpeg',.85);res(d)};im.onerror=()=>{URL.revokeObjectURL(url);rej()};im.src=url})}
+async function saveLogo(logo){
+  if(!db){msg('gMsg','เบราว์เซอร์นี้บันทึกข้อมูลไม่ได้',1);return}
+  try{await db.doc('settings/main').set({...settings,logo});applySet({...settings,logo});toast(logo?'บันทึกโลโก้แล้ว':'ลบโลโก้แล้ว')}catch(err){msg('gMsg',errText(err),1)}
+}
+$('logoFile').addEventListener('change',async()=>{
+  const f=$('logoFile').files[0];$('logoFile').value='';if(!f)return;
+  if(!/^image\//.test(f.type)){msg('gMsg','ไฟล์ที่เลือกไม่ใช่รูปภาพ',1);return}
+  try{saveLogo(await shrinkImage(f,320))}catch{msg('gMsg','อ่านรูปนี้ไม่ได้ ลองใช้ไฟล์ PNG หรือ JPG',1)}
+});
+async function saveTheme(c){
+  if(!db){msg('gMsg','ยังบันทึกไม่ได้',1);return}
+  applyTheme(c);try{await db.doc('settings/main').set({...settings,theme:c});applySet({...settings,theme:c});toast(c?'เปลี่ยนสีแล้ว':'กลับเป็นสีเริ่มต้นแล้ว')}catch(err){msg('gMsg',errText(err),1)}
+}
+$('swatches').addEventListener('click',e=>{const b=e.target.closest('[data-theme-c]');if(b)saveTheme(b.dataset.themeC===THEMES[0][0]?'':b.dataset.themeC)});
+$('themeCustom').addEventListener('input',e=>applyTheme(e.target.value));
+$('themeCustom').addEventListener('change',e=>saveTheme(e.target.value));
+$('themeReset').addEventListener('click',()=>saveTheme(''));
+$('logoDel').addEventListener('click',()=>{if(confirmClick('dellogo',$('logoDel'),'กดอีกครั้งเพื่อลบโลโก้'))saveLogo('')});
+
+/* ---------- start ---------- */
+resetIn(null);resetOut(null);resetMat(null);setRepSeg();renderAll();
+function backupNote(){const lb=localDb.meta('lastBackup');$('lastBackup').textContent=lb?'· สำรองล่าสุด '+thDate(lb):'· ยังไม่เคยสำรองข้อมูล';
+  const days=lb?(Date.now()-new Date(lb+'T00:00:00'))/864e5:Infinity;
+  if(false&&materials.length&&days>30)notice((lb?'ไม่ได้สำรองข้อมูลมาแล้ว '+Math.floor(days)+' วัน':'ยังไม่เคยสำรองข้อมูล')+' ไปที่แท็บ “ตั้งค่า / สำรองข้อมูล” แล้วกด “ดาวน์โหลดไฟล์สำรอง”');else notice('')}
+(()=>{
+  if(!localDb.available()){notice('ยังไม่ได้ตั้งลิงก์ Google Sheet — รีเฟรชหน้านี้แล้ววางลิงก์ Web App ที่ได้จาก Apps Script');return}
+  db=localDb;localDb.onStatus(notice);
+  let ready={m:0,v:0};
+  const after=()=>{if(ready.m&&ready.v){renderAll();backupNote();if(!$('inLines').querySelector('.ln')&&!editIn)resetIn(null);if(!$('outLines').querySelector('.ln')&&!editOut)resetOut(null)}};
+  db.collection('materials').onSnapshot(s=>{materials=s.docs.map(x=>({id:x.id,...x.data()}));ready.m=1;after();refreshLineSelects()});
+  db.collection('moves').onSnapshot(s=>{moves=s.docs.map(x=>({id:x.id,...x.data()}));ready.v=1;after()});
+  db.doc('settings/main').onSnapshot(s=>{applySet(s.exists?s.data():null);if(curTab()==='set')renderSet()});
+})();
+function refreshLineSelects(){
+  document.querySelectorAll('.lines .ln select').forEach(sel=>{const v=sel.value;fillSelect(sel,matOpts(false));if([...sel.options].some(o=>o.value===v))sel.value=v});
+}
+})();
+</script>
+
+<script>
+(function(){let armed=false;const b=document.getElementById('btnWipe');
+b.addEventListener('click',()=>{if(!armed){armed=true;b.textContent='กดอีกครั้ง: ล้างลิงก์/รหัสผ่าน/แคชที่จำไว้ในเครื่องนี้ (ข้อมูลใน Google Sheet ไม่หาย)';setTimeout(()=>{armed=false;b.textContent='ล้างแคชในเครื่องนี้'},5000);return}
+try{['',':url',':pass',':lastBackup'].forEach(s=>localStorage.removeItem('kumwatsadu-sheets-v1'+s))}catch(e){}location.reload()});})();
+</script>
+</body>
+</html>
