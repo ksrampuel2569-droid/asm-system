@@ -1,110 +1,154 @@
+from pathlib import Path
 
-<!DOCTYPE html>
+html = r'''<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#075985">
-  <title>ระบบสารสนเทศ | รพ.สต.บ้านอำปึล</title>
+  <meta name="theme-color" content="#123b5d">
+  <meta name="description" content="ศูนย์รวมระบบสารสนเทศและเครื่องมือสนับสนุนการปฏิบัติงาน รพ.สต.บ้านอำปึล">
+  <title>ศูนย์ระบบสารสนเทศ | รพ.สต.บ้านอำปึล</title>
   <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Tahoma, Arial, sans-serif;
-      background: #f0f7fc;
-      color: #183247;
-      line-height: 1.7;
-    }
-    header {
-      background: linear-gradient(135deg, #075985, #0e7490);
-      color: white;
-      text-align: center;
-      padding: 35px 16px;
-    }
-    header .symbol { font-size: 42px; }
-    header h1 { margin: 8px 0; font-size: 25px; }
-    header p { margin: 4px 0; }
-    main {
-      width: min(900px, 92%);
-      margin: 28px auto;
-    }
-    .intro { text-align: center; margin-bottom: 22px; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 18px;
-    }
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 5px 18px #164e6312;
-      border: 1px solid #dceaf2;
-    }
-    .card h2 { margin-top: 0; font-size: 20px; }
-    .emoji { font-size: 34px; }
-    .button {
-      display: block;
-      text-align: center;
-      padding: 12px 16px;
-      border-radius: 10px;
-      background: #0369a1;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 18px;
-    }
-    .button:hover { background: #075985; }
-    .secondary {
-      background: #e6f4f8;
-      color: #075985;
-      border: 1px solid #b7dce8;
-    }
-    footer {
-      text-align: center;
-      padding: 22px 12px;
-      color: #567080;
-      font-size: 13px;
-    }
+    :root{--navy:#123b5d;--blue:#176b87;--teal:#238b8d;--ink:#20384c;--muted:#62788a;--line:#dce6ee;--gold:#c5a66b;--shadow:0 12px 34px rgba(18,59,93,.08)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:"Leelawadee UI",Tahoma,"Noto Sans Thai",Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 95% 4%,rgba(35,139,141,.08),transparent 24rem),linear-gradient(180deg,#f7fafc 0%,#f2f6fa 100%);line-height:1.75}
+    a{color:inherit}
+    .topline{height:5px;background:linear-gradient(90deg,var(--gold),#e8d8b5,var(--teal),var(--navy))}
+    .hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(120deg,#102f4b 0%,#164f70 55%,#1d7b86 100%);padding:30px 20px 34px}
+    .hero:before,.hero:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.12);border-radius:50%;pointer-events:none}
+    .hero:before{width:360px;height:360px;right:-105px;top:-190px}.hero:after{width:250px;height:250px;right:-45px;top:-135px}
+    .hero-inner{position:relative;z-index:1;max-width:1120px;margin:auto}
+    .brandline{display:flex;align-items:center;gap:15px}
+    .emblem{width:66px;height:66px;flex:0 0 66px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.38);border-radius:18px;background:rgba(255,255,255,.11);font-size:32px;box-shadow:inset 0 0 0 5px rgba(255,255,255,.035)}
+    .eyebrow{margin:0 0 2px;color:#d7e9f1;font-size:13px;letter-spacing:.04em}
+    h1{margin:0;font-size:clamp(23px,3.4vw,35px);line-height:1.35;font-weight:750}
+    .subtitle{margin:7px 0 0;color:#e2eef4;font-size:15px}
+    .hero-rule{width:78px;height:3px;border-radius:9px;background:var(--gold);margin:23px 0 14px}
+    .hero-note{max-width:750px;margin:0;color:#e6f0f5;font-size:15px}
+    .container{max-width:1120px;width:calc(100% - 36px);margin:0 auto}
+    .main{padding:32px 0 42px}
+    .section-heading{display:flex;justify-content:space-between;align-items:end;gap:14px;margin:0 0 18px}
+    .section-kicker{color:var(--teal);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin:0 0 2px}
+    h2{color:var(--navy);margin:0;font-size:23px;line-height:1.4}
+    .section-desc{color:var(--muted);margin:5px 0 0;font-size:14px}
+    .count{white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:5px 11px;color:var(--muted);background:rgba(255,255,255,.75);font-size:12px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .card{min-width:0;position:relative;overflow:hidden;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:17px;padding:23px;box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+    .card:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--blue),var(--teal))}
+    .card:hover{transform:translateY(-3px);box-shadow:0 16px 38px rgba(18,59,93,.13);border-color:#bfd5e2}
+    .card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:17px}
+    .iconbox{display:grid;place-items:center;width:54px;height:54px;flex:0 0 54px;border-radius:15px;background:#eaf4f8;color:var(--navy);font-size:27px;border:1px solid #d9eaf1}
+    .tag{font-size:11px;color:#176b75;background:#eaf7f5;border:1px solid #cce9e4;border-radius:999px;padding:4px 9px;font-weight:700}
+    .card h3{color:var(--navy);font-size:19px;line-height:1.45;margin:0 0 8px}
+    .card p{color:var(--muted);font-size:14px;margin:0 0 19px;flex:1}
+    .features{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 19px}
+    .feature{font-size:11px;color:#506b7e;background:#f4f7fa;border:1px solid #e4ebf0;padding:3px 8px;border-radius:6px}
+    .button{display:flex;justify-content:center;align-items:center;gap:8px;min-height:45px;padding:10px 14px;border-radius:10px;color:#fff;background:var(--navy);text-decoration:none;text-align:center;font-size:14px;font-weight:750;border:1px solid var(--navy);transition:background .18s ease,transform .18s ease}
+    .button:hover{background:#1b607b;transform:translateY(-1px)}
+    .arrow{font-size:18px;line-height:1}
+    .info-panel{margin-top:26px;display:grid;grid-template-columns:1.1fr 1fr;gap:18px}
+    .info{background:rgba(255,255,255,.78);border:1px solid var(--line);border-radius:15px;padding:20px 22px}
+    .info h3{color:var(--navy);font-size:16px;margin:0 0 8px}
+    .info p,.info li{color:var(--muted);font-size:13px}
+    .info p{margin:0}.info ul{margin:0;padding-left:20px}
+    .notice{display:flex;gap:10px;align-items:flex-start}.notice-icon{font-size:20px}
+    footer{border-top:1px solid var(--line);background:#fff;padding:20px 16px 24px;text-align:center}
+    footer strong{display:block;color:var(--navy);font-size:14px}
+    footer span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+    .footer-line{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;color:#8497a5;font-size:11px}
+    .footer-line:before,.footer-line:after{content:"";width:28px;height:1px;background:#d8e2e9}
+    @media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:600px){.hero{padding:25px 17px 29px}.brandline{align-items:flex-start;gap:12px}.emblem{width:52px;height:52px;flex-basis:52px;font-size:26px;border-radius:14px}.subtitle{font-size:13px}.container{width:calc(100% - 28px)}.main{padding:25px 0 30px}.section-heading{align-items:flex-start;flex-direction:column}.grid,.info-panel{grid-template-columns:1fr}.card{padding:20px}h2{font-size:21px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
 <body>
-  <header>
-    <div class="symbol">🏥</div>
-    <h1>ระบบสารสนเทศ รพ.สต.บ้านอำปึล</h1>
-    <p>หน่วยงานกระทรวงสาธารณสุข</p>
-    <p>ตำบลบักได อำเภอพนมดงรัก จังหวัดสุรินทร์</p>
+  <div class="topline"></div>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="brandline">
+        <div class="emblem" aria-hidden="true">🏥</div>
+        <div>
+          <p class="eyebrow">MINISTRY OF PUBLIC HEALTH · PRIMARY HEALTH CARE</p>
+          <h1>ศูนย์ระบบสารสนเทศ<br>รพ.สต.บ้านอำปึล</h1>
+          <p class="subtitle">หน่วยงานกระทรวงสาธารณสุข · ตำบลบักได อำเภอพนมดงรัก จังหวัดสุรินทร์</p>
+        </div>
+      </div>
+      <div class="hero-rule"></div>
+      <p class="hero-note">ศูนย์รวมเครื่องมือดิจิทัลเพื่อสนับสนุนการปฏิบัติงาน การจัดการข้อมูล และการบริหารทรัพยากรของหน่วยบริการปฐมภูมิ ให้เข้าถึงระบบงานได้สะดวก เป็นระเบียบ และมีประสิทธิภาพ</p>
+    </div>
   </header>
 
-  <main>
-    <div class="intro">
-      <h2>เมนูระบบงาน</h2>
-      <p>เลือกเมนูที่ต้องการใช้งาน</p>
-    </div>
+  <main class="main">
+    <div class="container">
+      <section aria-labelledby="systems-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Digital Service Center</p>
+            <h2 id="systems-title">ระบบงานและเครื่องมือสนับสนุน</h2>
+            <p class="section-desc">เลือกระบบที่ต้องการใช้งานจากรายการด้านล่าง</p>
+          </div>
+          <span class="count">ระบบที่เผยแพร่ 3 รายการ</span>
+        </div>
 
-    <div class="grid">
-      <section class="card">
-        <div class="emoji">🗄️</div>
-        <h2>ระบบค้นหาครุภัณฑ์</h2>
-        <p>ค้นหาและตรวจสอบรายการครุภัณฑ์ของหน่วยงาน</p>
-        <a class="button" href="./ค้นหาครุภัณฑ์_รพสต_บ้านอำปึล_V6_ส่งออกเลือกส่วน.html">
-          เปิดระบบค้นหาครุภัณฑ์
-        </a>
+        <div class="grid">
+          <article class="card">
+            <div class="card-top"><div class="iconbox" aria-hidden="true">🗄️</div><span class="tag">ครุภัณฑ์</span></div>
+            <h3>ระบบค้นหาและตรวจสอบครุภัณฑ์</h3>
+            <p>เครื่องมือสำหรับค้นหารายการครุภัณฑ์และตรวจสอบข้อมูลประกอบการปฏิบัติงานด้านพัสดุของหน่วยบริการ</p>
+            <div class="features"><span class="feature">ค้นหารายการ</span><span class="feature">ตรวจสอบข้อมูล</span><span class="feature">ส่งออกข้อมูล</span></div>
+            <a class="button" href="./ค้นหาครุภัณฑ์_รพสต_บ้านอำปึล_V6_ส่งออกเลือกส่วน.html">เปิดระบบ <span class="arrow" aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="card">
+            <div class="card-top"><div class="iconbox" aria-hidden="true">📦</div><span class="tag">วัสดุ</span></div>
+            <h3>ระบบควบคุมวัสดุ รพ.สต.บ้านอำปึล</h3>
+            <p>เครื่องมือช่วยจัดการและติดตามรายการวัสดุ เพื่อสนับสนุนการควบคุมทรัพยากรและการปฏิบัติงานประจำ</p>
+            <div class="features"><span class="feature">รายการวัสดุ</span><span class="feature">งานพัสดุ</span><span class="feature">ติดตามข้อมูล</span></div>
+            <a class="button" href="./%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%84%E0%B8%B8%E0%B8%A1%E0%B8%A7%E0%B8%B1%E0%B8%AA%E0%B8%94%E0%B8%B8%20%E0%B8%AD%E0%B8%B3%E0%B8%9B%E0%B8%B6%E0%B8%A5.html">เปิดระบบ <span class="arrow" aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="card">
+            <div class="card-top"><div class="iconbox" aria-hidden="true">📊</div><span class="tag">รายงาน</span></div>
+            <h3>โปรแกรม E0, E1 V.3</h3>
+            <p>เครื่องมือสนับสนุนการทำงานตามฟังก์ชันที่จัดเตรียมไว้ในโปรแกรม สำหรับเจ้าหน้าที่ผู้รับผิดชอบงาน</p>
+            <div class="features"><span class="feature">เครื่องมือดิจิทัล</span><span class="feature">สนับสนุนงานบริการ</span></div>
+            <a class="button" href="./%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%81%E0%B8%81%E0%B8%A3%E0%B8%A1%20E0%2CE1%20V.3.html">เปิดระบบ <span class="arrow" aria-hidden="true">→</span></a>
+          </article>
+        </div>
       </section>
 
-      <section class="card">
-        <div class="emoji">📋</div>
-        <h2>ระบบอื่น ๆ</h2>
-        <p>สามารถเพิ่มเมนูระบบงานอื่นของหน่วยบริการได้ภายหลัง</p>
-        <a class="button secondary" href="https://github.com/ksrampuel2569-droid/asm-system">
-          ดูไฟล์ระบบใน GitHub
-        </a>
+      <section class="info-panel" aria-label="ข้อมูลและข้อควรทราบ">
+        <div class="info">
+          <h3>แนวทางการใช้งาน</h3>
+          <ul>
+            <li>เลือกเมนูให้ตรงกับภารกิจที่ต้องการดำเนินการ</li>
+            <li>ตรวจสอบความถูกต้องของข้อมูลก่อนนำไปใช้ในเอกสารราชการหรือรายงาน</li>
+            <li>หากพบข้อผิดพลาด ให้แจ้งผู้ดูแลระบบหรือผู้รับผิดชอบงานที่เกี่ยวข้อง</li>
+          </ul>
+        </div>
+        <div class="info">
+          <div class="notice">
+            <div class="notice-icon" aria-hidden="true">🔐</div>
+            <div>
+              <h3>ข้อควรทราบด้านข้อมูล</h3>
+              <p>โปรดใช้ระบบตามสิทธิและหน้าที่ที่ได้รับมอบหมาย และหลีกเลี่ยงการเผยแพร่ข้อมูลส่วนบุคคล ข้อมูลผู้ป่วย รหัสผ่าน หรือข้อมูลราชการที่ไม่ควรเปิดเผยต่อสาธารณะ</p>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   </main>
 
   <footer>
-    รพ.สต.บ้านอำปึล · ระบบสารสนเทศเพื่อสนับสนุนการปฏิบัติงาน
+    <strong>รพ.สต.บ้านอำปึล</strong>
+    <span>ตำบลบักได · อำเภอพนมดงรัก · จังหวัดสุรินทร์</span>
+    <div class="footer-line">ระบบสารสนเทศเพื่อสนับสนุนการปฏิบัติงาน</div>
   </footer>
 </body>
 </html>
+'''
+path = Path("/mnt/data/index.html")
+path.write_text(html, encoding="utf-8")
+print("สร้างไฟล์ index.html เรียบร้อยแล้ว")
