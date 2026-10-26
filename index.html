@@ -1,12 +1,10 @@
-from pathlib import Path
-
-html = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#123b5d">
-  <meta name="description" content="ศูนย์รวมระบบสารสนเทศและเครื่องมือสนับสนุนการปฏิบัติงาน รพ.สต.บ้านอำปึล">
+  <meta name="description" content="ศูนย์ระบบสารสนเทศ รพ.สต.บ้านอำปึล รวมเครื่องมือดิจิทัลเพื่อสนับสนุนงานบริการปฐมภูมิ งานพัสดุ และการจัดการข้อมูล">
   <title>ศูนย์ระบบสารสนเทศ | รพ.สต.บ้านอำปึล</title>
   <style>
     :root{--navy:#123b5d;--blue:#176b87;--teal:#238b8d;--ink:#20384c;--muted:#62788a;--line:#dce6ee;--gold:#c5a66b;--shadow:0 12px 34px rgba(18,59,93,.08)}
@@ -15,6 +13,20 @@ html = r'''<!DOCTYPE html>
     body{margin:0;font-family:"Leelawadee UI",Tahoma,"Noto Sans Thai",Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 95% 4%,rgba(35,139,141,.08),transparent 24rem),linear-gradient(180deg,#f7fafc 0%,#f2f6fa 100%);line-height:1.75}
     a{color:inherit}
     .topline{height:5px;background:linear-gradient(90deg,var(--gold),#e8d8b5,var(--teal),var(--navy))}
+    .skip-link{position:absolute;left:12px;top:-60px;z-index:20;background:#fff;color:var(--navy);padding:10px 14px;border-radius:8px;font-weight:700}
+    .skip-link:focus{top:12px}
+    .toolbar{display:flex;align-items:center;gap:12px;margin:0 0 18px}
+    .search-wrap{position:relative;flex:1}
+    .search-wrap label{display:block;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:5px}
+    .search-input{width:100%;min-height:46px;border:1px solid #cbd9e3;border-radius:11px;padding:10px 14px 10px 42px;background:#fff;color:var(--ink);font:inherit;font-size:14px;outline:none}
+    .search-input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(35,139,141,.15)}
+    .search-icon{position:absolute;left:14px;bottom:12px;color:var(--muted);font-size:17px}
+    .result-note{font-size:12px;color:var(--muted);white-space:nowrap}
+    .empty-state{display:none;padding:25px;text-align:center;border:1px dashed #b8cbd7;border-radius:14px;background:#fff;color:var(--muted);grid-column:1/-1}
+    .card[hidden]{display:none}
+    .meta-strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+    .meta-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.08);font-size:12px;color:#e7f1f6}
+    .button:focus-visible,.card a:focus-visible{outline:3px solid #e4bf72;outline-offset:3px}
     .hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(120deg,#102f4b 0%,#164f70 55%,#1d7b86 100%);padding:30px 20px 34px}
     .hero:before,.hero:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.12);border-radius:50%;pointer-events:none}
     .hero:before{width:360px;height:360px;right:-105px;top:-190px}.hero:after{width:250px;height:250px;right:-45px;top:-135px}
@@ -59,11 +71,12 @@ html = r'''<!DOCTYPE html>
     .footer-line{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;color:#8497a5;font-size:11px}
     .footer-line:before,.footer-line:after{content:"";width:28px;height:1px;background:#d8e2e9}
     @media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(max-width:600px){.hero{padding:25px 17px 29px}.brandline{align-items:flex-start;gap:12px}.emblem{width:52px;height:52px;flex-basis:52px;font-size:26px;border-radius:14px}.subtitle{font-size:13px}.container{width:calc(100% - 28px)}.main{padding:25px 0 30px}.section-heading{align-items:flex-start;flex-direction:column}.grid,.info-panel{grid-template-columns:1fr}.card{padding:20px}h2{font-size:21px}}
+    @media(max-width:600px){.hero{padding:25px 17px 29px}.brandline{align-items:flex-start;gap:12px}.emblem{width:52px;height:52px;flex-basis:52px;font-size:26px;border-radius:14px}.subtitle{font-size:13px}.container{width:calc(100% - 28px)}.main{padding:25px 0 30px}.section-heading{align-items:flex-start;flex-direction:column}.grid,.info-panel{grid-template-columns:1fr}.card{padding:20px}h2{font-size:21px}.toolbar{align-items:stretch;flex-direction:column;gap:6px}.result-note{white-space:normal}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#systems-title">ข้ามไปยังรายการระบบ</a>
   <div class="topline"></div>
   <header class="hero">
     <div class="hero-inner">
@@ -76,7 +89,8 @@ html = r'''<!DOCTYPE html>
         </div>
       </div>
       <div class="hero-rule"></div>
-      <p class="hero-note">ศูนย์รวมเครื่องมือดิจิทัลเพื่อสนับสนุนการปฏิบัติงาน การจัดการข้อมูล และการบริหารทรัพยากรของหน่วยบริการปฐมภูมิ ให้เข้าถึงระบบงานได้สะดวก เป็นระเบียบ และมีประสิทธิภาพ</p>
+      <p class="hero-note">ศูนย์รวมเครื่องมือดิจิทัลเพื่อสนับสนุนการปฏิบัติงาน การจัดการข้อมูล และการบริหารทรัพยากรของหน่วยบริการปฐมภูมิ โดยมุ่งเน้นการเข้าถึงที่สะดวก การใช้ข้อมูลอย่างรับผิดชอบ และการปฏิบัติงานอย่างเป็นระบบ</p>
+      <div class="meta-strip"><span class="meta-pill">✓ ใช้งานสะดวก</span><span class="meta-pill">▦ รวมระบบไว้ในจุดเดียว</span><span class="meta-pill">⌑ คำนึงถึงความปลอดภัยของข้อมูล</span></div>
     </div>
   </header>
 
@@ -92,7 +106,15 @@ html = r'''<!DOCTYPE html>
           <span class="count">ระบบที่เผยแพร่ 3 รายการ</span>
         </div>
 
-        <div class="grid">
+        <div class="toolbar">
+          <div class="search-wrap">
+            <label for="system-search">ค้นหาระบบงาน</label>
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input class="search-input" id="system-search" type="search" placeholder="พิมพ์ชื่อระบบหรือประเภทงาน..." autocomplete="off" aria-describedby="search-result">
+          </div>
+          <span class="result-note" id="search-result" aria-live="polite">แสดง 3 ระบบ</span>
+        </div>
+        <div class="grid" id="system-grid">
           <article class="card">
             <div class="card-top"><div class="iconbox" aria-hidden="true">🗄️</div><span class="tag">ครุภัณฑ์</span></div>
             <h3>ระบบค้นหาและตรวจสอบครุภัณฑ์</h3>
@@ -116,6 +138,7 @@ html = r'''<!DOCTYPE html>
             <div class="features"><span class="feature">เครื่องมือดิจิทัล</span><span class="feature">สนับสนุนงานบริการ</span></div>
             <a class="button" href="./%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%81%E0%B8%81%E0%B8%A3%E0%B8%A1%20E0%2CE1%20V.3.html">เปิดระบบ <span class="arrow" aria-hidden="true">→</span></a>
           </article>
+          <div class="empty-state" id="empty-state">ไม่พบระบบที่ตรงกับคำค้น กรุณาลองใช้คำค้นอื่น</div>
         </div>
       </section>
 
@@ -146,9 +169,29 @@ html = r'''<!DOCTYPE html>
     <span>ตำบลบักได · อำเภอพนมดงรัก · จังหวัดสุรินทร์</span>
     <div class="footer-line">ระบบสารสนเทศเพื่อสนับสนุนการปฏิบัติงาน</div>
   </footer>
+  <script>
+    (() => {
+      const search = document.getElementById('system-search');
+      const grid = document.getElementById('system-grid');
+      const cards = Array.from(grid.querySelectorAll('.card'));
+      const result = document.getElementById('search-result');
+      const empty = document.getElementById('empty-state');
+      const count = document.querySelector('.count');
+      const originalCount = cards.length;
+      count.textContent = `ระบบที่เผยแพร่ ${originalCount} รายการ`;
+      function filterSystems() {
+        const query = search.value.trim().toLocaleLowerCase('th');
+        let visible = 0;
+        cards.forEach(card => {
+          const matched = card.textContent.toLocaleLowerCase('th').includes(query);
+          card.hidden = !matched;
+          if (matched) visible++;
+        });
+        empty.style.display = visible === 0 ? 'block' : 'none';
+        result.textContent = `แสดง ${visible} จาก ${originalCount} ระบบ`;
+      }
+      search.addEventListener('input', filterSystems);
+    })();
+  </script>
 </body>
 </html>
-'''
-path = Path("/mnt/data/index.html")
-path.write_text(html, encoding="utf-8")
-print("สร้างไฟล์ index.html เรียบร้อยแล้ว")
